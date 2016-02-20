@@ -221,7 +221,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				{
 					creaP(nomeEroe + " ha sconfitto " + nomeNemico, "risultato-scontro");
 					spazio();
-					blocco(false);
+					blocco("#bottone-start", false);
 
 				}
 				else
