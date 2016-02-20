@@ -175,6 +175,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					difesa -= 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					creaP("Il "+ nomeNemico +" usa colpo-coda! Tua nuova difesa: "+ difesa);
+					stats("#difesa-value", difesa, "blu");
+
 				break;
 				case "corazzaLava":
 					difesaNemico += 5;
