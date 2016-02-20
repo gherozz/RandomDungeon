@@ -1,0 +1,96 @@
+{
+	"oggetti": [
+		{
+			"nome": "spada",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "10",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "30"
+		}, 
+		{
+			"nome": "scudo",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "0",
+			"difesa": "10",
+			"salute": "0",
+			"coloreTesto": "blu",
+			"chance": "30"
+		}, 
+		{
+			"nome": "pozione",
+			"tipo": "uso",
+			"slot": "nessuno",
+			"attacco": "0",
+			"difesa": "0",
+			"salute": "30",
+			"coloreTesto": "verde",
+			"chance": "20"
+		}, 
+		{
+			"nome": "spada-incantata",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "30",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		}
+	],
+	
+	
+	"nemici": [
+		{
+			"nome": "goblin",
+			"attacco": "10",
+			"difesa": "0",
+			"vita": "30",
+			"boss": false,
+			"chance": "50",
+			"azioni": 	[
+								{"nome": "pugnoLato", "chance":"10"}
+							]
+		}, 
+		{
+			"nome": "orco",
+			"attacco": "20",
+			"difesa": "5",
+			"vita": "40",
+			"boss": false,
+			"chance": "20",
+			"azioni": 	[
+								{"nome": "pugnoLato", "chance":"10"}
+							]
+		}, 
+		{
+			"nome": "troll",
+			"attacco": "20",
+			"difesa": "10",
+			"vita": "70",
+			"boss": false,
+			"chance": "5",
+			"azioni": 	[
+								{"nome": "leccaFerite", "chance":"25"},
+								{"nome": "pugnoLato", "chance":"50"}
+							]
+		},
+		{
+			"nome": "Boss",
+			"attacco": "40",
+			"difesa": "10",
+			"vita": "100",
+			"boss": true,
+			"chance": "0",
+			"azioni": 	[	
+								{"nome": "leccaFerite", "chance":"25"},
+								{"nome": "pugnoLato", "chance":"50"},
+								{"nome": "colpoCoda", "chance":"15"}, 
+								{"nome": "corazzaLava", "chance":"15"}
+							]
+		}
+	]
+}

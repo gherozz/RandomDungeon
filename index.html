@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+<!-- 	<meta name="viewport" content="width=device-width">
+ -->	<title>giochino idiota Frocini</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<script src="js/jquery-2.2.0.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.scrollTo.min.js"></script>
+	<script src="script.js"></script>
+
+</head>
+<body>
+	<div class="header">
+		<div class="header-left">
+			<h1><a href="index.html">Random Dungeon</a></h1>
+		</div>
+		<div class="header-right">
+			<div class="stats">
+				<span id="attacco">Attacco: <span id="attacco-value"></span></span>
+				<span id="difesa">Difesa: <span id="difesa-value"></span></span>
+				<div id="salute-container">
+					<span id="salute">Salute:</span>
+					<div id="salute-value"></div>
+					<div id="salute-max">
+						<div id="salute-bar"></div>
+					</div>
+				</div>
+			</div>
+			<input type="button" onclick="gioco()" value="Gioca!" id="bottone-start">
+		</div>
+	</div>
+	<div id="alert-villaggio">
+		<p>Fine Dungeon</p>
+		<p>Dove vai?</p>
+	</div>
+	<div id="gioco">
+	</div>
+	<div id="arena">
+			
+	</div>
+	<div class="colonna-sx">
+		<h3>Inventario</h3>
+		<div id="inventario">
+			<ul id="lista">	
+			</ul>
+		</div>
+		<h3>Equipaggiato</h3>
+		<div id="equipaggiamento">
+			<ul id="equip-lista">
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
