@@ -11,7 +11,15 @@ var nomeEroe
 var mani = 0;
 var testa = 0;
 var corpo = 0;
-
+var heightwindow;
+$(document).ready( function(){
+	 heightwindow = $(document).height();
+	$('#gioco').css('height', (heightwindow-350)+'px');
+});
+$(document).ready( function(){
+	 heightwindow = $(document).height();
+	$('.colonna-sx').css('height', (heightwindow-100)+'px');
+});
 $(document).ready(function(){
 	blocco(false);
 	nomeEroe = prompt("Inserisci il nome dell'eroe");
@@ -192,7 +200,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		
 		stats("#salute-value", salute, "rosso");
 		$("#salute-bar").css("width", salute+'px');		// MODIFICA IN TEMPO "REALE" LA STAT DELLA SALUTE DELL'EROE NELL'HEADER
-		$("#gioco").animate({scrollTop: $(document).height()});
+		// $("#gioco").animate({scrollTop: heightwindow});
+		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 
 		creaP(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
 		creaP(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
@@ -443,6 +452,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		}
 	}
 	creaP(text, colore);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 	
 	if (salute > maxSalute)
 	{
@@ -453,7 +463,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 
 $(document).ready(function(){		// AL CLICK DELL'INPUT SCORRE IN FONDO ALLA PAG
 	$("#bottone-start").click(function(){
-		$("#gioco").animate({scrollTop: $(document).height()});
+		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 		$(this).val("Gioca ancora!!")		// IL BOTTONE CAMBIA IN GIOCA ANCORA!!
 	});
 
@@ -476,14 +486,7 @@ $(document).ready(function(){		// AL CLICK DELL'INPUT SCORRE IN FONDO ALLA PAG
 		}
 	})
 })
-$(document).ready( function(){
-var heightwindow = $(document).height();
-$('#gioco').css('height', (heightwindow-350)+'px');
-});
-$(document).ready( function(){
-var heightwindow = $(document).height();
-$('.colonna-sx').css('height', (heightwindow-100)+'px');
-});
+
 
 
 
