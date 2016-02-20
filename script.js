@@ -263,27 +263,6 @@ function stampa(testo, oggettoObj, tipoElemento, idContainer){	// GENERA LE MINI
 	$("."+oggettoObj.nome).append(info);
 }
 
-/*
-function immagini(){    //IN BASE ALLA CLASSE PASSATA ALLA FUNZIONE STAMPA() GENERA LA CORRETTA MINIATURA
-	$(".spada").empty();
-	$(".spada").prepend('<img id="theImg" src="images/spada-base.png" title="spada"/>');
-	$(".spada").append('<div class="info"><p>Spada</p><p>Attacco: +10</p>');
-
-	$(".scudo").empty();
-	$(".scudo").prepend('<img id="theImg" src="images/scudo-base.png"/>');
-	$(".scudo").append('<div class="info"><p>scudo</p><p>Difesa: +10</p>');
-
-	$(".pozione").empty();
-	$(".pozione").prepend('<img id="theImg" src="images/pozionesalute-base.png"/>');
-	$(".pozione").append('<div class="info"><p>Pozione</p><p>Salute: +30</p>');
-
-	$(".spada-incantata").empty();
-	$(".spada-incantata").prepend('<img id="theImg" src="images/spada-incantata.png"/>');
-	$(".spada-incantata").append('<div class="info"><p>Spada</p><p>incantata</p><p>Attacco: +30</p>');
-};
-
-*/
-
 
 function creaP(testo, classe){		//CREA IL LOG DEL GIOCO
 	var nuovoElemento = document.createElement("P");
@@ -391,22 +370,6 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 
 function aggiornaStatsEquip(oggettoObj, text, equipaggiato) 
 {
-	var colore;
-	if ((oggettoObj.attacco) > (oggettoObj.difesa)
-		&& (oggettoObj.attacco) > (oggettoObj.salute))
-	{
-		colore = "arancione";
-	}
-	else if ((oggettoObj.difesa) > (oggettoObj.attacco)
-		&& (oggettoObj.difesa) > (oggettoObj.salute))
-	{
-		colore = "blu";
-	} 
-	else
-	{
-		colore = "verde";
-	}
-
 	if (oggettoObj.attacco > 0)
 	{
 		if (equipaggiato)
@@ -453,7 +416,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 			text += " salute - " + oggettoObj.salute;
 		}
 	}
-	creaP(text, colore);
+	creaP(text, oggettoObj.coloreTesto);
 	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 	
 	if (salute > maxSalute)
@@ -488,7 +451,6 @@ $(document).ready(function(){		// AL CLICK DELL'INPUT SCORRE IN FONDO ALLA PAG
 		}
 	})
 })
-
 
 
 
