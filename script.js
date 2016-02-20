@@ -12,6 +12,11 @@ var mani = 0;
 var testa = 0;
 var corpo = 0;
 var heightwindow;
+
+function nome(){
+	nomeEroe = $("#nomeeroe").val();
+	console.log(nomeEroe);
+}
 $(document).ready( function(){
 	 heightwindow = $(document).height();
 	$('#gioco').css('height', (heightwindow-350)+'px');
@@ -21,12 +26,6 @@ $(document).ready( function(){
 	$('.colonna-sx').css('height', (heightwindow-100)+'px');
 });
 $(document).ready(function(){
-	blocco(false);
-	nomeEroe = prompt("Inserisci il nome dell'eroe");
-	if(nomeEroe == "" || nomeEroe == null){
-		nomeEroe = "Ser Frocini";
-	}
-	console.log(nomeEroe);
 	$("#attacco-value").append(attacco);
 	$("#difesa-value").append(difesa);
 	$("#salute-value").append(salute);
@@ -34,7 +33,7 @@ $(document).ready(function(){
 	$("#salute-max").css("width", maxSalute+'px');
 });
 
-
+blocco("#bottone-start",false);	
 
 var mappaMostri = {};
 var mappaOggetti = {};
@@ -100,6 +99,11 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 }
 
 function gioco(){
+	if(nomeEroe == "" || nomeEroe == null){
+		nomeEroe = "Ser Frocini";
+		$("#nomeeroe").val(nomeEroe);
+	}
+	blocco("#nomeeroe", true)
 	if(stop == false){
 		livello++;
 		testo= nomeEroe + " è al livello " + livello;
@@ -137,8 +141,8 @@ function evento(){ //SEMPLIFICATI EVENTI/CONDIZIONI MA CI VA LAVORATO
 }
 
 
-function blocco(toggle){
-	$("#bottone-start").prop("disabled", toggle);
+function blocco(input,toggle){
+	$(input).prop("disabled", toggle);
 }
 
 function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
@@ -149,7 +153,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	var vitaNemico = parseInt(mostroScelto.vita);
 	var maxVitaNemico = parseInt(mostroScelto.vita);
 	
-	blocco(true);
+	blocco("#bottone-start",true);	
+
 	 function loopLi() {
 		var loop = setInterval(function() { 
 
