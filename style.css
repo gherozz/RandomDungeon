@@ -237,8 +237,6 @@ p{
 	.slot img:hover + .info{
 		opacity: .8;
 	}
-	
-
 	#salute-bar{
 		width: 100px;
 		height: 20px;
@@ -254,7 +252,23 @@ p{
 	#salute-value{
 		width: 50px;
 	}
-	
+	#scelta-nome{
+		float: right;
+		margin-right: 150px;
+		line-height: 30px;
+		margin-top: 20px;
+	}
+	#scelta-nome h3{
+		margin: 0;
+		padding: 0;
+	}
+	#scelta-nome input{
+		background: transparent;
+		border: none;
+		color: #eee;
+		font-size: 1.5em;
+		text-transform: capitalize;
+	}
 	
 }
 /* COLORI SCRITTE */
