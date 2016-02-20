@@ -452,16 +452,6 @@ $(document).ready(function(){		// AL CLICK DELL'INPUT SCORRE IN FONDO ALLA PAG
 	})
 })
 
-$(document).ready( function(){
-	var heightwindow = $(document).height();
-	$('#gioco').css('height', (heightwindow-350)+'px');
-});
-$(document).ready( function(){
-	var heightwindow = $(document).height();
-	$('.colonna-sx').css('height', (heightwindow-100)+'px');
-});
-
-
 
 
 
