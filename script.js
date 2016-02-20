@@ -99,6 +99,7 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 }
 
 function gioco(){
+	nome();
 	if(nomeEroe == "" || nomeEroe == null){
 		nomeEroe = "Ser Frocini";
 		$("#nomeeroe").val(nomeEroe);
