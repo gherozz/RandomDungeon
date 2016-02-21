@@ -1,24 +1,51 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-	<title>giochino idiota Frocini</title>
-	<link rel="stylesheet" href="style.css" media="all" type="text/css">
-	<script src="js/jquery-2.2.0.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jquery.scrollTo.min.js"></script>
-	<script src="script.js"></script>
+	<head>
 
-</head>
-<body>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>giochino idiota Frocini</title>
+		<link rel="stylesheet" href="style.css" media="all" type="text/css">
+		<script src="js/jquery-2.2.0.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/jquery.scrollTo.min.js"></script>
+		<script src="script.js"></script>
 
-
-	<div class="header">
-		<div class="header-left">
-			<h1><a href="index.html"></a></h1>
+	</head>
+	<body>
+		
+		<div id="alert-villaggio">
+			<p>Fine Dungeon</p>
+			<p>Dove vai?</p>
 		</div>
-		<div class="header-right">
+		
+		<div id="gioco">
+		</div>
+		
+		<div id="arena">
+		</div>
+		
+		<div class="colonna-sx">
+		
+			<div class="header">
+				<h1><a href="index.html"></a></h1>
+			</div>
+		
+			<h3>Inventario</h3>
+			
+			<div id="inventario">
+				<ul id="lista">	
+				</ul>
+			</div>
+			
+			<h3>Equipaggiato</h3>
+			
+			<div id="equipaggiamento">
+				<ul id="equip-lista">
+				</ul>
+			</div>
+			
 			<div class="stats">
 				<span id="attacco"> <span id="attacco-value"></span></span>
 				<span id="difesa"> <span id="difesa-value"></span></span>
@@ -30,33 +57,15 @@
 					</div>
 				</div>
 			</div>
-			<input type="button" onclick="gioco()" value="Gioca!" id="bottone-start">
+			
 			<div id="scelta-nome">
 				<h3>Inserisci il nome:</h3>
 				<input type="text" id="nomeeroe" placeholder="_______________________" autofocus>
 			</div>
-		</div>
-	</div>
-	<div id="alert-villaggio">
-		<p>Fine Dungeon</p>
-		<p>Dove vai?</p>
-	</div>
-	<div id="gioco">
-	</div>
-	<div id="arena">
+				
+			<input type="button" onclick="gioco()" value="Gioca!" id="bottone-start">
 			
-	</div>
-	<div class="colonna-sx">
-		<h3>Inventario</h3>
-		<div id="inventario">
-			<ul id="lista">	
-			</ul>
 		</div>
-		<h3>Equipaggiato</h3>
-		<div id="equipaggiamento">
-			<ul id="equip-lista">
-			</ul>
-		</div>
-	</div>
-</body>
+		
+	</body>
 </html>

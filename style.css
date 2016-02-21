@@ -1,6 +1,5 @@
 @charset "utf-8";
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto+Condensed:400,700|Roboto:400,700);
-@import url(mobile.css);
 body{
 		margin: 0;
 		background: #f2f1f1;
@@ -24,9 +23,7 @@ p{
 	text-indent: 20px;
 }
 .header{
-	/*position: fixed;
-	right: 0;
-	top: 0;*/
+	float: left;
 	width: 100%;
 	height: 100px;
 	background: #2A7F00;
@@ -34,17 +31,7 @@ p{
 	-moz-box-shadow:    0px 5px 12px 0px rgba(50, 50, 50, 0.55);
 	box-shadow:         0px 5px 12px 0px rgba(50, 50, 50, 0.55);
 }
-.header-left{
-	float: left;
-	width: 40%;
-	border-right: solid 1px #999;
-	height: 100px;
-}
-.header-right{
-	float: right;
-	width: 59%;
-}
-.header-left h1{
+.header h1{
 	margin: 0;
 	padding-left: 10%;
 	line-height: 100px;
@@ -71,9 +58,6 @@ p{
 	cursor: pointer;
 }
 .colonna-sx{
-	/*top: 100px;
-	position: fixed;
-	left: 0;*/
 	width: 40%;
 	height: 100%;
 	background: #88C159;
@@ -143,7 +127,7 @@ p{
 	p{
 		text-indent: 10px;
 	}
-	.header-left h1 a:after{
+	.header h1 a:after{
 		content: "R.D";
 		font-size: 2.2em;
 	}
@@ -168,7 +152,7 @@ p{
 }
 @media all and (min-width: 700px){
 
-	.header-left h1 a:after{
+	.header h1 a:after{
 		content: "Random Dungeon";
 	}
 	
