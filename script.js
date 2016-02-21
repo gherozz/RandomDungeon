@@ -175,6 +175,8 @@ function evento(){ //SEMPLIFICATI EVENTI/CONDIZIONI MA CI VA LAVORATO
 		aggiungiLog("hai trovato: " + oggettoScelto.nome + "!", oggettoScelto.coloreTesto);
 		aggiungiOggetto("", oggettoScelto, "LI", "lista");
 		$("#bottone-start").val("Scendi ancora..");
+		$("#bottone-start").removeClass("bottone-rosso");
+		$("#bottone-start").addClass("bottone-verde");
 	}
 }
 
@@ -188,6 +190,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	
 	blocco("#bottone-start",true);	
 	$("#bottone-start").val("Combattendo..");
+	$("#bottone-start").removeClass("bottone-verde");
+	$("#bottone-start").addClass("bottone-rosso");
 
 	 function loopLi() {
 		var loop = setInterval(function() { 
@@ -257,6 +261,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					spazio();
 					blocco("#bottone-start", false);
 					$("#bottone-start").val("Scendi ancora..");
+					$("#bottone-start").removeClass("bottone-rosso");
+					$("#bottone-start").addClass("bottone-verde");
 				}
 				else
 				{
