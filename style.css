@@ -25,7 +25,7 @@ p{
 .header{
 	float: left;
 	width: 100%;
-	height: 100px;
+	height: 10%;
 	background: #2A7F00;
 	-webkit-box-shadow: 0px 5px 12px 0px rgba(50, 50, 50, 0.55);
 	-moz-box-shadow:    0px 5px 12px 0px rgba(50, 50, 50, 0.55);
@@ -38,6 +38,11 @@ p{
 	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 2.2em;
 }
+.main{
+	float: left;
+	width: 100%;
+	height: 60%;
+}
 .stats span{
 	padding-right: 10px;
 }
@@ -46,7 +51,7 @@ p{
 }
 .stats{
 	float: left;
-	margin-top: 25px;
+	width:90%;
 	margin-left: 10px;
 	line-height: 25px;
 }
@@ -54,6 +59,7 @@ p{
 	width: 100%;
 	position:absolute;
 	bottom: 0;
+	left:0;
 	cursor: pointer;
 	background-color: #4CAF50;
 	border: 10px solid #4CAF50;
@@ -83,12 +89,14 @@ p{
 	position: relative;
 }
 #gioco{
-	float: right;
-	width: 55%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 60%;
 	background: #f2f1f1;
 	/*margin-top: 100px;*/
 	margin-top: 20px;
-	height: 500px;
+	height: 45%;
 	overflow: auto;
 }
 #gioco p{
@@ -127,8 +135,8 @@ p{
 }
 #arena{
 	width: 60%;
-	height: 200px;
-	position: fixed;
+	height: 50%;
+	position: absolute;
 	bottom: 0;
 	right: 0;
 	background: #ddd;
@@ -136,6 +144,25 @@ p{
 	-moz-box-shadow:    0px -5px 25px 0px rgba(50, 50, 50, 0.35);
 	box-shadow:         0px -5px 25px 0px rgba(50, 50, 50, 0.35);
 }
+#scelta-nome{
+	float: left;
+	width:90%;
+	margin-left: 10px;
+	line-height: 30px;
+	margin-top: 20px;
+}
+#scelta-nome input{
+	background: transparent;
+	border: none;
+	color: #eee;
+	font-size: 1.5em;
+	text-transform: capitalize;
+}
+
+input:placeholder-shown { 
+  color: #000;
+}
+
 
 @media all and (max-width: 699px){
 	*{
@@ -253,23 +280,6 @@ p{
 	}
 	#salute-value{
 		width: 50px;
-	}
-	#scelta-nome{
-		float: right;
-		margin-right: 150px;
-		line-height: 30px;
-		margin-top: 20px;
-	}
-	#scelta-nome h3{
-		margin: 0;
-		padding: 0;
-	}
-	#scelta-nome input{
-		background: transparent;
-		border: none;
-		color: #eee;
-		font-size: 1.5em;
-		text-transform: capitalize;
 	}
 	
 }

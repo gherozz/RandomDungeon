@@ -350,9 +350,6 @@ $(document).on("click", "#lista .oggetto", function(){
 
 $(document).on("click", "#equip-lista .oggetto", function(){
 	var oggettoObj = mappaOggetti[$(this).prop("nome")];
-	//var r = confirm("rimuovi " + oggettoObj.nome +"?");
-	//if(r == true)
-	//{
 		if (oggettoObj.slot == "mano" )
 		{
 			mani--;
@@ -371,7 +368,6 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 		stampa("", oggettoObj, "LI", "lista");
 		 
 		spazio();	
-	//}
 });
 
 function aggiornaStatsEquip(oggettoObj, text, equipaggiato) 
@@ -432,10 +428,10 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 	}
 }
 
-$(document).ready(function(){		// AL CLICK DELL'INPUT SCORRE IN FONDO ALLA PAG
+$(document).ready(function(){
 	$("#bottone-start").click(function(){
 		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
-		$(this).val("Gioca ancora!!")		// IL BOTTONE CAMBIA IN GIOCA ANCORA!!
+		$(this).val("Scendi un altro livello");
 	});
 
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
