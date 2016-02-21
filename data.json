@@ -1,16 +1,18 @@
 {
 	"oggetti": [
 		{
+			"nomeEsterno":  "Spada di Ferro",
 			"nome": "spada",
 			"tipo": "equip",
 			"slot": "mano",
-			"attacco": "10",
+			"attacco": "15",
 			"difesa": "0",
 			"salute": "0",
 			"coloreTesto": "arancione",
 			"chance": "30"
 		}, 
 		{
+			"nomeEsterno":  "Scudo di Ferro",
 			"nome": "scudo",
 			"tipo": "equip",
 			"slot": "mano",
@@ -21,21 +23,188 @@
 			"chance": "30"
 		}, 
 		{
-			"nome": "pozione",
+			"nomeEsterno":  "Pozione di Cura I",
+			"nome": "pozione-cura-i",
 			"tipo": "uso",
 			"slot": "nessuno",
 			"attacco": "0",
 			"difesa": "0",
 			"salute": "30",
 			"coloreTesto": "verde",
-			"chance": "20"
+			"chance": "100"
 		}, 
 		{
+			"nomeEsterno":  "Spada +1",
 			"nome": "spada-incantata",
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "30",
 			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Armatura di Ferro",
+			"nome": "armatura-ferro",
+			"tipo": "equip",
+			"slot": "corpo",
+			"attacco": "0",
+			"difesa": "20",
+			"salute": "0",
+			"coloreTesto": "blu",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Arco",
+			"nome": "arco",
+			"tipo": "equip",
+			"slot": "2 mani",
+			"attacco": "20",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "15"
+		},
+		{
+			"nomeEsterno":  "Excalibur",
+			"nome": "excalibur",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "20",
+			"difesa": "20",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "2"
+		},
+		{
+			"nomeEsterno":  "Spada Arrugginita",
+			"nome": "spada-arrugginita",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "10",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "40"
+		},
+		{
+			"nomeEsterno":  "Spada di Legno",
+			"nome": "spada-legno",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "5",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "50"
+		},
+		{
+			"nomeEsterno":  "Spada d'Oro",
+			"nome": "spada-oro",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "5",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Spada Venefica",
+			"nome": "spada-venefica",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "20",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Giavellotto",
+			"nome": "giavellotto",
+			"tipo": "equip",
+			"slot": "2 mani",
+			"attacco": "10",
+			"difesa": "5",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "20"
+		},
+		{
+			"nomeEsterno":  "Pala",
+			"nome": "pala",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "5",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "20"
+		},
+		{
+			"nomeEsterno":  "Spada di Fuoco",
+			"nome": "spada-fuoco",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "20",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Spada Maledetta",
+			"nome": "spada-maledetta",
+			"tipo": "equip",
+			"slot": "2 mani",
+			"attacco": "40",
+			"difesa": "-5",
+			"salute": "-10",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Arco Maledetto",
+			"nome": "arco-maledetto",
+			"tipo": "equip",
+			"slot": "2 mani",
+			"attacco": "40",
+			"difesa": "-5",
+			"salute": "-10",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Arco +1",
+			"nome": "arco-incantato",
+			"tipo": "equip",
+			"slot": "2 mani",
+			"attacco": "40",
+			"difesa": "0",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Aloxidil",
+			"nome": "aloxidil",
+			"tipo": "equip",
+			"slot": "mano",
+			"attacco": "10",
+			"difesa": "30",
+			"salute": "0",
+			"coloreTesto": "arancione",
+			"chance": "5"
+		},
+		{
+			"nomeEsterno":  "Distruttore",
+			"nome": "distruttore",
+			"tipo": "equip",
+			"slot": "2 mani",
+			"attacco": "50",
+			"difesa": "-20",
 			"salute": "0",
 			"coloreTesto": "arancione",
 			"chance": "5"
@@ -79,7 +248,7 @@
 							]
 		},
 		{
-			"nome": "Boss",
+			"nome": "boss",
 			"attacco": "40",
 			"difesa": "10",
 			"vita": "100",

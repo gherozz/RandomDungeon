@@ -7,9 +7,13 @@ var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
 var salute = 100;
-var nomeEroe
+var critico = 0;
+var mana = 0;
+var monete = 0;
+var nomeEroe;
+var livello = 0;
 
-var mani = 0;
+var maniLibere = 2;
 var testa = 0;
 var corpo = 0;
 var heightwindow;
@@ -22,11 +26,13 @@ $(document).ready( function(){
 	$('#gioco').css('height', (heightwindow/2)+'px');
 	$('#arena').css('height', (heightwindow/2)+'px');
 
-	$("#attacco-value").append(attacco);
-	$("#difesa-value").append(difesa);
-	$("#salute-value").append(salute);
-	$("#salute-bar").css("width", salute+'px');
-	$("#salute-max").css("width", maxSalute+'px');
+	$("#attacco-value").append(" " + attacco);
+	$("#difesa-value").append(" " + difesa);
+	$("#salute-value").append(" " + salute);
+	$("#critico-value").append(" " + critico);
+	$("#mana-value").append(" " + mana);
+	$("#monete-value").append(" " + monete);
+	$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
 
@@ -135,7 +141,7 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 function gioco(){
 	nome();
 	if(nomeEroe == "" || nomeEroe == null){
-		nomeEroe = "Ser Frocini";
+		nomeEroe = "Ser Davidezio";
 		$("#nomeEroe").val(nomeEroe);
 	}
 	blocco("#nomeEroe", true);
@@ -149,7 +155,7 @@ function gioco(){
 		} else if(livello != livelloBoss){
 			aggiungiLog(testo, "titolo-livello");
 			evento();
-			aggiungiLog("hai attacco: "+attacco+", difesa: "+difesa+", salute: "+salute);
+			aggiungiLog(nomeEroe + " ha attacco: "+attacco+", difesa: "+difesa+", salute: "+salute);
 			spazio();
 		}
 	} else if(stop == true){
@@ -160,7 +166,7 @@ function gioco(){
 	}
 }
 
-function evento(){ //SEMPLIFICATI EVENTI/CONDIZIONI MA CI VA LAVORATO
+function evento(){
 	if (numeroRandom(0, 100) > 50) 
 	{
 		var listaPesata = generaListaPesata(listaMostri);
@@ -172,9 +178,9 @@ function evento(){ //SEMPLIFICATI EVENTI/CONDIZIONI MA CI VA LAVORATO
 	{
 		var listaPesata = generaListaPesata(listaOggetti);
 		oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
-		aggiungiLog("hai trovato: " + oggettoScelto.nome + "!", oggettoScelto.coloreTesto);
+		aggiungiLog(nomeEroe + " ha trovato: " + oggettoScelto.nomeEsterno + "!", oggettoScelto.coloreTesto);
 		aggiungiOggetto("", oggettoScelto, "LI", "lista");
-		$("#bottone-start").val("Scendi ancora..");
+		$("#bottone-start").val("Scende ancora..");
 		$("#bottone-start").removeClass("bottone-rosso");
 		$("#bottone-start").addClass("bottone-verde");
 	}
@@ -189,7 +195,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	var maxVitaNemico = parseInt(mostroScelto.vita);
 	
 	blocco("#bottone-start",true);	
-	$("#bottone-start").val("Combattendo..");
+	$("#bottone-start").val("In combattimento..");
 	$("#bottone-start").removeClass("bottone-verde");
 	$("#bottone-start").addClass("bottone-rosso");
 
@@ -224,7 +230,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				case "corazzaLava":
 					difesaNemico += 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-					aggiungiLog(nomeNemico +" genera la sua corazza di lava!!!1!11, difesa attuale: "+ difesaNemico);
+					aggiungiLog(nomeNemico +" genera la sua corazza di lava!, difesa attuale: "+ difesaNemico);
 				break;
 			}
 		}
@@ -244,8 +250,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		vitaNemico -= dannoEroe;
 		
 		stats("#salute-value", salute, "rosso");
-		$("#salute-bar").css("width", salute+'px');		// MODIFICA IN TEMPO "REALE" LA STAT DELLA SALUTE DELL'EROE NELL'HEADER
-		// $("#gioco").animate({scrollTop: heightwindow});
+		$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
 		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 
 		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
@@ -260,7 +265,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					aggiungiLog(nomeEroe + " ha sconfitto " + nomeNemico, "risultato-scontro");
 					spazio();
 					blocco("#bottone-start", false);
-					$("#bottone-start").val("Scendi ancora..");
+					$("#bottone-start").val("Scende ancora..");
 					$("#bottone-start").removeClass("bottone-rosso");
 					$("#bottone-start").addClass("bottone-verde");
 				}
@@ -268,7 +273,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				{
 					aggiungiLog(nomeEroe + " è morto", "morto");
 					stop= true;
-					var r = confirm("Sei Morto! Riprova?");
+					var r = confirm(nomeEroe + " é morto! Riprova?");
 					if(r == true){
 						location.reload();
 					}
@@ -279,18 +284,16 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	loopLi();
 }
 
-function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){	// GENERA LE MINIATURE NELL'INVENTARIO E NELL'EQUIPAGGIATO
+function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	var nuovoElemento = document.createElement(tipoElemento);
 	//var testoInterno = document.createTextNode(testo);  //PASSARE PARAMETRO TESTO COME STRINGA SE SI VUOLE SCRIVERE TESTO (NON TESTATO CON L'IMMAGINE OCCHIO)
 	nuovoElemento.className = oggettoObj.nome + " oggetto slot";
-	//nuovoElemento.appendChild(testoInterno);
 	var list = document.getElementById(idContainer);
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
-	//immagini();		// FICCA LE IMMAGINI 
 	$(nuovoElemento).prop("nome",oggettoObj.nome);
 	$("."+oggettoObj.nome).empty();
-	$("."+oggettoObj.nome).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" title="' + oggettoObj.nome + '"/>');
-	var info = '<div class="info"><p>' + oggettoObj.nome + '</p>';
+	$("."+oggettoObj.nome).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" title="' + oggettoObj.nomeEsterno + '"/>');
+	var info = '<div class="info"><p>' + oggettoObj.nomeEsterno + '</p>';
 	info += '<p>Tipo: ' + oggettoObj.tipo + '</p>';
 	info += '<p>Slot: ' + oggettoObj.slot + '</p>';
 	if (oggettoObj.attacco > 0)
@@ -309,7 +312,7 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){	// GENER
 }
 
 
-function aggiungiLog(testo, classe){		//CREA IL LOG DEL GIOCO
+function aggiungiLog(testo, classe){
 	var nuovoElemento = document.createElement("P");
 	var testoInterno = document.createTextNode(testo);
 	if(classe != undefined){
@@ -319,7 +322,7 @@ function aggiungiLog(testo, classe){		//CREA IL LOG DEL GIOCO
 	document.getElementById("gioco").appendChild(nuovoElemento);
 }
 
-function spazio(){				// CREA LO SPAZIO TRA IL LOG
+function spazio(){
 	var nuovoElemento = document.createElement("P");
 	var testoInterno = document.createTextNode("__________");
 	nuovoElemento.appendChild(testoInterno);
@@ -327,19 +330,19 @@ function spazio(){				// CREA LO SPAZIO TRA IL LOG
 }
 
 
-function popup(){		// RICHIAMA JQUERY POPUP DI FINE GIOCO (2 SCELTE CUSTOMIZZABILI)
+function popup(){
 	$("#alert-villaggio").dialog("open");
 };
 	
-function stats(tipo, valore, classe){		// FUNZIONE CHE MODIFICA LE STATS NELL'HEADER
+function stats(tipo, valore, classe){	
 	$(tipo).empty();
-	$(tipo).append(valore);
-	$(tipo).addClass(classe);	//ASSEGNA UN COLORE ALLA SCRITTA
+	$(tipo).append(" " + valore);
+	$(tipo).addClass(classe);
 	setTimeout(function(){
-		$(tipo).removeClass(classe);	// RIMUOVE IL COLORE DOPO 0.4S, EFFETTO BOH MI GARBAVA
+		$(tipo).removeClass(classe);
 	}, 400);
 	if(valore == salute){
-		$("#salute-bar").css("width", salute+'px');
+		$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
 	}
 }
 
@@ -348,13 +351,14 @@ function stats(tipo, valore, classe){		// FUNZIONE CHE MODIFICA LE STATS NELL'HE
 $(document).on("click", "#lista .oggetto", function(){
 	var oggettoObj = mappaOggetti[$(this).prop("nome")];
 	if(oggettoObj.tipo == "equip"){
-		if ((oggettoObj.slot == "mano" && mani < 2)
+		if ((oggettoObj.slot == "mano" && maniLibere >= 1)
 			|| (oggettoObj.slot == "testa" && testa < 1)
-			|| (oggettoObj.slot == "corpo" && corpo < 1))
+			|| (oggettoObj.slot == "corpo" && corpo < 1)
+			|| (oggettoObj.slot == "2 mani" && maniLibere >= 2))
 		{
 			if (oggettoObj.slot == "mano" )
 			{
-				mani++;
+				maniLibere--;
 			}
 			else if (oggettoObj.slot == "testa" )
 			{
@@ -364,24 +368,28 @@ $(document).on("click", "#lista .oggetto", function(){
 			{
 				corpo++;
 			}
+			else if (oggettoObj.slot == "2 mani" )
+			{
+				maniLibere -= 2;
+			}
 			$(this).remove();
-			text = "equipaggi " + oggettoObj.nome + ",";
+			text = nomeEroe + " ha equipaggiato " + oggettoObj.nomeEsterno + ",";
 			aggiornaStatsEquip(oggettoObj, text, true);
 			aggiungiOggetto("", oggettoObj, "LI", "equip-lista");
 		} 
 		else 
 		{
-			aggiungiLog("Non hai uno slot libero per questo oggetto!");
+			aggiungiLog(nomeEroe + "  non ha uno slot libero per questo oggetto!");
 		}
 	} 
 	else if (oggettoObj.tipo == "uso") 
 	{
 		if(salute < maxSalute){
 			$(this).remove();		
-			text = "consumi " + oggettoObj.nome + ",";
+			text = nomeEroe + "  ha consumato " + oggettoObj.nomeEsterno + ",";
 			aggiornaStatsEquip(oggettoObj, text, true);		
 		} else{
-			aggiungiLog("salute al massimo");
+			aggiungiLog("salute di " + nomeEroe + " al massimo");
 		}
 	}
 	spazio();	
@@ -392,7 +400,7 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 	
 		if (oggettoObj.slot == "mano" )
 		{
-			mani--;
+			maniLibere++;
 		}
 		else if (oggettoObj.slot == "testa" )
 		{
@@ -402,8 +410,12 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 		{
 			corpo--;
 		}
+		else if (oggettoObj.slot == "2 mani" )
+			{
+				maniLibere += 2;
+			}
 		$(this).remove();
-		text = "rimuovi " + oggettoObj.nome + ",";
+		text = nomeEroe + " ha rimuosoi " + oggettoObj.nomeEsterno + ",";
 		aggiornaStatsEquip(oggettoObj, text, false);
 		aggiungiOggetto("", oggettoObj, "LI", "lista");
 		 
