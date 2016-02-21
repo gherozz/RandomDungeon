@@ -23,7 +23,7 @@ $(document).ready( function(){
 });
 $(document).ready( function(){
 	 heightwindow = $(document).height();
-	$('.colonna-sx').css('height', (heightwindow-100)+'px');
+	$('.colonna-sx').css('height', (heightwindow)+'px');
 });
 $(document).ready(function(){
 	$("#attacco-value").append(attacco);
