@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var livello = 0;
 var testo;
 var stop = false;
@@ -934,14 +934,3 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		stats("#salute-value", salute, "verde");
 	}
 }
-
-
-
-
-
-
-
-
-
-
->>>>>>> refs/heads/Uomoz-patch
