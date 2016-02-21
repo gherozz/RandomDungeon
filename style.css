@@ -57,7 +57,7 @@ p{
 }
 #bottone-start{
 	width: 100%;
-	height: ;
+	height: 20%;
 	position:absolute;
 	bottom: 0;
 	left:0;
@@ -67,7 +67,6 @@ p{
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-	padding:90px 0 90px 0;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -96,16 +95,15 @@ p{
 	width: 60%;
 	background: #f2f1f1;
 	/*margin-top: 100px;*/
-	margin-top: 20px;
-	height: 45%;
 	overflow: auto;
 }
 #gioco p{
+	margin-left: 10px;
 	font-family: 'Roboto Mono';
 	font-size: 0.9em;
 }
 #inventario, #equipaggiamento{
-	margin: 10px auto 50px;
+	margin: 10px auto 10px;
 	width: 96%;
 	background: #eee;
 	border-top: solid 1px #222;
@@ -136,7 +134,6 @@ p{
 }
 #arena{
 	width: 60%;
-	height: 50%;
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -147,22 +144,109 @@ p{
 }
 #scelta-nome{
 	float: left;
-	width:90%;
+	width:96%;
 	margin-left: 10px;
 	line-height: 30px;
 	margin-top: 20px;
 }
 #scelta-nome input{
-	background: transparent;
+	width:100%;
 	border: none;
-	color: #eee;
+	color: #000;
 	font-size: 1.5em;
 	text-transform: capitalize;
+	background: #eee;
+	border-top: solid 1px #222;
+	border-left: solid 1px #222;
+	border-radius: 10px;
 }
 
 input:placeholder-shown { 
   color: #000;
 }
+
+.header h1 a:after{
+	content: "Random Dungeon";
+}
+
+#attacco:before{
+	content: "Attacco:";
+}
+#difesa:before{
+	content: "Difesa:";
+}
+#alert-villaggio{
+	background: #eee;
+	display: none;
+}
+.ui-dialog{
+	height: 300px;
+	width: 300px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #eaeaea;
+	border-radius: 5px;
+	border: solid 2px #999;
+}
+.ui-dialog-title{
+	margin: 1em;
+}
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+.ui-button{
+	height: 30px;
+	border-radius: 5px;
+	margin-bottom: 0.1em;
+}
+.ui-dialog-buttonset .ui-button:last-child{
+	float: right;
+	margin-right: 0.1em;
+}	
+.info{
+	background: #010101;
+	color: #fff;
+	border-radius: 5px;
+	height: 100px;
+	width: 75px;
+	position: relative;
+	top: -50px;
+	font-size: 0.8em;
+	margin: 0 auto;
+	opacity: 0;
+	transition: opacity 0.2s;
+	text-align: center;
+}
+.info p{
+	padding: 5px 0 0 0px;
+	margin: 0;
+	text-indent: 0;
+}
+.info p:first-child{
+	padding-top: 10px;
+}
+.slot img:hover + .info{
+	opacity: .8;
+}
+#salute-bar{
+	width: 100px;
+	height: 20px;
+	background: red;
+	float: left;
+}
+#salute-max{
+	border-radius: 5px;
+	border: solid 1px black;
+	margin-top: 2px;
+	overflow: hidden;
+}
+#salute-value{
+	width: 50px;
+}
+
+/*
 
 
 @media all and (max-width: 699px){
@@ -198,91 +282,11 @@ input:placeholder-shown {
 }
 @media all and (min-width: 700px){
 
-	.header h1 a:after{
-		content: "Random Dungeon";
-	}
-	
-	#attacco:before{
-		content: "Attacco:";
-	}
-	#difesa:before{
-		content: "Difesa:";
-	}
-	#bottone-start{
-		margin-top: 30px;
-	}
-	#alert-villaggio{
-		background: #eee;
-		display: none;
-	}
-	.ui-dialog{
-		height: 300px;
-		width: 300px;
-		position: fixed;
-		left: 50%;
-		top: 50%;
-		transform: translateY(-50%);
-		background: #eaeaea;
-		border-radius: 5px;
-		border: solid 2px #999;
-	}
-	.ui-dialog-title{
-		margin: 1em;
-	}
-	.no-close .ui-dialog-titlebar-close {
-	  display: none;
-	}
-	.ui-button{
-		height: 30px;
-		border-radius: 5px;
-		margin-bottom: 0.1em;
-	}
-	.ui-dialog-buttonset .ui-button:last-child{
-		float: right;
-		margin-right: 0.1em;
-	}	
-	.info{
-		background: #010101;
-		color: #fff;
-		border-radius: 5px;
-		height: 100px;
-		width: 75px;
-		position: relative;
-		top: -50px;
-		font-size: 0.8em;
-		margin: 0 auto;
-		opacity: 0;
-		transition: opacity 0.2s;
-		text-align: center;
-	}
-	.info p{
-		padding: 5px 0 0 0px;
-		margin: 0;
-		text-indent: 0;
-	}
-	.info p:first-child{
-		padding-top: 10px;
-	}
-	.slot img:hover + .info{
-		opacity: .8;
-	}
-	#salute-bar{
-		width: 100px;
-		height: 20px;
-		background: red;
-		float: left;
-	}
-	#salute-max{
-		border-radius: 5px;
-		border: solid 1px black;
-		margin-top: 2px;
-		overflow: hidden;
-	}
-	#salute-value{
-		width: 50px;
-	}
 	
 }
+
+*/
+
 /* COLORI  */
 .rosso{
 	color: red;
@@ -303,6 +307,7 @@ input:placeholder-shown {
 	font-weight: bold;
 	font-size: 1.2em;
 	text-indent: 0;
+	margin-top: 10px;
 }
 .risultato-scontro{
 	font-weight: bold;
@@ -317,4 +322,8 @@ input:placeholder-shown {
 }
 .colonna-sx-red{
 	background: #f27d3e;
+}
+
+.rapporto{
+	text-decoration: underline;
 }

@@ -13,15 +13,13 @@ var testa = 0;
 var corpo = 0;
 var heightwindow;
 var numDungeon = 1;
-function nome(){
-	nomeEroe = $("#nomeeroe").val();
-	console.log(nomeEroe);
-}
+
 $(document).ready( function(){
 	dungeon(numDungeon);
-	 heightwindow = $(document).height();
-	$('#gioco').css('height', (heightwindow-430)+'px');
+	heightwindow = $(document).height();
 	$('.colonna-sx').css('height', (heightwindow)+'px');
+	$('#gioco').css('height', (heightwindow/2)+'px');
+	$('#arena').css('height', (heightwindow/2)+'px');
 
 	$("#attacco-value").append(attacco);
 	$("#difesa-value").append(difesa);
@@ -33,8 +31,6 @@ $(document).ready( function(){
 
 	$("#bottone-start").click(function(){
 		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
-		$(this).val("Gioca ancora!!")		// IL BOTTONE CAMBIA IN GIOCA ANCORA!!
-	});
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
 		autoOpen: false,
 		dialogClass: "no-close",
@@ -47,14 +43,15 @@ $(document).ready( function(){
 			},
 			"Vai avanti": function(){
 				$(this).dialog("close");
-				creaP("VAI AVANTI", "titolo-livello");
+				aggiungiLog("VAI AVANTI", "titolo-livello");
 				dungeon(numDungeon);
 				spazio();	
 				stop = false;
 				gioco();
+				blocco("#bottone-start",false);
 				$("#bottone-start").click(function(){
-				$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
-			});
+					$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
+				});
 			}
 		}
 	})
@@ -66,36 +63,45 @@ var mappaOggetti = {};
 var listaMostri = [];
 var listaOggetti = [];
 
-	console.log( "lettura JSON:" ); //MISTER JSON VIENE LETTO E GIUDICATO PER I SUOI PECCATI
-	$.getJSON( "data.json", function(data) {
-		$.each(data.nemici, function( key, val ) //MOSTRI FINISCONO IN UNA MAPPA E IN UNA LISTA 
-		{
-			mappaMostri[val.nome] = val; 	//(LISTA = NOME DEL MOSTRO ASSOCIATO A UN 'OGGETTO' MOSTRO) 
-															//var mostroScelto = listaMostri[NOME MOSTRO]
-															//mostroScelto puo poi essere usato per estrarne le proprietá come vita/attacco/etc (var x = mostroScelto.attacco)
-			listaMostri.push(val); //(LISTA = NUMERO INDICE ASSOCIATO A UN 'OGGETTO' MOSTRO) 
-											//var mostroScelto = listaMostri[NUMEROINDICE]
-			console.log(val);
-		});
-		$.each(data.oggetti, function( key, val )  //OGGETTI FINISCONO IN UNA MAPPA E IN UNA LISTA, COME SOPRA
-		{
-			mappaOggetti[val.nome] = val;
-			listaOggetti.push(val);
-			console.log(val);
-		});
-	})
-	.done(function() {
-		console.log( "" );
-		console.log( "JSON letto con successo, analisi mappe e liste:" ); //VARI CHECK SUL LOG PER VEDERE CHE FUNZIONI
-		console.log(mappaMostri);
-		console.log(mappaOggetti);
-		console.log(listaMostri);
-		console.log(listaOggetti);
-	})
-	.fail( function(d, textStatus, error) {
-        console.error("getJSON failed, status: " + textStatus + ", error: "+error)
-    });
+console.log( "lettura JSON:" ); //MISTER JSON VIENE LETTO E GIUDICATO PER I SUOI PECCATI
+$.getJSON( "data.json", function(data) {
+	$.each(data.nemici, function( key, val ) //MOSTRI FINISCONO IN UNA MAPPA E IN UNA LISTA 
+	{
+		mappaMostri[val.nome] = val; 	//(LISTA = NOME DEL MOSTRO ASSOCIATO A UN 'OGGETTO' MOSTRO) 
+														//var mostroScelto = listaMostri[NOME MOSTRO]
+														//mostroScelto puo poi essere usato per estrarne le proprietá come vita/attacco/etc (var x = mostroScelto.attacco)
+		listaMostri.push(val); //(LISTA = NUMERO INDICE ASSOCIATO A UN 'OGGETTO' MOSTRO) 
+										//var mostroScelto = listaMostri[NUMEROINDICE]
+		console.log(val);
+	});
+	$.each(data.oggetti, function( key, val )  //OGGETTI FINISCONO IN UNA MAPPA E IN UNA LISTA, COME SOPRA
+	{
+		mappaOggetti[val.nome] = val;
+		listaOggetti.push(val);
+		console.log(val);
+	});
+})
+.done(function() {
+	console.log( "" );
+	console.log( "JSON letto con successo, analisi mappe e liste:" ); //VARI CHECK SUL LOG PER VEDERE CHE FUNZIONI
+	console.log(mappaMostri);
+	console.log(mappaOggetti);
+	console.log(listaMostri);
+	console.log(listaOggetti);
+})
+.fail( function(d, textStatus, error) {
+	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+});
+	
+function nome(){
+	nomeEroe = $("#nomeEroe").val();
+	console.log(nomeEroe);
+}
 
+function blocco(input,toggle){
+	$(input).prop("disabled", toggle);
+}
+	
  function numeroRandom(min, max) { //NUOVO RANDOMIZZATORE CON MASSIMI E MINIMI
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -123,25 +129,25 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 	}
 	return listaPesata;
 }
+
 function gioco(){
 	nome();
 	if(nomeEroe == "" || nomeEroe == null){
 		nomeEroe = "Ser Frocini";
-		$("#nomeeroe").val(nomeEroe);
+		$("#nomeEroe").val(nomeEroe);
 	}
-	blocco("#nomeeroe", true)
+	blocco("#nomeEroe", true);
 	if(stop == false){
 		livello++;
 		testo= nomeEroe + " è al livello " + livello;
 		if(livello == livelloBoss){
-			creaP(testo+", Boss!!!", "titolo-livello");
+			aggiungiLog(testo+", Boss!!!", "titolo-livello");
 			scontro(mappaMostri['Boss']);
 			stop= true;
-			livello++;
 		} else if(livello != livelloBoss){
-			creaP(testo, "titolo-livello");
+			aggiungiLog(testo, "titolo-livello");
 			evento();
-			creaP("hai attacco: "+attacco+", difesa: "+difesa+", salute: "+salute);
+			aggiungiLog("hai attacco: "+attacco+", difesa: "+difesa+", salute: "+salute);
 			spazio();
 		}
 	} else if(stop == true){
@@ -157,21 +163,17 @@ function evento(){ //SEMPLIFICATI EVENTI/CONDIZIONI MA CI VA LAVORATO
 	{
 		var listaPesata = generaListaPesata(listaMostri);
 		mostroScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
-		creaP("incontri: " + mostroScelto.nome + "!", "rosso");
+		aggiungiLog("incontri: " + mostroScelto.nome + "!", "rosso");
 		scontro(mostroScelto);
 	}
 	else
 	{
 		var listaPesata = generaListaPesata(listaOggetti);
 		oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
-		creaP("hai trovato: " + oggettoScelto.nome + "!", oggettoScelto.coloreTesto);
-		stampa("", oggettoScelto, "LI", "lista");
+		aggiungiLog("hai trovato: " + oggettoScelto.nome + "!", oggettoScelto.coloreTesto);
+		aggiungiOggetto("", oggettoScelto, "LI", "lista");
+		$("#bottone-start").val("Scendi ancora..");
 	}
-}
-
-
-function blocco(input,toggle){
-	$(input).prop("disabled", toggle);
 }
 
 function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
@@ -183,6 +185,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	var maxVitaNemico = parseInt(mostroScelto.vita);
 	
 	blocco("#bottone-start",true);	
+	$("#bottone-start").val("Combattendo..");
 
 	 function loopLi() {
 		var loop = setInterval(function() { 
@@ -199,23 +202,23 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 						vitaNemico = maxVitaNemico;
 					}
 					attaccoNemico= 0;
-					creaP("Il "+ nomeNemico +" si lecca le ferite, vita "+ nomeNemico +" attuale: " + vitaNemico);
+					aggiungiLog(nomeNemico +" si lecca le ferite, vita "+ nomeNemico +" attuale: " + vitaNemico);
 				break;
 				case "pugnoLato":
-					creaP("Il "+ nomeNemico +" tira un pugno di lato");
+					aggiungiLog(nomeNemico +" tira un pugno di lato");
 					attaccoNemico = baseAttaccoNemico; //RESI STI VALORI DELLE PERCENTUALI DELL ATTACCO BASE DEL MOSTRO COSI LI POSSIAMO USARE ANCHE SU TROLL ETC
 				break;
 				case "colpoCoda":
 					difesa -= 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-					creaP("Il "+ nomeNemico +" usa colpo-coda! Tua nuova difesa: "+ difesa);
+					aggiungiLog(nomeNemico +" usa colpo-coda! Tua nuova difesa: "+ difesa);
 					stats("#difesa-value", difesa, "blu");
 
 				break;
 				case "corazzaLava":
 					difesaNemico += 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-					creaP("Il "+ nomeNemico +" genera la sua corazza di lava!!!1!11, difesa attuale: "+ difesaNemico);
+					aggiungiLog(nomeNemico +" genera la sua corazza di lava!!!1!11, difesa attuale: "+ difesaNemico);
 				break;
 			}
 		}
@@ -239,23 +242,23 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		// $("#gioco").animate({scrollTop: heightwindow});
 		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 
-		creaP(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
-		creaP(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
-		creaP("Vita " + nomeNemico +": " + vitaNemico + ", vita " + nomeEroe + ": "+ salute)
+		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
+		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
+		aggiungiLog("Vita " + nomeNemico +": " + vitaNemico + ", vita " + nomeEroe + ": "+ salute, "rapporto")
 			
 			
 			if(salute <= 0 || vitaNemico <= 0) {
 				clearInterval(loop);
 				if (salute > 0)
 				{
-					creaP(nomeEroe + " ha sconfitto " + nomeNemico, "risultato-scontro");
+					aggiungiLog(nomeEroe + " ha sconfitto " + nomeNemico, "risultato-scontro");
 					spazio();
 					blocco("#bottone-start", false);
-
+					$("#bottone-start").val("Scendi ancora..");
 				}
 				else
 				{
-					creaP(nomeEroe + " è morto", "morto");
+					aggiungiLog(nomeEroe + " è morto", "morto");
 					stop= true;
 					var r = confirm("Sei Morto! Riprova?");
 					if(r == true){
@@ -268,7 +271,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	loopLi();
 }
 
-function stampa(testo, oggettoObj, tipoElemento, idContainer){	// GENERA LE MINIATURE NELL'INVENTARIO E NELL'EQUIPAGGIATO
+function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){	// GENERA LE MINIATURE NELL'INVENTARIO E NELL'EQUIPAGGIATO
 	var nuovoElemento = document.createElement(tipoElemento);
 	//var testoInterno = document.createTextNode(testo);  //PASSARE PARAMETRO TESTO COME STRINGA SE SI VUOLE SCRIVERE TESTO (NON TESTATO CON L'IMMAGINE OCCHIO)
 	nuovoElemento.className = oggettoObj.nome + " oggetto slot";
@@ -298,7 +301,7 @@ function stampa(testo, oggettoObj, tipoElemento, idContainer){	// GENERA LE MINI
 }
 
 
-function creaP(testo, classe){		//CREA IL LOG DEL GIOCO
+function aggiungiLog(testo, classe){		//CREA IL LOG DEL GIOCO
 	var nuovoElemento = document.createElement("P");
 	var testoInterno = document.createTextNode(testo);
 	if(classe != undefined){
@@ -356,11 +359,11 @@ $(document).on("click", "#lista .oggetto", function(){
 			$(this).remove();
 			text = "equipaggi " + oggettoObj.nome + ",";
 			aggiornaStatsEquip(oggettoObj, text, true);
-			stampa("", oggettoObj, "LI", "equip-lista");
+			aggiungiOggetto("", oggettoObj, "LI", "equip-lista");
 		} 
 		else 
 		{
-			creaP("Non hai uno slot libero per questo oggetto!");
+			aggiungiLog("Non hai uno slot libero per questo oggetto!");
 		}
 	} 
 	else if (oggettoObj.tipo == "uso") 
@@ -370,7 +373,7 @@ $(document).on("click", "#lista .oggetto", function(){
 			text = "consumi " + oggettoObj.nome + ",";
 			aggiornaStatsEquip(oggettoObj, text, true);		
 		} else{
-			creaP("salute al massimo");
+			aggiungiLog("salute al massimo");
 		}
 	}
 	spazio();	
@@ -394,7 +397,7 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 		$(this).remove();
 		text = "rimuovi " + oggettoObj.nome + ",";
 		aggiornaStatsEquip(oggettoObj, text, false);
-		stampa("", oggettoObj, "LI", "lista");
+		aggiungiOggetto("", oggettoObj, "LI", "lista");
 		 
 		spazio();	
 
@@ -448,7 +451,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 			text += " salute - " + oggettoObj.salute;
 		}
 	}
-	creaP(text, oggettoObj.coloreTesto);
+	aggiungiLog(text, oggettoObj.coloreTesto);
 	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 	
 	if (salute > maxSalute)
