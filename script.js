@@ -2,7 +2,7 @@ var livello = 0;
 var testo;
 var stop = false;
 var livelloBoss = 10;
-var attacco = 100;
+var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
 var salute = 100;
@@ -378,9 +378,7 @@ $(document).on("click", "#lista .oggetto", function(){
 
 $(document).on("click", "#equip-lista .oggetto", function(){
 	var oggettoObj = mappaOggetti[$(this).prop("nome")];
-	//var r = confirm("rimuovi " + oggettoObj.nome +"?");
-	//if(r == true)
-	//{
+	
 		if (oggettoObj.slot == "mano" )
 		{
 			mani--;
@@ -399,7 +397,7 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 		stampa("", oggettoObj, "LI", "lista");
 		 
 		spazio();	
-	//}
+
 });
 
 function aggiornaStatsEquip(oggettoObj, text, equipaggiato) 
