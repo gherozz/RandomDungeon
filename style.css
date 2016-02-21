@@ -51,18 +51,36 @@ p{
 	line-height: 25px;
 }
 #bottone-start{
-	width: 100px;
-	border-radius: 10px;
-	float: right;
-	margin-right: 50px;
+	width: 100%;
+	position:absolute;
+	bottom: 0;
 	cursor: pointer;
+	background-color: #4CAF50;
+	border: 10px solid #4CAF50;
+	box-sizing: bordr-box;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	padding:90px 0 90px 0;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 48px;
+	line-height:0px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
+#bottone-start:hover{
+	background-color: white; /* Green */
+    color: #4CAF50;
+}
+
 .colonna-sx{
 	width: 40%;
 	height: 100%;
 	background: #88C159;
 	float: left;
 	overflow: hidden;
+	position: relative;
 }
 #gioco{
 	float: right;
