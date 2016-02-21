@@ -150,7 +150,7 @@ function gioco(){
 		testo= nomeEroe + " è al livello " + livello;
 		if(livello == livelloBoss){
 			aggiungiLog(testo+", Boss!!!", "titolo-livello");
-			scontro(mappaMostri['Boss']);
+			scontro(mappaMostri['boss']);
 			stop= true;
 		} else if(livello != livelloBoss){
 			aggiungiLog(testo, "titolo-livello");
