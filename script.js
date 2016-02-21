@@ -31,6 +31,7 @@ $(document).ready( function(){
 
 	$("#bottone-start").click(function(){
 		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
+	});
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
 		autoOpen: false,
 		dialogClass: "no-close",
