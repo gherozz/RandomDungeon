@@ -57,13 +57,14 @@ p{
 }
 #bottone-start{
 	width: 100%;
+	height: ;
 	position:absolute;
 	bottom: 0;
 	left:0;
 	cursor: pointer;
 	background-color: #4CAF50;
 	border: 10px solid #4CAF50;
-	box-sizing: bordr-box;
+	box-sizing: border-box;
 	-moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 	padding:90px 0 90px 0;
@@ -208,7 +209,6 @@ input:placeholder-shown {
 		content: "Difesa:";
 	}
 	#bottone-start{
-		height: 40px;
 		margin-top: 30px;
 	}
 	#alert-villaggio{
@@ -283,7 +283,7 @@ input:placeholder-shown {
 	}
 	
 }
-/* COLORI SCRITTE */
+/* COLORI  */
 .rosso{
 	color: red;
 }
@@ -310,4 +310,11 @@ input:placeholder-shown {
 .morto{
 	font-weight: bold;
 	color: red;
+}
+
+.header-red{
+	background: #ef4410;
+}
+.colonna-sx-red{
+	background: #f27d3e;
 }

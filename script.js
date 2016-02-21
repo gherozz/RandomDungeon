@@ -2,7 +2,7 @@ var livello = 0;
 var testo;
 var stop = false;
 var livelloBoss = 10;
-var attacco = 10;
+var attacco = 100;
 var difesa = 10;
 var maxSalute = 100;
 var salute = 100;
@@ -12,28 +12,54 @@ var mani = 0;
 var testa = 0;
 var corpo = 0;
 var heightwindow;
-
+var numDungeon = 1;
 function nome(){
 	nomeEroe = $("#nomeeroe").val();
 	console.log(nomeEroe);
 }
 $(document).ready( function(){
+	dungeon(numDungeon);
 	 heightwindow = $(document).height();
-	$('#gioco').css('height', (heightwindow-350)+'px');
-});
-$(document).ready( function(){
-	 heightwindow = $(document).height();
+	$('#gioco').css('height', (heightwindow-430)+'px');
 	$('.colonna-sx').css('height', (heightwindow)+'px');
-});
-$(document).ready(function(){
+
 	$("#attacco-value").append(attacco);
 	$("#difesa-value").append(difesa);
 	$("#salute-value").append(salute);
 	$("#salute-bar").css("width", salute+'px');
 	$("#salute-max").css("width", maxSalute+'px');
+	blocco("#bottone-start",false);	
+	$(".avvia-gioco").click(function(){gioco()});
+
+	$("#bottone-start").click(function(){
+		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
+		$(this).val("Gioca ancora!!")		// IL BOTTONE CAMBIA IN GIOCA ANCORA!!
+	});
+	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
+		autoOpen: false,
+		dialogClass: "no-close",
+		modal: true,
+		buttons: {
+			"Torna al villaggio": function(){
+				$(this).dialog("close");
+				villaggio();
+				stop = true;
+			},
+			"Vai avanti": function(){
+				$(this).dialog("close");
+				creaP("VAI AVANTI", "titolo-livello");
+				dungeon(numDungeon);
+				spazio();	
+				stop = false;
+				gioco();
+				$("#bottone-start").click(function(){
+				$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
+			});
+			}
+		}
+	})
 });
 
-blocco("#bottone-start",false);	
 
 var mappaMostri = {};
 var mappaOggetti = {};
@@ -97,7 +123,6 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 	}
 	return listaPesata;
 }
-
 function gioco(){
 	nome();
 	if(nomeEroe == "" || nomeEroe == null){
@@ -113,14 +138,17 @@ function gioco(){
 			scontro(mappaMostri['Boss']);
 			stop= true;
 			livello++;
-		} else if(livello< livelloBoss){
+		} else if(livello != livelloBoss){
 			creaP(testo, "titolo-livello");
 			evento();
 			creaP("hai attacco: "+attacco+", difesa: "+difesa+", salute: "+salute);
 			spazio();
 		}
 	} else if(stop == true){
-		popup();	
+		numDungeon++;	
+		popup();
+		stop =false;
+		blocco("#bottone-start",true);		
 	}
 }
 
@@ -350,6 +378,9 @@ $(document).on("click", "#lista .oggetto", function(){
 
 $(document).on("click", "#equip-lista .oggetto", function(){
 	var oggettoObj = mappaOggetti[$(this).prop("nome")];
+	//var r = confirm("rimuovi " + oggettoObj.nome +"?");
+	//if(r == true)
+	//{
 		if (oggettoObj.slot == "mano" )
 		{
 			mani--;
@@ -368,6 +399,7 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 		stampa("", oggettoObj, "LI", "lista");
 		 
 		spazio();	
+	//}
 });
 
 function aggiornaStatsEquip(oggettoObj, text, equipaggiato) 
@@ -428,31 +460,6 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 	}
 }
 
-$(document).ready(function(){
-	$("#bottone-start").click(function(){
-		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
-		$(this).val("Scendi un altro livello");
-	});
-
-	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
-		autoOpen: false,
-		dialogClass: "no-close",
-		modal: true,
-		buttons: {
-			"Torna al villaggio": function(){
-				$(this).dialog("close");
-				creaP("Torni al villaggio", "titolo-livello");
-				spazio();
-				stop = true;
-			},
-			"Vai avanti": function(){
-				$(this).dialog("close");
-				creaP("VAI AVANTI", "titolo-livello");
-				spazio();	
-			}
-		}
-	})
-})
 
 
 
