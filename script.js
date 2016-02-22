@@ -91,7 +91,7 @@ $.getJSON( "data.json", function(data) {
 })
 .done(function() {
 	console.log( "" );
-	console.log( "JSON letto con successo, analisi mappe e liste:" ); //VARI CHECK SUL LOG PER VEDERE CHE FUNZIONI
+	console.log( "JSON letto con successo, analisi mappe e liste:" );
 	console.log(mappaMostri);
 	console.log(mappaOggetti);
 	console.log(listaMostri);
@@ -224,7 +224,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					difesa -= 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					aggiungiLog(nomeNemico +" usa colpo-coda! Tua nuova difesa: "+ difesa);
-					stats("#difesa-value", difesa, "blu");
+					modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 
 				break;
 				case "corazzaLava":
@@ -238,18 +238,18 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		attaccoTemp = randomizza50(attacco);
 		dannoNemico = attaccoNemicoTemp-difesa;
 		dannoEroe = attaccoTemp-difesaNemico;
-		if ( dannoNemico < 0)
+		if ( dannoNemico <= 0)
 		{
-			dannoNemico = 0;
+			dannoNemico = 1;
 		}
-		if (dannoEroe < 0)
+		if (dannoEroe <= 0)
 		{
-			dannoEroe = 0;
+			dannoEroe = 1;
 		}
 		salute -= dannoNemico;
 		vitaNemico -= dannoEroe;
 		
-		stats("#salute-value", salute, "rosso");
+		modificaStatsVisualizzate("#salute-value", salute, "rosso");
 		$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
 		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 
@@ -334,7 +334,7 @@ function popup(){
 	$("#alert-villaggio").dialog("open");
 };
 	
-function stats(tipo, valore, classe){	
+function modificaStatsVisualizzate(tipo, valore, classe){	
 	$(tipo).empty();
 	$(tipo).append(" " + valore);
 	$(tipo).addClass(classe);
@@ -415,7 +415,7 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 				maniLibere += 2;
 			}
 		$(this).remove();
-		text = nomeEroe + " ha rimuosoi " + oggettoObj.nomeEsterno + ",";
+		text = nomeEroe + " ha rimosso " + oggettoObj.nomeEsterno + ",";
 		aggiornaStatsEquip(oggettoObj, text, false);
 		aggiungiOggetto("", oggettoObj, "LI", "lista");
 		 
@@ -430,13 +430,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			attacco += parseInt(oggettoObj.attacco);
-			stats("#attacco-value", attacco, "arancione");
+			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
 			text += " attacco + " + oggettoObj.attacco;
 		} 
 		else 
 		{
 			attacco -= parseInt(oggettoObj.attacco);
-			stats("#attacco-value", attacco, "arancione");
+			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
 			text += " attacco - " + oggettoObj.attacco;
 		}
 		
@@ -446,13 +446,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			difesa += parseInt(oggettoObj.difesa);
-			stats("#difesa-value", difesa, "blu");
+			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 			text += " difesa + " + oggettoObj.difesa;
 		} 
 		else 
 		{
 			difesa -= parseInt(oggettoObj.difesa);
-			stats("#difesa-value", difesa, "blu");
+			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 			text += " difesa - " + oggettoObj.difesa;
 		}
 	}
@@ -461,13 +461,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			salute += parseInt(oggettoObj.salute);
-			stats("#salute-value", salute, "verde");
+			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute + " + oggettoObj.salute;
 		} 
 		else 
 		{
 			salute -= parseInt(oggettoObj.salute);
-			stats("#salute-value", salute, "verde");
+			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute - " + oggettoObj.salute;
 		}
 	}
@@ -477,6 +477,6 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 	if (salute > maxSalute)
 	{
 		salute = maxSalute;
-		stats("#salute-value", salute, "verde");
+		modificaStatsVisualizzate("#salute-value", salute, "verde");
 	}
 }

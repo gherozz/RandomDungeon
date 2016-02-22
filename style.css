@@ -61,38 +61,62 @@ span{
 #inventario, #equipaggiamento{
 	margin: 10px auto 10px;
 	width: 96%;
-	background: #eee;
+	background: #ccc;
 	border-top: solid 1px #222;
 	border-left: solid 1px #222;
-	border-radius: 10px;
-	overflow: hidden;
 }
 #inventario{	
-	min-height: 160px;
+	min-height: 80px;
 }
 .colonna-sx h3{
 	margin: 10px 0px 10px 10px;
 }
 #equipaggiamento{
-	height: 80px;
+	height: 40px;
 }
 .slot{
 	float: left;
-	width: 80px;
-	height: 80px;
+	width: 40px;
+	height: 40px;
 	border-right: solid 1px #222;
 	border-bottom: solid 1px #222;
 	cursor: pointer;
 }
 .slot img{
-	width: 80px;
-	height: 80px;
+	width: 40px;
+	height: 40px;
+	position: relative;
+	top: 0px;
+	left:0px;
+	z-index: 20;
+}
+.info{
+	background: #010101;
+	color: #fff;
+	border-radius: 5px;
+	padding: 0px 5px 5px 40px;
+	width: 100px;
+	position: relative;
+	top: -44px;
+	z-index: 10;
+	font-size: 0.8em;
+	margin: 0 auto;
+	opacity: 0;
+	transition: opacity 0.5s;
+	text-align: center;
+}
+.info p{
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+}
+.slot img:hover + .info{
+	opacity: .8;
 }
 #scelta-nome{
 	float: left;
 	width:96%;
 	margin-left: 10px;
-	line-height: 30px;
 	margin-top: 20px;
 }
 #scelta-nome input{
@@ -100,6 +124,7 @@ span{
 	border: none;
 	color: #000;
 	font-size: 1.5em;
+	font-weight: bold;
 	text-transform: capitalize;
 	background-color: transparent;
 }
@@ -107,11 +132,12 @@ input:focus {
     outline: none !important;
 }
 ::-webkit-input-placeholder {
-    color: #666;
+    color: #66ff99;
 	text-transform: none;
+	font-weight: normal;
 }
 input:placeholder-shown { 
-  color: #000;
+  color: #66ff99;
 }
 #salute-max{
 	float: left;
@@ -245,31 +271,6 @@ input:placeholder-shown {
 	float: right;
 	margin-right: 0.1em;
 }	
-.info{
-	background: #010101;
-	color: #fff;
-	border-radius: 5px;
-	height: 100px;
-	width: 75px;
-	position: relative;
-	top: -50px;
-	font-size: 0.8em;
-	margin: 0 auto;
-	opacity: 0;
-	transition: opacity 0.2s;
-	text-align: center;
-}
-.info p{
-	padding: 5px 0 0 0px;
-	margin: 0;
-	text-indent: 0;
-}
-.info p:first-child{
-	padding-top: 10px;
-}
-.slot img:hover + .info{
-	opacity: .8;
-}
 
 /*
 
