@@ -302,15 +302,14 @@ input:placeholder-shown {
 }
 .stats-mostro h3{
 	margin-left: 10px;
-	margin-top: 10px;
+	margin-top: 1%;
 }
 .stats-eroe h3{
 	margin-left: 10px;
-	margin-top: 40px;
+	margin-top: 4%;
 }
 .stats-eroe .stats1, .stats-eroe .stats2{
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 1%;
 }
 /* COLORI  */
 .rosso{
