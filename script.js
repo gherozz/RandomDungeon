@@ -292,7 +292,7 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
 	$(nuovoElemento).prop("nome",oggettoObj.nome);
 	$("."+oggettoObj.nome).empty();
-	$("."+oggettoObj.nome).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" title="' + oggettoObj.nomeEsterno + '"/>');
+	$("."+oggettoObj.nome).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 	var info = '<div class="info"><p>' + oggettoObj.nomeEsterno + '</p>';
 	info += '<p>Tipo: ' + oggettoObj.tipo + '</p>';
 	info += '<p>Slot: ' + oggettoObj.slot + '</p>';

@@ -94,10 +94,11 @@ span{
 	background: #010101;
 	color: #fff;
 	border-radius: 5px;
-	padding: 0px 5px 5px 40px;
+	padding: 0px 5px 5px 0px;
 	width: 100px;
 	position: relative;
 	top: -44px;
+	left: 40px;
 	z-index: 10;
 	font-size: 0.8em;
 	margin: 0 auto;
@@ -112,6 +113,7 @@ span{
 }
 .slot img:hover + .info{
 	opacity: .8;
+	z-index: 30;
 }
 #scelta-nome{
 	float: left;
