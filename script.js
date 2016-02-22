@@ -2,7 +2,7 @@
 var livello = 0;
 var testo;
 var stop = false;
-var livelloBoss = 10;
+var livelloBoss = [10, 20, 30, 40];
 var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
@@ -19,15 +19,15 @@ var testa = 0;
 var corpo = 0;
 var heightwindow;
 var numDungeon = 1;
-
+var x = 0;
 $(document).ready( function(){
 	dungeon(numDungeon);
 	heightwindow = $( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
-	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, "slow");
-	$('#arena').animate({height: (heightwindow/3)+'px'}, "slow");
+	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, "slow");		
+	$('#arena').animate({height: (heightwindow/3)+'px'}, "slow");		
 
-	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
+	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
 	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
 	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 	modificaStatsVisualizzate("#salute-value", salute, "verde");
@@ -68,8 +68,8 @@ $(document).ready( function(){
 $(window).resize(function () { 
 	heightwindow =$( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
-	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, 200);
-	$('#arena').animate({height: (heightwindow/3)+'px'}, 200);
+	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, 200);		
+	$('#arena').animate({height: (heightwindow/3)+'px'}, 200);		
 });
 
 
@@ -87,13 +87,13 @@ $.getJSON( "data.json", function(data) {
 														//mostroScelto puo poi essere usato per estrarne le proprietá come vita/attacco/etc (var x = mostroScelto.attacco)
 		listaMostri.push(val); //(LISTA = NUMERO INDICE ASSOCIATO A UN 'OGGETTO' MOSTRO) 
 										//var mostroScelto = listaMostri[NUMEROINDICE]
-		//console.log(val);
+		// console.log(val);
 	});
 	$.each(data.oggetti, function( key, val )  //OGGETTI FINISCONO IN UNA MAPPA E IN UNA LISTA, COME SOPRA
 	{
 		mappaOggetti[val.nome] = val;
 		listaOggetti.push(val);
-		//console.log(val);
+		// console.log(val);
 	});
 })
 .done(function() {
@@ -110,7 +110,12 @@ $.getJSON( "data.json", function(data) {
 	
 function nome(){
 	nomeEroe = $("#nomeEroe").val();
-	console.log(nomeEroe);
+	if(nomeEroe.contains("Ser") || nomeEroe.contains("ser")){
+		$("#nomeEroe").val(nomeEroe);
+	} else{
+		nomeEroe = "Ser "+ $("#nomeEroe").val();
+		$("#nomeEroe").val(nomeEroe);
+	}
 }
 
 function blocco(input,toggle){
@@ -128,14 +133,14 @@ function randomizza50(valore) { //UNA FUNZIONE CHE FA IL -50%/+50% DA SOLA PER V
 var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 {
 	var listaPesata = [];
-	//console.log(" ");
-	//console.log("roll chances:");
+	// console.log(" ");
+	// console.log("roll chances:");
 	
 	for (var i = 0; i < lista.length; i++) 
 	{
 		var multiples = lista[i].chance * 100;
 		
-		//console.log("chances " + lista[i].nome + " = " + lista[i].chance)
+		// console.log("chances " + lista[i].nome + " = " + lista[i].chance)
 
 		for (var j = 0; j < multiples; j++) 
 		{
@@ -146,8 +151,10 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 }
 
 function gioco(){
+console.log(numDungeon);
+
 	nome();
-	if(nomeEroe == "" || nomeEroe == null){
+	if(nomeEroe == "Ser " || nomeEroe == null){
 		nomeEroe = "Ser Random";
 		$("#nomeEroe").val(nomeEroe);
 	}
@@ -155,16 +162,17 @@ function gioco(){
 	if(stop == false){
 		livello++;
 		testo= nomeEroe + " è al livello " + livello;
-		if(livello == livelloBoss){
+		if(livello == livelloBoss[x]){
 			aggiungiLog(testo+", Boss!!!", "titolo-livello");
 			scontro(mappaMostri['boss']);
 			stop= true;
-		} else if(livello != livelloBoss){
+		} else if(livello != livelloBoss[x]){
 			aggiungiLog(testo, "titolo-livello");
 			evento();
 		}
 	} else if(stop == true){
-		numDungeon++;	
+		x++;	
+		numDungeon = Math.floor(Math.random()*4)+1;
 		popup();
 		stop =false;
 		blocco("#bottone-start",true);		
@@ -179,12 +187,6 @@ function evento(){
 }
 
 function generaOggetto(){
-	// $('.stats-mostro').children().setTimeOut(1000, function(){
-	// 	fadeOut(700, function(){
-	// 	$(this).empty();
-	// });
-	// })
-	
 	var listaPesata = generaListaPesata(listaOggetti);
 	oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
 	spazio();
@@ -219,7 +221,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
 			attaccoScelto = listaPesataAzioni[numeroRandom(0, listaPesataAzioni.length-1)];
-			//console.log(attaccoScelto.nome);
+			// console.log(attaccoScelto.nome);
 			switch(attaccoScelto.nome){ //UN COSO CHE GESTISCE AZIONI SPECIALI PER QUALUNQUE MOSTRO, VEDI IL JSON COME AGGIUNGERE AZIONI AD ALTRI MOSTRI
 				case "leccaFerite":
 					vitaNemico+= randomizza50(Math.round(maxVitaNemico*0.2));
@@ -356,9 +358,9 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 	$(tipo).toggleClass( "bold", roundTimer, "easeInOutCubic" );
 	
 	if(valore == salute){
-		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
-		$(".salute-bar").addClass("bgBianco");
-		$(".salute-bar").toggleClass("bgBianco", roundTimer/5, "easeOutCubic" );
+		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);		
+		$(".salute-bar").addClass("bgBianco");		
+		$(".salute-bar").toggleClass("bgBianco", roundTimer/5, "easeOutCubic" );		
 	}
 }
 
@@ -460,12 +462,20 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			difesa += parseInt(oggettoObj.difesa);
+			if (salute > maxSalute)		
+			{		
+				salute = maxSalute;		
+			}
 			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 			text += " difesa + " + oggettoObj.difesa;
 		} 
 		else 
 		{
 			difesa -= parseInt(oggettoObj.difesa);
+			if (salute > maxSalute)		
+			{		
+				salute = maxSalute;		
+			}
 			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 			text += " difesa - " + oggettoObj.difesa;
 		}
@@ -475,20 +485,12 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			salute += parseInt(oggettoObj.salute);
-			if (salute > maxSalute)
-			{
-				salute = maxSalute;
-			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute + " + oggettoObj.salute;
 		} 
 		else 
 		{
 			salute -= parseInt(oggettoObj.salute);
-			if (salute > maxSalute)
-			{
-				salute = maxSalute;
-			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute - " + oggettoObj.salute;
 		}
