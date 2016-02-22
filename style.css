@@ -156,7 +156,7 @@ input:placeholder-shown {
 	float: left;
 	clear: both;
 	line-height: 15px;
-	margin: 10px 10px 20px 10px;
+	margin: 1% 10px 1% 10px;
 	background: #f2f1f1;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
@@ -182,7 +182,7 @@ input:placeholder-shown {
 }
 .stats-eroe h3{
 	float: left;
-	clear: both;
+	margin-top: 2%;
 	margin-left: 10px;
 }
 .stats-eroe .stats, .stats-mostro{

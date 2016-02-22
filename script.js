@@ -158,6 +158,7 @@ console.log(numDungeon);
 		nomeEroe = "Ser Random";
 		$("#nomeEroe").val(nomeEroe);
 	}
+	$(".stats-eroe h3").append(nomeEroe);
 	blocco("#nomeEroe", true);
 	if(stop == false){
 		livello++;
