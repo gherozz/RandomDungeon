@@ -21,9 +21,9 @@ function villaggio(){
 
 
 function statsMostro(vita,maxvita, attacco, difesa){
-	$('.stats-mostro').html('<h3>Statistiche Mostro</h3><div class="stats1"><ul><li><span class="flaticon-medieval"></span><span class="attacco"></span><span id="attacco-mostro-value"></span></li><li><span class="flaticon-weapon"></span><span class="difesa"></span><span id="difesa-mostro-value"></span></li><li><span class="flaticon-shapes"></span><span class="salute"></span><span id="salute-mostro-value"></span><span id="maxSalute-mostro-value"></span></li></ul></div><div class="salute-container"><div id="salute-mostro-max"><div id="salute-mostro-bar"></div></div></div>');
+	$('.stats-mostro').html('<h3>Statistiche Nemico</h3><div class="stats"><ul><li><span class="flaticon-medieval"></span><span class="attacco"></span><span id="attacco-mostro-value"></span></li><li><span class="flaticon-weapon"></span><span class="difesa"></span><span id="difesa-mostro-value"></span></li><li><span class="flaticon-shapes"></span><span class="salute"></span><span id="salute-mostro-value"></span><span id="maxSalute-mostro-value"></span></li></ul></div><div class="salute-container"><div id="salute-mostro-max"><div class="salute-mostro-bar"></div></div></div>');
 
-	$("#salute-mostro-bar").animate({width: (vita/maxvita)*100 +"%"}, roundTimer);
+	$(".salute-mostro-bar").animate({width: (vita/maxvita)*100 +"%"}, roundTimer);
 	modificaStatsVisualizzate("#attacco-mostro-value", attacco, "arancione");
 	modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu");
 	modificaStatsVisualizzate("#salute-mostro-value", vita, "verde");

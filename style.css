@@ -29,7 +29,6 @@ span{
 }
 .colonna-sx{
 	width: 40%;
-	min-width: 500px;
 	height: 100%;
 	background: #88C159;
 	float: left;
@@ -84,7 +83,6 @@ span{
 	height: 40px;
 	border: solid 1px #222;
 	cursor: pointer;
-	
 }
 .slot img{
 	width: 40px;
@@ -154,22 +152,42 @@ input:placeholder-shown {
 	font-weight: normal;
 	text-shadow: 2px 1px 5px rgba(0, 0, 0, 1);
 }
-.stats1, .stats2{
+.stats{
 	float: left;
-	width:45%;
-	line-height: 22px;
+	clear: both;
+	line-height: 28px;
 	margin: 10px 10px 20px 10px;
 	background: #f2f1f1;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 }
-.stats1 ul, .stats2 ul{
-	margin-left: 12px;
+.stats ul{
+	margin: 10px;
 }
-.stats1 ul li, .stats2 ul li{
-	 margin-top: 5px;
-	 margin-bottom: 5px;
+.stats ul li{
+	 display: inline;
+	 margin: 15px;
+}
+.stats-eroe{
+	width: 100%;
+	height: 50%;
+	position: absolute;
+	bottom: 0;
+}
+.stats-mostro h3{
+	float: left;
+	clear: both;
+	margin-left: 10px;
+}
+.stats-eroe h3{
+	float: left;
+	clear: both;
+	margin-left: 10px;
+}
+.stats-eroe .stats, .stats-mostro{
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .attacco:after{
 	content: "Attacco:";
@@ -189,7 +207,7 @@ input:placeholder-shown {
 .monete:after{
 	content: "Monete:";
 }
-#salute-bar, #salute-mostro-bar{
+.salute-bar, .salute-mostro-bar{
 	float: left;
 	height: 20px;
 	background: red;
@@ -204,10 +222,6 @@ input:placeholder-shown {
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
-}
-#salute-mostro-max{
-	width: 45%;
-	clear: left;
 }
 #bottone-start{
 	width: 100%;
@@ -294,23 +308,6 @@ input:placeholder-shown {
 	float: right;
 	margin-right: 0.1em;
 }	
-.stats-eroe{
-	width: 100%;
-	height: 50%;
-	position: absolute;
-	bottom: 0;
-}
-.stats-mostro h3{
-	margin-left: 10px;
-	margin-top: 1%;
-}
-.stats-eroe h3{
-	margin-left: 10px;
-	margin-top: 4%;
-}
-.stats-eroe .stats1, .stats-eroe .stats2{
-	margin-top: 1%;
-}
 /* COLORI  */
 .rosso{
 	color: red;
@@ -335,6 +332,9 @@ input:placeholder-shown {
 }
 .bold{
 	font-weight: bold;
+}
+.bgBianco{
+	background: #fff;
 }
 .titolo-livello{
 	font-weight: bold;

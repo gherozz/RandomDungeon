@@ -24,10 +24,10 @@ $(document).ready( function(){
 	dungeon(numDungeon);
 	heightwindow = $( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
-	$('#gioco').animate({height: (heightwindow/2)+'px'}, "slow");
-	$('#arena').animate({height: (heightwindow/2)+'px'}, "slow");
+	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, "slow");
+	$('#arena').animate({height: (heightwindow/3)+'px'}, "slow");
 
-	$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
+	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
 	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
 	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 	modificaStatsVisualizzate("#salute-value", salute, "verde");
@@ -68,8 +68,8 @@ $(document).ready( function(){
 $(window).resize(function () { 
 	heightwindow =$( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
-	$('#gioco').animate({height: (heightwindow/2)+'px'}, 200);
-	$('#arena').animate({height: (heightwindow/2)+'px'}, 200);
+	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, 200);
+	$('#arena').animate({height: (heightwindow/3)+'px'}, 200);
 });
 
 
@@ -214,7 +214,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	 function loopLi() {
 		var loop = setInterval(function() { 
 
-			$("#salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
+			$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
 
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
@@ -284,9 +284,6 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					if (numeroRandom(0, 100) > 25) 
 					{
 						generaOggetto();
-						
-						
-	
 					}
 					$("#bottone-start").val("Scende ancora..");
 					$("#bottone-start").removeClass("bottone-rosso");
@@ -351,10 +348,6 @@ function popup(){
 };
 	
 function modificaStatsVisualizzate(tipo, valore, classe){	
-	if (salute > maxSalute)
-	{
-		salute = maxSalute;
-	}
 	$(tipo).empty();
 	$(tipo).append(" " + valore);
 	$(tipo).addClass(classe);
@@ -363,9 +356,9 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 	$(tipo).toggleClass( "bold", roundTimer, "easeInOutCubic" );
 	
 	if(valore == salute){
-		$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
-		$("#salute-bar").addClass("whiteBg");
-		$("#salute-bar").toggleClass("whiteBg", roundTimer/2, "easeInOutCubic" );
+		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
+		$(".salute-bar").addClass("bgBianco");
+		$(".salute-bar").toggleClass("bgBianco", roundTimer/5, "easeOutCubic" );
 	}
 }
 
@@ -446,7 +439,7 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 
 function aggiornaStatsEquip(oggettoObj, text, equipaggiato) 
 {
-	if (oggettoObj.attacco > 0)
+	if (oggettoObj.attacco != 0)
 	{
 		if (equipaggiato)
 		{
@@ -462,7 +455,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		}
 		
 	}
-	if (oggettoObj.difesa > 0)
+	if (oggettoObj.difesa != 0)
 	{
 		if (equipaggiato)
 		{
@@ -477,17 +470,25 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 			text += " difesa - " + oggettoObj.difesa;
 		}
 	}
-	if (oggettoObj.salute > 0)
+	if (oggettoObj.salute != 0)
 	{
 		if (equipaggiato)
 		{
 			salute += parseInt(oggettoObj.salute);
+			if (salute > maxSalute)
+			{
+				salute = maxSalute;
+			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute + " + oggettoObj.salute;
 		} 
 		else 
 		{
 			salute -= parseInt(oggettoObj.salute);
+			if (salute > maxSalute)
+			{
+				salute = maxSalute;
+			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute - " + oggettoObj.salute;
 		}
