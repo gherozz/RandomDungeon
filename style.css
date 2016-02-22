@@ -82,7 +82,7 @@ span{
 	width: 40px;
 	height: 40px;
 	border: solid 1px #222;
-	cursor: pointer;
+	cursor: pointer;	
 }
 .slot img{
 	width: 40px;
@@ -333,8 +333,8 @@ input:placeholder-shown {
 .bold{
 	font-weight: bold;
 }
-.bgBianco{
-	background: #fff;
+.bgBianco{		
+	background: #fff;		
 }
 .titolo-livello{
 	font-weight: bold;
