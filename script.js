@@ -3,7 +3,7 @@ var livello = 0;
 var testo;
 var stop = false;
 var livelloBoss = 10;
-var attacco = 100;
+var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
 var salute = 100;
