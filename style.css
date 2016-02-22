@@ -30,6 +30,7 @@ span{
 }
 .colonna-sx{
 	width: 40%;
+	min-width: 500px;
 	height: 100%;
 	background: #88C159;
 	float: left;
