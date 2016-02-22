@@ -20,6 +20,7 @@ var corpo = 0;
 var heightwindow;
 var numDungeon = 1;
 var x = 0;
+
 $(document).ready( function(){
 	dungeon(numDungeon);
 	heightwindow = $( window ).height();
@@ -320,15 +321,15 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	var info = '<div class="info"><p>' + oggettoObj.nomeEsterno + '</p>';
 	info += '<p>Tipo: ' + oggettoObj.tipo + '</p>';
 	info += '<p>Slot: ' + oggettoObj.slot + '</p>';
-	if (oggettoObj.attacco > 0)
+	if (oggettoObj.attacco != 0)
 	{
 		info += '<p>Attacco: +' + oggettoObj.attacco + '</p>';
 	}
-	if (oggettoObj.difesa > 0)
+	if (oggettoObj.difesa != 0)
 	{
 		info += '<p>Difesa: +' + oggettoObj.difesa + '</p>';
 	}
-	if (oggettoObj.salute > 0)
+	if (oggettoObj.salute != 0)
 	{
 		info += '<p>Salute: +' + oggettoObj.salute + '</p>';
 	}
@@ -463,20 +464,12 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			difesa += parseInt(oggettoObj.difesa);
-			if (salute > maxSalute)		
-			{		
-				salute = maxSalute;		
-			}
 			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 			text += " difesa + " + oggettoObj.difesa;
 		} 
 		else 
 		{
 			difesa -= parseInt(oggettoObj.difesa);
-			if (salute > maxSalute)		
-			{		
-				salute = maxSalute;		
-			}
 			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 			text += " difesa - " + oggettoObj.difesa;
 		}
@@ -486,12 +479,20 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			salute += parseInt(oggettoObj.salute);
+			if (salute > maxSalute)		
+			{		
+				salute = maxSalute;		
+			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute + " + oggettoObj.salute;
 		} 
 		else 
 		{
 			salute -= parseInt(oggettoObj.salute);
+			if (salute > maxSalute)		
+			{		
+				salute = maxSalute;		
+			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
 			text += " salute - " + oggettoObj.salute;
 		}
