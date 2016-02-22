@@ -213,7 +213,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	$("#bottone-start").removeClass("bottone-verde");
 	$("#bottone-start").addClass("bottone-rosso");
 
-	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico);
+	statsMostro(nomeNemico, vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico);
 
 	 function loopLi() {
 		var loop = setInterval(function() { 
