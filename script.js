@@ -22,7 +22,7 @@ var numDungeon = 1;
 
 $(document).ready( function(){
 	dungeon(numDungeon);
-	heightwindow = $(document).height();
+	heightwindow = $( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
 	$('#gioco').animate({height: (heightwindow/2)+'px'}, "slow");
 	$('#arena').animate({height: (heightwindow/2)+'px'}, "slow");
@@ -59,6 +59,13 @@ $(document).ready( function(){
 			}
 		}
 	})
+});
+
+$(window).resize(function () { 
+	heightwindow =$( window ).height();
+	$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
+	$('#gioco').animate({height: (heightwindow/2)+'px'}, 200);
+	$('#arena').animate({height: (heightwindow/2)+'px'}, 200);
 });
 
 
