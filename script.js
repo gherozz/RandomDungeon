@@ -7,7 +7,7 @@ var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
 var salute = 100;
-var critico = 0;
+var critico =10;
 var mana = 0;
 var monete = 0;
 var nomeEroe;
@@ -27,13 +27,14 @@ $(document).ready( function(){
 	$('#gioco').animate({height: (heightwindow/2)+'px'}, "slow");
 	$('#arena').animate({height: (heightwindow/2)+'px'}, "slow");
 
-	$("#attacco-value").append(" " + attacco);
-	$("#difesa-value").append(" " + difesa);
-	$("#salute-value").append(" " + salute);
-	$("#critico-value").append(" " + critico);
-	$("#mana-value").append(" " + mana);
-	$("#monete-value").append(" " + monete);
-	$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, "slow");
+	$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
+	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+	modificaStatsVisualizzate("#salute-value", salute, "verde");
+	$("#maxSalute-value").append(" " + maxSalute);
+	modificaStatsVisualizzate("#critico-value", critico, "rosso");
+	modificaStatsVisualizzate("#mana-value", mana, "viola");
+	modificaStatsVisualizzate("#monete-value", monete, "giallo");
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
 
@@ -150,8 +151,6 @@ function gioco(){
 		} else if(livello != livelloBoss){
 			aggiungiLog(testo, "titolo-livello");
 			evento();
-			aggiungiLog(nomeEroe + " ha attacco: "+attacco+", difesa: "+difesa+", salute: "+salute);
-			spazio();
 		}
 	} else if(stop == true){
 		numDungeon++;	
@@ -162,23 +161,18 @@ function gioco(){
 }
 
 function evento(){
-	if (numeroRandom(0, 100) > 50) 
-	{
-		var listaPesata = generaListaPesata(listaMostri);
-		mostroScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
-		aggiungiLog("incontri: " + mostroScelto.nome + "!", "rosso");
-		scontro(mostroScelto);
-	}
-	else
-	{
-		var listaPesata = generaListaPesata(listaOggetti);
-		oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
-		aggiungiLog(nomeEroe + " ha trovato: " + oggettoScelto.nomeEsterno + "!", oggettoScelto.coloreTesto);
-		aggiungiOggetto("", oggettoScelto, "LI", "lista");
-		$("#bottone-start").val("Scende ancora..");
-		$("#bottone-start").removeClass("bottone-rosso");
-		$("#bottone-start").addClass("bottone-verde");
-	}
+	var listaPesata = generaListaPesata(listaMostri);
+	mostroScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
+	aggiungiLog("incontri: " + mostroScelto.nome + "!", "rosso");
+	scontro(mostroScelto);
+}
+
+function generaOggetto(){
+	var listaPesata = generaListaPesata(listaOggetti);
+	oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
+	spazio();
+	aggiungiLog(nomeEroe + " ha trovato: " + oggettoScelto.nomeEsterno + "!", oggettoScelto.coloreTesto);
+	aggiungiOggetto("", oggettoScelto, "LI", "lista");
 }
 
 function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
@@ -256,11 +250,17 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				if (salute > 0)
 				{
 					aggiungiLog(nomeEroe + " ha sconfitto " + nomeNemico, "risultato-scontro");
-					spazio();
+					
 					blocco("#bottone-start", false);
+					
+					if (numeroRandom(0, 100) > 25) 
+					{
+						generaOggetto();
+					}
 					$("#bottone-start").val("Scende ancora..");
 					$("#bottone-start").removeClass("bottone-rosso");
 					$("#bottone-start").addClass("bottone-verde");
+					spazio();
 				}
 				else
 				{
@@ -314,13 +314,11 @@ function aggiungiLog(testo, classe){
 	nuovoElemento.appendChild(testoInterno);
 	
 	$(nuovoElemento).hide().appendTo(document.getElementById("gioco")).fadeIn(300);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/2);
 }
 
 function spazio(){
-	var nuovoElemento = document.createElement("P");
-	var testoInterno = document.createTextNode("__________");
-	nuovoElemento.appendChild(testoInterno);
+	var nuovoElemento = document.createElement("BR");
 	document.getElementById("gioco").appendChild(nuovoElemento);
 }
 
@@ -330,14 +328,21 @@ function popup(){
 };
 	
 function modificaStatsVisualizzate(tipo, valore, classe){	
+	if (salute > maxSalute)
+	{
+		salute = maxSalute;
+	}
 	$(tipo).empty();
 	$(tipo).append(" " + valore);
-	$(tipo).removeClass("nero");
 	$(tipo).addClass(classe);
-	$(tipo).switchClass( classe, "nero", 700, "easeInCubic" );
+	$(tipo).addClass("bold");
+	$(tipo).toggleClass( classe, roundTimer, "easeInOutCubic" );
+	$(tipo).toggleClass( "bold", roundTimer, "easeInOutCubic" );
 	
 	if(valore == salute){
 		$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
+		$("#salute-bar").addClass("whiteBg");
+		$("#salute-bar").toggleClass("whiteBg", roundTimer/2, "easeInOutCubic" );
 	}
 }
 
@@ -467,10 +472,4 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		}
 	}
 	aggiungiLog(text, oggettoObj.coloreTesto);
-	
-	if (salute > maxSalute)
-	{
-		salute = maxSalute;
-		modificaStatsVisualizzate("#salute-value", salute, "verde");
-	}
 }

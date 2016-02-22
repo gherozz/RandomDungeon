@@ -109,7 +109,7 @@ span{
 	padding: 0px 5px 5px 0px;
 	width: 100px;
 	position: relative;
-	top: -44px;
+	top: -45px;
 	left: 40px;
 	z-index: 10;
 	font-size: 0.8em;
@@ -335,26 +335,27 @@ input:placeholder-shown {
 /* COLORI  */
 .rosso{
 	color: red;
-	font-weight: bold;
 }
 .viola{
 	color: purple;
-	font-weight: bold;
 }
 .verde{
 	color: green;
-	font-weight: bold;
 }
 .blu{
 	color: blue;
-	font-weight: bold;
 }
 .arancione{
 	color: orange;
-	font-weight: bold;
+}
+.giallo{
+	color: yellow;
 }
 .nero{
 	color: black;
+}
+.bold{
+	font-weight: bold;
 }
 .titolo-livello{
 	font-weight: bold;
