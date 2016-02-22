@@ -306,22 +306,14 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 
 
 function aggiungiLog(testo, classe){
-	var nuovoElemento = document.createElement("P");
-	var testoInterno = document.createTextNode(testo);
-	if(classe != undefined){
-		nuovoElemento.className=classe;
-	}
-	nuovoElemento.appendChild(testoInterno);
-	
-	$(nuovoElemento).hide().appendTo(document.getElementById("gioco")).fadeIn(300);
+	var nuovoElemento = '<p class="'+classe+'">'+testo+'</p>';
+ 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(300);
 	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/2);
 }
 
 function spazio(){
-	var nuovoElemento = document.createElement("BR");
-	document.getElementById("gioco").appendChild(nuovoElemento);
+	$("#gioco").append("<br/>");
 }
-
 
 function popup(){
 	$("#alert-villaggio").dialog("open");
@@ -345,8 +337,6 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 		$("#salute-bar").toggleClass("whiteBg", roundTimer/2, "easeInOutCubic" );
 	}
 }
-
-// JQuery
 
 $(document).on("click", "#lista .oggetto", function(){
 	var oggettoObj = mappaOggetti[$(this).prop("nome")];
