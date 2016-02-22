@@ -87,13 +87,13 @@ $.getJSON( "data.json", function(data) {
 														//mostroScelto puo poi essere usato per estrarne le proprietá come vita/attacco/etc (var x = mostroScelto.attacco)
 		listaMostri.push(val); //(LISTA = NUMERO INDICE ASSOCIATO A UN 'OGGETTO' MOSTRO) 
 										//var mostroScelto = listaMostri[NUMEROINDICE]
-		console.log(val);
+		//console.log(val);
 	});
 	$.each(data.oggetti, function( key, val )  //OGGETTI FINISCONO IN UNA MAPPA E IN UNA LISTA, COME SOPRA
 	{
 		mappaOggetti[val.nome] = val;
 		listaOggetti.push(val);
-		console.log(val);
+		//console.log(val);
 	});
 })
 .done(function() {
@@ -128,14 +128,14 @@ function randomizza50(valore) { //UNA FUNZIONE CHE FA IL -50%/+50% DA SOLA PER V
 var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 {
 	var listaPesata = [];
-	console.log(" ");
-	console.log("roll chances:");
+	//console.log(" ");
+	//console.log("roll chances:");
 	
 	for (var i = 0; i < lista.length; i++) 
 	{
 		var multiples = lista[i].chance * 100;
 		
-		console.log("chances " + lista[i].nome + " = " + lista[i].chance)
+		//console.log("chances " + lista[i].nome + " = " + lista[i].chance)
 
 		for (var j = 0; j < multiples; j++) 
 		{
@@ -219,7 +219,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
 			attaccoScelto = listaPesataAzioni[numeroRandom(0, listaPesataAzioni.length-1)];
-			console.log(attaccoScelto.nome);
+			//console.log(attaccoScelto.nome);
 			switch(attaccoScelto.nome){ //UN COSO CHE GESTISCE AZIONI SPECIALI PER QUALUNQUE MOSTRO, VEDI IL JSON COME AGGIUNGERE AZIONI AD ALTRI MOSTRI
 				case "leccaFerite":
 					vitaNemico+= randomizza50(Math.round(maxVitaNemico*0.2));
