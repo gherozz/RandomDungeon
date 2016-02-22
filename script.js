@@ -38,6 +38,10 @@ $(document).ready( function(){
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
 
+
+
+
+
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
 		autoOpen: false,
 		dialogClass: "no-close",
@@ -175,12 +179,20 @@ function evento(){
 }
 
 function generaOggetto(){
+	// $('.stats-mostro').children().setTimeOut(1000, function(){
+	// 	fadeOut(700, function(){
+	// 	$(this).empty();
+	// });
+	// })
+	
 	var listaPesata = generaListaPesata(listaOggetti);
 	oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
 	spazio();
 	aggiungiLog(nomeEroe + " ha trovato: " + oggettoScelto.nomeEsterno + "!", oggettoScelto.coloreTesto);
 	aggiungiOggetto("", oggettoScelto, "LI", "lista");
 }
+
+
 
 function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
 	var nomeNemico = mostroScelto.nome;
@@ -190,13 +202,19 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	var vitaNemico = parseInt(mostroScelto.vita);
 	var maxVitaNemico = parseInt(mostroScelto.vita);
 	
+
+
 	blocco("#bottone-start",true);	
 	$("#bottone-start").val("In combattimento..");
 	$("#bottone-start").removeClass("bottone-verde");
 	$("#bottone-start").addClass("bottone-rosso");
 
+	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico);
+
 	 function loopLi() {
 		var loop = setInterval(function() { 
+
+			$("#salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
 
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
@@ -246,6 +264,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		vitaNemico -= dannoEroe;
 		
 		modificaStatsVisualizzate("#salute-value", salute, "rosso");
+		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 
 		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
 		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
@@ -259,10 +278,15 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					aggiungiLog(nomeEroe + " ha sconfitto " + nomeNemico, "risultato-scontro");
 					
 					blocco("#bottone-start", false);
-					
+					$('.stats-mostro').children().fadeOut(700, function(){
+						$(this).empty()
+					});
 					if (numeroRandom(0, 100) > 25) 
 					{
 						generaOggetto();
+						
+						
+	
 					}
 					$("#bottone-start").val("Scende ancora..");
 					$("#bottone-start").removeClass("bottone-rosso");
