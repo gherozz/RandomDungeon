@@ -22,9 +22,9 @@ var numDungeon = 1;
 $(document).ready( function(){
 	dungeon(numDungeon);
 	heightwindow = $(document).height();
-	$('.colonna-sx').css('height', (heightwindow)+'px');
-	$('#gioco').css('height', (heightwindow/2)+'px');
-	$('#arena').css('height', (heightwindow/2)+'px');
+	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
+	$('#gioco').animate({height: (heightwindow/2)+'px'}, "slow");
+	$('#arena').animate({height: (heightwindow/2)+'px'}, "slow");
 
 	$("#attacco-value").append(" " + attacco);
 	$("#difesa-value").append(" " + difesa);
@@ -32,13 +32,10 @@ $(document).ready( function(){
 	$("#critico-value").append(" " + critico);
 	$("#mana-value").append(" " + mana);
 	$("#monete-value").append(" " + monete);
-	$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
+	$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, "slow");
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
 
-	$("#bottone-start").click(function(){
-		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
-	});
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
 		autoOpen: false,
 		dialogClass: "no-close",
@@ -57,9 +54,6 @@ $(document).ready( function(){
 				stop = false;
 				gioco();
 				blocco("#bottone-start",false);
-				$("#bottone-start").click(function(){
-					$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
-				});
 			}
 		}
 	})
@@ -250,12 +244,10 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		vitaNemico -= dannoEroe;
 		
 		modificaStatsVisualizzate("#salute-value", salute, "rosso");
-		$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
-		$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 
 		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
 		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
-		aggiungiLog("Vita " + nomeNemico +": " + vitaNemico + ", vita " + nomeEroe + ": "+ salute, "rapporto")
+		//aggiungiLog("Vita " + nomeNemico +": " + vitaNemico + ", vita " + //nomeEroe + ": "+ salute, "rapporto")
 			
 			
 			if(salute <= 0 || vitaNemico <= 0) {
@@ -319,7 +311,9 @@ function aggiungiLog(testo, classe){
 		nuovoElemento.className=classe;
 	}
 	nuovoElemento.appendChild(testoInterno);
-	document.getElementById("gioco").appendChild(nuovoElemento);
+	
+	$(nuovoElemento).hide().appendTo(document.getElementById("gioco")).fadeIn(300);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 500);
 }
 
 function spazio(){
@@ -342,7 +336,7 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 		$(tipo).removeClass(classe);
 	}, 400);
 	if(valore == salute){
-		$("#salute-bar").css("width", (salute/maxSalute)*100 +"%");
+		$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, "slow");
 	}
 }
 
@@ -472,7 +466,6 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		}
 	}
 	aggiungiLog(text, oggettoObj.coloreTesto);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 1000);
 	
 	if (salute > maxSalute)
 	{

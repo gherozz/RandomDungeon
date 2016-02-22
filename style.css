@@ -1,6 +1,8 @@
 
 @charset "utf-8";
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto+Condensed:400,700|Roboto:400,700);
+@import url("font/flaticon.css");
+
 body{
 	margin: 0;
 	background: #f2f1f1;
@@ -61,26 +63,27 @@ span{
 #inventario, #equipaggiamento{
 	margin: 10px auto 10px;
 	width: 96%;
-	background: #ccc;
-	border-top: solid 1px #222;
-	border-left: solid 1px #222;
+	background-color: #ccc;
+	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
+	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
+	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 }
 #inventario{	
-	min-height: 80px;
+	min-height: 84px;
 }
 .colonna-sx h3{
 	margin: 10px 0px 10px 10px;
 }
 #equipaggiamento{
-	height: 40px;
+	height: 42px;
 }
 .slot{
 	float: left;
 	width: 40px;
 	height: 40px;
-	border-right: solid 1px #222;
-	border-bottom: solid 1px #222;
+	border: solid 1px #222;
 	cursor: pointer;
+	
 }
 .slot img{
 	width: 40px;
@@ -89,6 +92,14 @@ span{
 	top: 0px;
 	left:0px;
 	z-index: 20;
+	transition: background-color 0.5s;
+}
+.slot img:hover {
+	background-color: #fff;
+}
+.slot img:hover + .info{
+	opacity: .8;
+	z-index: 30;
 }
 .info{
 	background: #010101;
@@ -110,10 +121,6 @@ span{
 	margin: 0;
 	padding: 0;
 	text-indent: 0;
-}
-.slot img:hover + .info{
-	opacity: .8;
-	z-index: 30;
 }
 #scelta-nome{
 	float: left;
@@ -146,9 +153,13 @@ input:placeholder-shown {
 }
 .stats1, .stats2{
 	float: left;
-	width:50%;
+	width:45%;
 	line-height: 25px;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 10px 20px 10px;
+	background: #f2f1f1;
+	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
+	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
+	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 }
 .stats1 ul, .stats2 ul{
 	margin-left: 12px;
@@ -157,22 +168,22 @@ input:placeholder-shown {
 	 margin-top: 5px;
 	 margin-bottom: 5px;
 }
-.attacco:before{
+.attacco:after{
 	content: "Attacco:";
 }
-.difesa:before{
+.difesa:after{
 	content: "Difesa:";
 }
-.salute:before{
+.salute:after{
 	content: "Salute:";
 }
-.mana:before{
+.mana:after{
 	content: "Mana:";
 }
-.critico:before{
+.critico:after{
 	content: "Critico:";
 }
-.monete:before{
+.monete:after{
 	content: "Monete:";
 }
 #salute-bar{
