@@ -108,7 +108,7 @@ span{
 	padding: 0px 5px 5px 0px;
 	width: 100px;
 	position: relative;
-	top: -44px;
+	top: -45px;
 	left: 40px;
 	z-index: 10;
 	font-size: 0.8em;
@@ -346,6 +346,15 @@ input:placeholder-shown {
 }
 .arancione{
 	color: orange;
+}
+.giallo{
+	color: yellow;
+}
+.nero{
+	color: black;
+}
+.bold{
+	font-weight: bold;
 }
 .titolo-livello{
 	font-weight: bold;
