@@ -32,7 +32,7 @@ $(document).ready( function(){
 	$("#critico-value").append(" " + critico);
 	$("#mana-value").append(" " + mana);
 	$("#monete-value").append(" " + monete);
-	$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, "slow");
+	$("#salute-bar").animate({width: salute +"%"}, "slow");
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
 
@@ -305,24 +305,14 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 
 
 function aggiungiLog(testo, classe){
-	var nuovoElemento = document.createElement("P");
-	var testoInterno = document.createTextNode(testo);
-	if(classe != undefined){
-		nuovoElemento.className=classe;
-	}
-	nuovoElemento.appendChild(testoInterno);
-	
-	$(nuovoElemento).hide().appendTo(document.getElementById("gioco")).fadeIn(300);
+	var nuovoElemento = '<p class="'+classe+'">'+testo+'</p>';
+	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(300);
 	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 500);
 }
 
 function spazio(){
-	var nuovoElemento = document.createElement("P");
-	var testoInterno = document.createTextNode("__________");
-	nuovoElemento.appendChild(testoInterno);
-	document.getElementById("gioco").appendChild(nuovoElemento);
+	$("#gioco").append("<p>__________</p>");
 }
-
 
 function popup(){
 	$("#alert-villaggio").dialog("open");
@@ -339,8 +329,6 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 		$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, "slow");
 	}
 }
-
-// JQuery
 
 $(document).on("click", "#lista .oggetto", function(){
 	var oggettoObj = mappaOggetti[$(this).prop("nome")];
