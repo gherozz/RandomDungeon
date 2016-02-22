@@ -298,7 +298,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				{
 					aggiungiLog(nomeEroe + " è morto", "morto");
 					stop= true;
-					var r = confirm(nomeEroe + " é morto! Riprova?");
+					var r = confirm(nomeEroe + " é morto! Riprova?\n\n Livello Raggiunto: "+livello);
 					if(r == true){
 						location.reload();
 					}
