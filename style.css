@@ -335,18 +335,26 @@ input:placeholder-shown {
 /* COLORI  */
 .rosso{
 	color: red;
+	font-weight: bold;
 }
 .viola{
 	color: purple;
+	font-weight: bold;
 }
 .verde{
 	color: green;
+	font-weight: bold;
 }
 .blu{
 	color: blue;
+	font-weight: bold;
 }
 .arancione{
 	color: orange;
+	font-weight: bold;
+}
+.nero{
+	color: black;
 }
 .titolo-livello{
 	font-weight: bold;

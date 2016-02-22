@@ -12,6 +12,7 @@ var mana = 0;
 var monete = 0;
 var nomeEroe;
 var livello = 0;
+var roundTimer = 700;
 
 var maniLibere = 2;
 var testa = 0;
@@ -271,7 +272,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					}
 				}
 			}
-		}, 1000);
+		}, roundTimer*2);
 	}
 	loopLi();
 }
@@ -313,7 +314,7 @@ function aggiungiLog(testo, classe){
 	nuovoElemento.appendChild(testoInterno);
 	
 	$(nuovoElemento).hide().appendTo(document.getElementById("gioco")).fadeIn(300);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, 500);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer);
 }
 
 function spazio(){
@@ -331,12 +332,12 @@ function popup(){
 function modificaStatsVisualizzate(tipo, valore, classe){	
 	$(tipo).empty();
 	$(tipo).append(" " + valore);
+	$(tipo).removeClass("nero");
 	$(tipo).addClass(classe);
-	setTimeout(function(){
-		$(tipo).removeClass(classe);
-	}, 400);
+	$(tipo).switchClass( classe, "nero", 700, "easeInCubic" );
+	
 	if(valore == salute){
-		$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, "slow");
+		$("#salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
 	}
 }
 
