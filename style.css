@@ -36,6 +36,9 @@ span{
 	overflow: hidden;
 	position: relative;
 }
+.colonna-sx h3{
+	margin: 10px 0px 10px 10px;
+}
 .header{
 	float: left;
 	width: 100%;
@@ -46,7 +49,8 @@ span{
 	box-shadow:         0px 5px 12px 0px rgba(50, 50, 50, 0.55);
 }
 .header h1{
-	margin: 3% 0;
+	margin: 0;
+	line-height: 100px;
 	padding-left: 10%;
 	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 2.2em;
@@ -58,7 +62,6 @@ span{
 	float: left;
 	width: 100%;
 	height: 60%;
-<<<<<<< HEAD
 }
 #inventario, #equipaggiamento{
 	margin: 10px auto 10px;
@@ -70,9 +73,6 @@ span{
 }
 #inventario{	
 	min-height: 84px;
-}
-.colonna-sx h3{
-	margin: 10px 0px 10px 10px;
 }
 #equipaggiamento{
 	height: 42px;
@@ -153,70 +153,9 @@ input:placeholder-shown {
 	text-transform: none;
 	font-weight: normal;
 	text-shadow: 2px 1px 5px rgba(0, 0, 0, 1);
-=======
-}
-#inventario, #equipaggiamento{
-	margin: 10px auto 10px;
-	width: 96%;
-	background: #eee;
-	border-top: solid 1px #222;
-	border-left: solid 1px #222;
-	border-radius: 10px;
-	overflow: hidden;
-}
-#inventario{	
-	min-height: 160px;
-}
-.colonna-sx h3{
-	margin: 10px 0px 10px 10px;
-}
-#equipaggiamento{
-	height: 80px;
-}
-.slot{
-	float: left;
-	width: 80px;
-	height: 80px;
-	border-right: solid 1px #222;
-	border-bottom: solid 1px #222;
-	cursor: pointer;
-}
-.slot img{
-	width: 80px;
-	height: 80px;
-}
-#scelta-nome{
-	float: left;
-	width:96%;
-	margin-left: 10px;
-	line-height: 30px;
-	margin-top: 20px;
-}
-#scelta-nome input{
-	width:100%;
-	border: none;
-	color: #000;
-	font-size: 1.5em;
-	text-transform: capitalize;
-	background-color: transparent;
-}
-input:focus {
-    outline: none !important;
-}
-::-webkit-input-placeholder {
-    color: #666;
-	text-transform: none;
-}
-input:placeholder-shown { 
-  color: #000;
->>>>>>> origin/master
-}
-#salute-max{
-	float: left;
 }
 .stats1, .stats2{
 	float: left;
-<<<<<<< HEAD
 	width:45%;
 	line-height: 25px;
 	margin: 20px 10px 20px 10px;
@@ -265,49 +204,6 @@ input:placeholder-shown {
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
-=======
-	width:50%;
-	line-height: 25px;
-	margin: 20px 0px 20px 0px;
-}
-.stats1 ul, .stats2 ul{
-	margin-left: 12px;
-}
-.stats1 ul li, .stats2 ul li{
-	 margin-top: 5px;
-	 margin-bottom: 5px;
-}
-.attacco:before{
-	content: "Attacco:";
-}
-.difesa:before{
-	content: "Difesa:";
-}
-.salute:before{
-	content: "Salute:";
-}
-.mana:before{
-	content: "Mana:";
-}
-.critico:before{
-	content: "Critico:";
-}
-.monete:before{
-	content: "Monete:";
-}
-#salute-bar{
-	float: left;
-	height: 20px;
-	background: red;
-	float: left;
-}
-#salute-max{
-	float: left;
-	width:96%;
-	margin-left: 10px;
-	overflow: hidden;
-	background: #cbb;
->>>>>>> origin/master
 }
 #bottone-start{
 	width: 100%;
