@@ -218,7 +218,6 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	 function loopLi() {
 		var loop = setInterval(function() { 
 
-			$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
 
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
@@ -269,6 +268,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		
 		modificaStatsVisualizzate("#salute-value", salute, "rosso");
 		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
+		$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
 
 		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
 		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
