@@ -110,7 +110,7 @@ $.getJSON( "data.json", function(data) {
 	
 function nome(){
 	nomeEroe = $("#nomeEroe").val();
-	if(nomeEroe.contains("Ser") || nomeEroe.contains("ser")){
+	if(nomeEroe.indexOf("Ser") >=0 || nomeEroe.indexOf("ser") >=0){
 		$("#nomeEroe").val(nomeEroe);
 	} else{
 		nomeEroe = "Ser "+ $("#nomeEroe").val();
