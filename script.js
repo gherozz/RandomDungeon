@@ -6,7 +6,7 @@ var livelloBoss = [10, 20, 30, 40];
 var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
-var salute = 100;
+var salute = maxSalute;
 var critico =10;
 var mana = 0;
 var monete = 0;
@@ -29,13 +29,13 @@ $(document).ready( function(){
 	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");		
 
 	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
-	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
-	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
-	modificaStatsVisualizzate("#salute-value", salute, "verde");
+	modificaStatsVisualizzate("#attacco-value", attacco, "arancione", true);
+	modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
+	modificaStatsVisualizzate("#salute-value", salute, "verde", true);
 	$("#maxSalute-value").append(" " + maxSalute);
-	modificaStatsVisualizzate("#critico-value", critico, "rosso");
-	modificaStatsVisualizzate("#mana-value", mana, "viola");
-	modificaStatsVisualizzate("#monete-value", monete, "giallo");
+	modificaStatsVisualizzate("#critico-value", critico, "rosso", true);
+	modificaStatsVisualizzate("#mana-value", mana, "viola", true);
+	modificaStatsVisualizzate("#monete-value", monete, "giallo", true);
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
 
@@ -242,13 +242,14 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					difesa -= 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					aggiungiLog(nomeNemico +" usa colpo-coda! Tua nuova difesa: "+ difesa);
-					modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+					modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
 
 				break;
 				case "corazzaLava":
 					difesaNemico += 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					aggiungiLog(nomeNemico +" genera la sua corazza di lava!, difesa attuale: "+ difesaNemico);
+					modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu", true);
 				break;
 			}
 		}
@@ -267,9 +268,10 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		salute -= dannoNemico;
 		vitaNemico -= dannoEroe;
 		
-		modificaStatsVisualizzate("#salute-value", salute, "rosso");
-		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 		$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
+		modificaStatsVisualizzate("#salute-value", salute, "rosso", true);
+		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso", false);
+		
 
 		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
 		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
@@ -308,8 +310,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	}
 	loopLi();
 }
-function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 
+function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	var nuovoElemento = document.createElement(tipoElemento);
 	nuovoElemento.className = oggettoObj.nome + " oggetto slot";
 	var list = document.getElementById(idContainer);
@@ -350,7 +352,7 @@ function popup(){
 	$("#alert-villaggio").dialog("open");
 };
 	
-function modificaStatsVisualizzate(tipo, valore, classe){	
+function modificaStatsVisualizzate(tipo, valore, classe, boolEroe){	
 	$(tipo).empty();
 	$(tipo).append(" " + valore);
 	$(tipo).addClass(classe);
@@ -358,10 +360,13 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 	$(tipo).toggleClass( classe, roundTimer, "easeInOutCubic" );
 	$(tipo).toggleClass( "bold", roundTimer, "easeInOutCubic" );
 	
-	if(valore == salute){
+	if(tipo.includes("salute") && boolEroe){
 		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);		
 		$(".salute-bar").addClass("bgBianco");		
-		$(".salute-bar").toggleClass("bgBianco", roundTimer/5, "easeOutCubic" );		
+		$(".salute-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );		
+	} else if(tipo.includes("salute") && !boolEroe){		
+		$(".salute-mostro-bar").addClass("bgBianco");		
+		$(".salute-mostro-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );
 	}
 }
 
@@ -428,9 +433,9 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 			corpo--;
 		}
 		else if (oggettoObj.slot == "2 mani" )
-			{
-				maniLibere += 2;
-			}
+		{
+			maniLibere += 2;
+		}
 		$(this).remove();
 		text = nomeEroe + " ha rimosso " + oggettoObj.nomeEsterno + ",";
 		aggiornaStatsEquip(oggettoObj, text, false);
@@ -447,13 +452,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			attacco += parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+			modificaStatsVisualizzate("#attacco-value", attacco, "arancione", true);
 			text += " attacco + " + oggettoObj.attacco;
 		} 
 		else 
 		{
 			attacco -= parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+			modificaStatsVisualizzate("#attacco-value", attacco, "arancione", true);
 			text += " attacco - " + oggettoObj.attacco;
 		}
 		
@@ -463,13 +468,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			difesa += parseInt(oggettoObj.difesa);
-			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+			modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
 			text += " difesa + " + oggettoObj.difesa;
 		} 
 		else 
 		{
 			difesa -= parseInt(oggettoObj.difesa);
-			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+			modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
 			text += " difesa - " + oggettoObj.difesa;
 		}
 	}
@@ -482,7 +487,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 			{		
 				salute = maxSalute;		
 			}
-			modificaStatsVisualizzate("#salute-value", salute, "verde");
+			modificaStatsVisualizzate("#salute-value", salute, "verde", true);
 			text += " salute + " + oggettoObj.salute;
 		} 
 		else 
@@ -492,7 +497,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 			{		
 				salute = maxSalute;		
 			}
-			modificaStatsVisualizzate("#salute-value", salute, "verde");
+			modificaStatsVisualizzate("#salute-value", salute, "verde", true);
 			text += " salute - " + oggettoObj.salute;
 		}
 	}

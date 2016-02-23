@@ -114,9 +114,9 @@ span{
 	text-align: center;
 }
 .slot img:hover + div .info{
-	opacity: .8;
-	z-index: 30;
-}
+ 	opacity: .8;
+ 	z-index: 30;
+ }
 .info p{
 	margin: 0;
 	padding: 0;
@@ -125,7 +125,6 @@ span{
 #scelta-nome{
 	width:96%;
 	margin-left: 10px;
-	margin-top: 50px;
 }
 #scelta-nome input{
 	width:100%;
