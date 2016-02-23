@@ -2,7 +2,7 @@
 var livello = 0;
 var testo;
 var stop = false;
-var livelloBoss = [10, 20, 30, 40];
+var livelloBoss = 10;
 var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
@@ -165,11 +165,12 @@ console.log(numDungeon);
 	if(stop == false){
 		livello++;
 		testo= nomeEroe + " è al livello " + livello;
-		if(livello == livelloBoss[x]){
+		if(livello == livelloBoss{
 			aggiungiLog(testo+", Boss!!!", "titolo-livello");
 			scontro(mappaMostri['boss']);
 			stop= true;
-		} else if(livello != livelloBoss[x]){
+			livelloBoss += randomizza50(10);
+		} else if(livello != livelloBoss){
 			aggiungiLog(testo, "titolo-livello");
 			evento();
 		}
