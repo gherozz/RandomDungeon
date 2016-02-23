@@ -127,6 +127,10 @@ function blocco(input,toggle){
 function randomizza50(valore) { //UNA FUNZIONE CHE FA IL -50%/+50% DA SOLA PER VARIARE DANNI E CURE
 	return Math.round((valore/2)+(valore*Math.random()));
 }
+
+function randomizza25(valore) {
+	return Math.round((valore/4*3)+(valore*Math.random())/2);
+}
  
 var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 {
@@ -197,9 +201,9 @@ function generaOggetto(){
 
 function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
 	var nomeNemico = mostroScelto.nome;
-	var baseAttaccoNemico = randomizza50(parseInt(mostroScelto.attacco) + parseInt(mostroScelto.attacco)*livello/30);
-	var difesaNemico = randomizza50(parseInt(mostroScelto.difesa) + parseInt(mostroScelto.difesa)*livello/30);
-	var maxVitaNemico = randomizza50(parseInt(mostroScelto.vita) + parseInt(mostroScelto.vita)*livello/30);
+	var baseAttaccoNemico = randomizza25(parseInt(mostroScelto.attacco) + parseInt(mostroScelto.attacco)*livello/30);
+	var difesaNemico = randomizza25(parseInt(mostroScelto.difesa) + parseInt(mostroScelto.difesa)*livello/30);
+	var maxVitaNemico = randomizza25(parseInt(mostroScelto.vita) + parseInt(mostroScelto.vita)*livello/30);
 	var vitaNemico = maxVitaNemico;
 	var attaccoNemico = baseAttaccoNemico;
 	
