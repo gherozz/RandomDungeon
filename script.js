@@ -249,7 +249,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 					difesaNemico += 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					aggiungiLog(nomeNemico +" genera la sua corazza di lava!, difesa attuale: "+ difesaNemico);
-					modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu", true);
+					modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu", false);
 				break;
 			}
 		}
@@ -300,10 +300,12 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				{
 					aggiungiLog(nomeEroe + " è morto", "morto");
 					stop= true;
-					var r = confirm(nomeEroe + " é morto! Riprova?\n\n Livello Raggiunto: "+livello);
-					if(r == true){
-						location.reload();
-					}
+					setTimeout(function(){ 
+						var r = confirm(nomeEroe + " é morto! Riprova?\n\n Livello Raggiunto: "+livello);
+						if(r == true){
+							location.reload();
+						}
+					}, 3000);
 				}
 			}
 		}, roundTimer*2);
