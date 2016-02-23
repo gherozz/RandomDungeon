@@ -114,7 +114,7 @@ span{
 	text-align: center;
 }
 .slot img:hover + div .info{
- 	opacity: .8;
+ 	opacity: .9;
  	z-index: 30;
  }
 .info p{
