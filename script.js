@@ -25,8 +25,8 @@ $(document).ready( function(){
 	dungeon(numDungeon);
 	heightwindow = $( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
-	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, "slow");		
-	$('#arena').animate({height: (heightwindow/3)+'px'}, "slow");		
+	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, "slow");		
+	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");		
 
 	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
 	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
@@ -38,9 +38,6 @@ $(document).ready( function(){
 	modificaStatsVisualizzate("#monete-value", monete, "giallo");
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
-
-
-
 
 
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
@@ -69,8 +66,8 @@ $(document).ready( function(){
 $(window).resize(function () { 
 	heightwindow =$( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
-	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, 200);		
-	$('#arena').animate({height: (heightwindow/3)+'px'}, 200);		
+	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, 200);		
+	$('#arena').animate({height: (heightwindow/5*2)+'px'}, 200);		
 });
 
 
@@ -200,13 +197,13 @@ function generaOggetto(){
 
 function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
 	var nomeNemico = mostroScelto.nome;
-	var attaccoNemico = parseInt(mostroScelto.attacco);
-	var baseAttaccoNemico = parseInt(mostroScelto.attacco);
-	var difesaNemico = parseInt(mostroScelto.difesa);
-	var vitaNemico = parseInt(mostroScelto.vita);
-	var maxVitaNemico = parseInt(mostroScelto.vita);
+	var baseAttaccoNemico = randomizza50(parseInt(mostroScelto.attacco) + parseInt(mostroScelto.attacco)*livello/30);
+	var difesaNemico = randomizza50(parseInt(mostroScelto.difesa) + parseInt(mostroScelto.difesa)*livello/30);
+	var maxVitaNemico = randomizza50(parseInt(mostroScelto.vita) + parseInt(mostroScelto.vita)*livello/30);
+	var vitaNemico = maxVitaNemico;
+	var attaccoNemico = baseAttaccoNemico;
 	
-
+	
 
 	blocco("#bottone-start",true);	
 	$("#bottone-start").val("In combattimento..");
@@ -322,15 +319,15 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	info += '<p>Slot: ' + oggettoObj.slot + '</p>';
 	if (oggettoObj.attacco != 0)
 	{
-		info += '<p>Attacco: +' + oggettoObj.attacco + '</p>';
+		info += '<p>Attacco: ' + oggettoObj.attacco + '</p>';
 	}
 	if (oggettoObj.difesa != 0)
 	{
-		info += '<p>Difesa: +' + oggettoObj.difesa + '</p>';
+		info += '<p>Difesa: ' + oggettoObj.difesa + '</p>';
 	}
 	if (oggettoObj.salute != 0)
 	{
-		info += '<p>Salute: +' + oggettoObj.salute + '</p>';
+		info += '<p>Salute: ' + oggettoObj.salute + '</p>';
 	}
 	$("."+oggettoObj.nome).append(info);
 }

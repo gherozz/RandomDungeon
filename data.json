@@ -226,7 +226,7 @@
 		}, 
 		{
 			"nome": "orco",
-			"attacco": "20",
+			"attacco": "15",
 			"difesa": "5",
 			"vita": "40",
 			"boss": false,
@@ -249,7 +249,7 @@
 		},
 		{
 			"nome": "boss",
-			"attacco": "40",
+			"attacco": "30",
 			"difesa": "10",
 			"vita": "100",
 			"boss": true,
