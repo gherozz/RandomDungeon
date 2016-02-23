@@ -32,7 +32,6 @@ span{
 	height: 100%;
 	background: #88C159;
 	float: left;
-	overflow: hidden;
 	position: relative;
 }
 .colonna-sx h3{
@@ -82,7 +81,7 @@ span{
 	width: 40px;
 	height: 40px;
 	border: solid 1px #222;
-	cursor: pointer;
+	cursor: pointer;	
 }
 .slot img{
 	width: 40px;
@@ -97,26 +96,27 @@ span{
 .slot img:hover {
 	background-color: #fff;
 }
-.slot img:hover + .info{
-	opacity: .8;
-	z-index: 30;
-}
 .info{
 	background-color: #010101;
 	color: #fff;
 	border-radius: 5px;
 	padding: 0px 5px 5px 0px;
 	width: 100px;
-	position: relative;
-	top: -45px;
-	left: 40px;
+	position: absolute;
+	/*top: -45px;
+	left: 40px;*/
+	margin-top: -45px;
+	margin-left: 40px;
 	z-index: 10;
 	font-size: 0.8em;
-	margin: 0 auto;
 	opacity: 0;
-	transition: opacity 0.5s;
+	transition: opacity 0.3s;
 	text-align: center;
 }
+.slot img:hover + div .info{
+ 	opacity: .9;
+ 	z-index: 30;
+ }
 .info p{
 	margin: 0;
 	padding: 0;
@@ -125,7 +125,6 @@ span{
 #scelta-nome{
 	width:96%;
 	margin-left: 10px;
-	margin-top: 50px;
 }
 #scelta-nome input{
 	width:100%;
@@ -155,8 +154,8 @@ input:placeholder-shown {
 .stats{
 	float: left;
 	clear: both;
-	line-height: 28px;
-	margin: 10px 10px 20px 10px;
+	line-height: 15px;
+	margin: 0.5% 0px 0.5% 10px;
 	background: #f2f1f1;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
@@ -178,16 +177,18 @@ input:placeholder-shown {
 .stats-mostro h3{
 	float: left;
 	clear: both;
+	margin-bottom: 10px;
 	margin-left: 10px;
+	text-transform: capitalize;
 }
 .stats-eroe h3{
 	float: left;
 	clear: both;
-	margin-left: 10px;
-}
-.stats-eroe .stats, .stats-mostro{
 	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-left: 10px;
+	text-transform: capitalize;
+}
+.stats-eroe, .stats-mostro{
 }
 .attacco:after{
 	content: "Attacco:";
@@ -209,7 +210,7 @@ input:placeholder-shown {
 }
 .salute-bar, .salute-mostro-bar{
 	float: left;
-	height: 20px;
+	height: 15px;
 	background: red;
 	float: left;
 }
@@ -333,8 +334,8 @@ input:placeholder-shown {
 .bold{
 	font-weight: bold;
 }
-.bgBianco{
-	background: #fff;
+.bgBianco{		
+	background-color: #fff;		
 }
 .titolo-livello{
 	font-weight: bold;

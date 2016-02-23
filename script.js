@@ -2,11 +2,11 @@
 var livello = 0;
 var testo;
 var stop = false;
-var livelloBoss = 10;
+var livelloBoss = [10, 20, 30, 40];
 var attacco = 10;
 var difesa = 10;
 var maxSalute = 100;
-var salute = 100;
+var salute = maxSalute;
 var critico =10;
 var mana = 0;
 var monete = 0;
@@ -19,27 +19,25 @@ var testa = 0;
 var corpo = 0;
 var heightwindow;
 var numDungeon = 1;
+var x = 0;
 
 $(document).ready( function(){
 	dungeon(numDungeon);
 	heightwindow = $( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
-	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, "slow");
-	$('#arena').animate({height: (heightwindow/3)+'px'}, "slow");
+	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, "slow");		
+	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");		
 
-	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
-	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
-	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
-	modificaStatsVisualizzate("#salute-value", salute, "verde");
+	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
+	modificaStatsVisualizzate("#attacco-value", attacco, "arancione", true);
+	modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
+	modificaStatsVisualizzate("#salute-value", salute, "verde", true);
 	$("#maxSalute-value").append(" " + maxSalute);
-	modificaStatsVisualizzate("#critico-value", critico, "rosso");
-	modificaStatsVisualizzate("#mana-value", mana, "viola");
-	modificaStatsVisualizzate("#monete-value", monete, "giallo");
+	modificaStatsVisualizzate("#critico-value", critico, "rosso", true);
+	modificaStatsVisualizzate("#mana-value", mana, "viola", true);
+	modificaStatsVisualizzate("#monete-value", monete, "giallo", true);
 	blocco("#bottone-start",false);	
 	$(".avvia-gioco").click(function(){gioco()});
-
-
-
 
 
 	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
@@ -68,8 +66,8 @@ $(document).ready( function(){
 $(window).resize(function () { 
 	heightwindow =$( window ).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
-	$('#gioco').animate({height: (heightwindow/3*2)+'px'}, 200);
-	$('#arena').animate({height: (heightwindow/3)+'px'}, 200);
+	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, 200);		
+	$('#arena').animate({height: (heightwindow/5*2)+'px'}, 200);		
 });
 
 
@@ -87,13 +85,13 @@ $.getJSON( "data.json", function(data) {
 														//mostroScelto puo poi essere usato per estrarne le proprietá come vita/attacco/etc (var x = mostroScelto.attacco)
 		listaMostri.push(val); //(LISTA = NUMERO INDICE ASSOCIATO A UN 'OGGETTO' MOSTRO) 
 										//var mostroScelto = listaMostri[NUMEROINDICE]
-		console.log(val);
+		// console.log(val);
 	});
 	$.each(data.oggetti, function( key, val )  //OGGETTI FINISCONO IN UNA MAPPA E IN UNA LISTA, COME SOPRA
 	{
 		mappaOggetti[val.nome] = val;
 		listaOggetti.push(val);
-		console.log(val);
+		// console.log(val);
 	});
 })
 .done(function() {
@@ -110,7 +108,12 @@ $.getJSON( "data.json", function(data) {
 	
 function nome(){
 	nomeEroe = $("#nomeEroe").val();
-	console.log(nomeEroe);
+	if(nomeEroe.indexOf("Ser") >=0 || nomeEroe.indexOf("ser") >=0){
+		$("#nomeEroe").val(nomeEroe);
+	} else{
+		nomeEroe = "Ser "+ $("#nomeEroe").val();
+		$("#nomeEroe").val(nomeEroe);
+	}
 }
 
 function blocco(input,toggle){
@@ -124,18 +127,22 @@ function blocco(input,toggle){
 function randomizza50(valore) { //UNA FUNZIONE CHE FA IL -50%/+50% DA SOLA PER VARIARE DANNI E CURE
 	return Math.round((valore/2)+(valore*Math.random()));
 }
+
+function randomizza25(valore) {
+	return Math.round((valore/4*3)+(valore*Math.random())/2);
+}
  
 var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 {
 	var listaPesata = [];
-	console.log(" ");
-	console.log("roll chances:");
+	// console.log(" ");
+	// console.log("roll chances:");
 	
 	for (var i = 0; i < lista.length; i++) 
 	{
 		var multiples = lista[i].chance * 100;
 		
-		console.log("chances " + lista[i].nome + " = " + lista[i].chance)
+		// console.log("chances " + lista[i].nome + " = " + lista[i].chance)
 
 		for (var j = 0; j < multiples; j++) 
 		{
@@ -146,25 +153,29 @@ var generaListaPesata = function(lista)  //FUNZIONE CHE GESTISCE LE LISTE PESATE
 }
 
 function gioco(){
+console.log(numDungeon);
+
 	nome();
-	if(nomeEroe == "" || nomeEroe == null){
+	if(nomeEroe == "Ser " || nomeEroe == null){
 		nomeEroe = "Ser Random";
 		$("#nomeEroe").val(nomeEroe);
 	}
+	$(".stats-eroe h3").html("Statistiche "+nomeEroe);
 	blocco("#nomeEroe", true);
 	if(stop == false){
 		livello++;
 		testo= nomeEroe + " è al livello " + livello;
-		if(livello == livelloBoss){
+		if(livello == livelloBoss[x]){
 			aggiungiLog(testo+", Boss!!!", "titolo-livello");
 			scontro(mappaMostri['boss']);
 			stop= true;
-		} else if(livello != livelloBoss){
+		} else if(livello != livelloBoss[x]){
 			aggiungiLog(testo, "titolo-livello");
 			evento();
 		}
 	} else if(stop == true){
-		numDungeon++;	
+		x++;	
+		numDungeon = Math.floor(Math.random()*4)+1;
 		popup();
 		stop =false;
 		blocco("#bottone-start",true);		
@@ -179,12 +190,6 @@ function evento(){
 }
 
 function generaOggetto(){
-	// $('.stats-mostro').children().setTimeOut(1000, function(){
-	// 	fadeOut(700, function(){
-	// 	$(this).empty();
-	// });
-	// })
-	
 	var listaPesata = generaListaPesata(listaOggetti);
 	oggettoScelto = listaPesata[numeroRandom(0, listaPesata.length-1)];
 	spazio();
@@ -194,33 +199,31 @@ function generaOggetto(){
 
 
 
-function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
+function scontro(mostroScelto){ 
 	var nomeNemico = mostroScelto.nome;
-	var attaccoNemico = parseInt(mostroScelto.attacco);
-	var baseAttaccoNemico = parseInt(mostroScelto.attacco);
-	var difesaNemico = parseInt(mostroScelto.difesa);
-	var vitaNemico = parseInt(mostroScelto.vita);
-	var maxVitaNemico = parseInt(mostroScelto.vita);
+	var baseAttaccoNemico = randomizza25(parseInt(mostroScelto.attacco) + parseInt(mostroScelto.attacco)*livello/30);
+	var difesaNemico = randomizza25(parseInt(mostroScelto.difesa) + parseInt(mostroScelto.difesa)*livello/30);
+	var maxVitaNemico = randomizza25(parseInt(mostroScelto.vita) + parseInt(mostroScelto.vita)*livello/30);
+	var vitaNemico = maxVitaNemico;
+	var attaccoNemico = baseAttaccoNemico;
 	
-
+	
 
 	blocco("#bottone-start",true);	
 	$("#bottone-start").val("In combattimento..");
 	$("#bottone-start").removeClass("bottone-verde");
 	$("#bottone-start").addClass("bottone-rosso");
-
-	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico);
+	
+	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico, nomeNemico);
 
 	 function loopLi() {
 		var loop = setInterval(function() { 
 
-			$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
 
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
 			attaccoScelto = listaPesataAzioni[numeroRandom(0, listaPesataAzioni.length-1)];
-			console.log(attaccoScelto.nome);
-			switch(attaccoScelto.nome){ //UN COSO CHE GESTISCE AZIONI SPECIALI PER QUALUNQUE MOSTRO, VEDI IL JSON COME AGGIUNGERE AZIONI AD ALTRI MOSTRI
+			switch(attaccoScelto.nome){ 
 				case "leccaFerite":
 					vitaNemico+= randomizza50(Math.round(maxVitaNemico*0.2));
 					if (vitaNemico > maxVitaNemico)
@@ -232,19 +235,20 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				break;
 				case "pugnoLato":
 					aggiungiLog(nomeNemico +" tira un pugno di lato");
-					attaccoNemico = baseAttaccoNemico; //RESI STI VALORI DELLE PERCENTUALI DELL ATTACCO BASE DEL MOSTRO COSI LI POSSIAMO USARE ANCHE SU TROLL ETC
+					attaccoNemico = baseAttaccoNemico;
 				break;
 				case "colpoCoda":
 					difesa -= 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					aggiungiLog(nomeNemico +" usa colpo-coda! Tua nuova difesa: "+ difesa);
-					modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+					modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
 
 				break;
 				case "corazzaLava":
 					difesaNemico += 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
 					aggiungiLog(nomeNemico +" genera la sua corazza di lava!, difesa attuale: "+ difesaNemico);
+					modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu", false);
 				break;
 			}
 		}
@@ -263,12 +267,13 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		salute -= dannoNemico;
 		vitaNemico -= dannoEroe;
 		
-		modificaStatsVisualizzate("#salute-value", salute, "rosso");
-		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
+		$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
+		modificaStatsVisualizzate("#salute-value", salute, "rosso", true);
+		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso", false);
+		
 
-		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
-		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
-		//aggiungiLog("Vita " + nomeNemico +": " + vitaNemico + ", vita " + //nomeEroe + ": "+ salute, "rapporto")
+		aggiungiLog(nomeNemico +" infligge "+ "(" + attaccoNemicoTemp + " - " + difesa + "): " + dannoNemico + " danni", "rosso");
+		aggiungiLog(nomeEroe +" infligge "+ "(" + attaccoTemp + " - " + difesaNemico + "): " + dannoEroe + " danni", "viola");
 			
 			
 			if(salute <= 0 || vitaNemico <= 0) {
@@ -293,11 +298,14 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				else
 				{
 					aggiungiLog(nomeEroe + " è morto", "morto");
+					$("#bottone-start").val("Morto..");
 					stop= true;
-					var r = confirm(nomeEroe + " é morto! Riprova?");
-					if(r == true){
-						location.reload();
-					}
+					setTimeout(function(){ 
+						var r = confirm(nomeEroe + " é morto! Riprova?\n\n Livello Raggiunto: "+livello);
+						if(r == true){
+							location.reload();
+						}
+					}, 3000);
 				}
 			}
 		}, roundTimer*2);
@@ -307,7 +315,6 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 
 function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	var nuovoElemento = document.createElement(tipoElemento);
-	//var testoInterno = document.createTextNode(testo);  //PASSARE PARAMETRO TESTO COME STRINGA SE SI VUOLE SCRIVERE TESTO (NON TESTATO CON L'IMMAGINE OCCHIO)
 	nuovoElemento.className = oggettoObj.nome + " oggetto slot";
 	var list = document.getElementById(idContainer);
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
@@ -317,19 +324,19 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	var info = '<div class="info"><p>' + oggettoObj.nomeEsterno + '</p>';
 	info += '<p>Tipo: ' + oggettoObj.tipo + '</p>';
 	info += '<p>Slot: ' + oggettoObj.slot + '</p>';
-	if (oggettoObj.attacco > 0)
+	if (oggettoObj.attacco != 0)
 	{
-		info += '<p>Attacco: +' + oggettoObj.attacco + '</p>';
+		info += '<p>Attacco: ' + oggettoObj.attacco + '</p>';
 	}
-	if (oggettoObj.difesa > 0)
+	if (oggettoObj.difesa != 0)
 	{
-		info += '<p>Difesa: +' + oggettoObj.difesa + '</p>';
+		info += '<p>Difesa: ' + oggettoObj.difesa + '</p>';
 	}
-	if (oggettoObj.salute > 0)
+	if (oggettoObj.salute != 0)
 	{
-		info += '<p>Salute: +' + oggettoObj.salute + '</p>';
+		info += '<p>Salute: ' + oggettoObj.salute + '</p>';
 	}
-	$("."+oggettoObj.nome).append(info);
+	$("."+oggettoObj.nome).append("<div>"+info+"</div>");
 }
 
 
@@ -347,7 +354,7 @@ function popup(){
 	$("#alert-villaggio").dialog("open");
 };
 	
-function modificaStatsVisualizzate(tipo, valore, classe){	
+function modificaStatsVisualizzate(tipo, valore, classe, boolEroe){	
 	$(tipo).empty();
 	$(tipo).append(" " + valore);
 	$(tipo).addClass(classe);
@@ -355,10 +362,13 @@ function modificaStatsVisualizzate(tipo, valore, classe){
 	$(tipo).toggleClass( classe, roundTimer, "easeInOutCubic" );
 	$(tipo).toggleClass( "bold", roundTimer, "easeInOutCubic" );
 	
-	if(valore == salute){
-		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);
-		$(".salute-bar").addClass("bgBianco");
-		$(".salute-bar").toggleClass("bgBianco", roundTimer/5, "easeOutCubic" );
+	if(tipo.includes("salute") && boolEroe){
+		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);		
+		$(".salute-bar").addClass("bgBianco");		
+		$(".salute-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );		
+	} else if(tipo.includes("salute") && !boolEroe){		
+		$(".salute-mostro-bar").addClass("bgBianco");		
+		$(".salute-mostro-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );
 	}
 }
 
@@ -425,9 +435,9 @@ $(document).on("click", "#equip-lista .oggetto", function(){
 			corpo--;
 		}
 		else if (oggettoObj.slot == "2 mani" )
-			{
-				maniLibere += 2;
-			}
+		{
+			maniLibere += 2;
+		}
 		$(this).remove();
 		text = nomeEroe + " ha rimosso " + oggettoObj.nomeEsterno + ",";
 		aggiornaStatsEquip(oggettoObj, text, false);
@@ -444,13 +454,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			attacco += parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+			modificaStatsVisualizzate("#attacco-value", attacco, "arancione", true);
 			text += " attacco + " + oggettoObj.attacco;
 		} 
 		else 
 		{
 			attacco -= parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+			modificaStatsVisualizzate("#attacco-value", attacco, "arancione", true);
 			text += " attacco - " + oggettoObj.attacco;
 		}
 		
@@ -460,13 +470,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			difesa += parseInt(oggettoObj.difesa);
-			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+			modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
 			text += " difesa + " + oggettoObj.difesa;
 		} 
 		else 
 		{
 			difesa -= parseInt(oggettoObj.difesa);
-			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+			modificaStatsVisualizzate("#difesa-value", difesa, "blu", true);
 			text += " difesa - " + oggettoObj.difesa;
 		}
 	}
@@ -475,21 +485,21 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		if (equipaggiato)
 		{
 			salute += parseInt(oggettoObj.salute);
-			if (salute > maxSalute)
-			{
-				salute = maxSalute;
+			if (salute > maxSalute)		
+			{		
+				salute = maxSalute;		
 			}
-			modificaStatsVisualizzate("#salute-value", salute, "verde");
+			modificaStatsVisualizzate("#salute-value", salute, "verde", true);
 			text += " salute + " + oggettoObj.salute;
 		} 
 		else 
 		{
 			salute -= parseInt(oggettoObj.salute);
-			if (salute > maxSalute)
-			{
-				salute = maxSalute;
+			if (salute > maxSalute)		
+			{		
+				salute = maxSalute;		
 			}
-			modificaStatsVisualizzate("#salute-value", salute, "verde");
+			modificaStatsVisualizzate("#salute-value", salute, "verde", true);
 			text += " salute - " + oggettoObj.salute;
 		}
 	}

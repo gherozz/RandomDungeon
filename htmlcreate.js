@@ -1,14 +1,23 @@
 function dungeon(numdungeon){
 	
 	switch(numdungeon){
+
 		case 1:
-			// $('.main').html('<div id="alert-villaggio"><p>Fine Dungeon</p><p>Dove vai?</p></div><div class="colonna-sx"><h3>Inventario</h3><div id="inventario"><ul id="lista"></ul></div><h3>Equipaggiato</h3><div id="equipaggiamento"><ul id="equip-lista"></ul></div></div><div id="arena"></div><div id="gioco"></div>');
+			$('.header').animate({backgroundColor: "#2A7F00"});
+			$('.colonna-sx').animate({backgroundColor: "#88C159"});
 		break;
 		case 2:
-			// $('.main').html('<div id="alert-villaggio"><p>Fine Dungeon</p><p>Dove vai?</p></div><div class="colonna-sx"><h3>Inventario</h3><div id="inventario"><ul id="lista"></ul></div><h3>Equipaggiato</h3><div id="equipaggiamento"><ul id="equip-lista"></ul></div></div><div id="arena"></div><div id="gioco"></div>');
-			$('.header').addClass('');
-			$('.colonna-sx').addClass('');
+			$('.header').animate({backgroundColor: "#ef4410"});
+			$('.colonna-sx').animate({backgroundColor: "#f27d3e"});
 		break;
+		case 3:
+			$('.header').animate({backgroundColor: "#8C8181"});
+			$('.colonna-sx').animate({backgroundColor: "#9E7E7E"});
+		break;
+		case 4:
+			$('.header').animate({backgroundColor: "#474141"});
+			$('.colonna-sx').animate({backgroundColor: "#684E4E"});
+		
 	}
 }
 
@@ -20,13 +29,14 @@ function villaggio(){
 }
 
 
-function statsMostro(vita,maxvita, attacco, difesa){
-	$('.stats-mostro').html('<h3>Statistiche Nemico</h3><div class="stats"><ul><li><span class="flaticon-medieval"></span><span class="attacco"></span><span id="attacco-mostro-value"></span></li><li><span class="flaticon-weapon"></span><span class="difesa"></span><span id="difesa-mostro-value"></span></li><li><span class="flaticon-shapes"></span><span class="salute"></span><span id="salute-mostro-value"></span><span id="maxSalute-mostro-value"></span></li></ul></div><div class="salute-container"><div id="salute-mostro-max"><div class="salute-mostro-bar"></div></div></div>');
+function statsMostro(vita,maxvita, attacco, difesa,nomeNemico){
+$('.stats-mostro').html('<div class="stats"><ul><li><span class="flaticon-medieval"></span><span class="attacco"></span><span id="attacco-mostro-value"></span></li><li><span class="flaticon-weapon"></span><span class="difesa"></span><span id="difesa-mostro-value"></span></li><li><span class="flaticon-shapes"></span><span class="salute"></span><span id="salute-mostro-value"></span><span id="maxSalute-mostro-value"></span></li></ul></div><h3></h3><div class="salute-container"><div id="salute-mostro-max"><div class="salute-mostro-bar"></div></div></div>');
 
-	$(".salute-mostro-bar").animate({width: (vita/maxvita)*100 +"%"}, roundTimer);
-	modificaStatsVisualizzate("#attacco-mostro-value", attacco, "arancione");
-	modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu");
-	modificaStatsVisualizzate("#salute-mostro-value", vita, "verde");
+	$(".stats-mostro h3").html("Statistiche "+nomeNemico);
+	$(".salute-mostro-bar").animate({width: (vita/maxvita)*100 +"%"}, roundTimer);	
+	modificaStatsVisualizzate("#attacco-mostro-value", attacco, "arancione", false);
+	modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu", false);
+	modificaStatsVisualizzate("#salute-mostro-value", vita, "verde", false);
 	$("#maxSalute-mostro-value").html(" / " + maxvita);
 	
 }
