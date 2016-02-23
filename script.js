@@ -212,8 +212,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	$("#bottone-start").val("In combattimento..");
 	$("#bottone-start").removeClass("bottone-verde");
 	$("#bottone-start").addClass("bottone-rosso");
-
-	statsMostro(nomeNemico, vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico);
+	
+	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico, nomeNemico);
 
 	 function loopLi() {
 		var loop = setInterval(function() { 
@@ -272,7 +272,6 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 
 		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
 		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
-		//aggiungiLog("Vita " + nomeNemico +": " + vitaNemico + ", vita " + //nomeEroe + ": "+ salute, "rapporto")
 			
 			
 			if(salute <= 0 || vitaNemico <= 0) {
