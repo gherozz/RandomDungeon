@@ -308,10 +308,9 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 	}
 	loopLi();
 }
-
 function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
+
 	var nuovoElemento = document.createElement(tipoElemento);
-	//var testoInterno = document.createTextNode(testo);  //PASSARE PARAMETRO TESTO COME STRINGA SE SI VUOLE SCRIVERE TESTO (NON TESTATO CON L'IMMAGINE OCCHIO)
 	nuovoElemento.className = oggettoObj.nome + " oggetto slot";
 	var list = document.getElementById(idContainer);
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
@@ -333,7 +332,7 @@ function aggiungiOggetto(testo, oggettoObj, tipoElemento, idContainer){
 	{
 		info += '<p>Salute: ' + oggettoObj.salute + '</p>';
 	}
-	$("."+oggettoObj.nome).append(info);
+	$("."+oggettoObj.nome).append("<div>"+info+"</div>");
 }
 
 
