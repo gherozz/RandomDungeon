@@ -156,7 +156,7 @@ input:placeholder-shown {
 	float: left;
 	clear: both;
 	line-height: 15px;
-	margin: 1% 10px 1% 10px;
+	margin: 0.5% 0px 0.5% 10px;
 	background: #f2f1f1;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
@@ -178,16 +178,18 @@ input:placeholder-shown {
 .stats-mostro h3{
 	float: left;
 	clear: both;
+	margin-bottom: 10px;
 	margin-left: 10px;
+	text-transform: capitalize;
 }
 .stats-eroe h3{
 	float: left;
-	margin-top: 2%;
-	margin-left: 10px;
-}
-.stats-eroe .stats, .stats-mostro{
+	clear: both;
 	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-left: 10px;
+	text-transform: capitalize;
+}
+.stats-eroe, .stats-mostro{
 }
 .attacco:after{
 	content: "Attacco:";
@@ -209,7 +211,7 @@ input:placeholder-shown {
 }
 .salute-bar, .salute-mostro-bar{
 	float: left;
-	height: 20px;
+	height: 15px;
 	background: red;
 	float: left;
 }
