@@ -199,7 +199,7 @@ function generaOggetto(){
 
 
 
-function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E BOSS, MENO CODICE, UOMOZ FELICE
+function scontro(mostroScelto){ 
 	var nomeNemico = mostroScelto.nome;
 	var baseAttaccoNemico = randomizza25(parseInt(mostroScelto.attacco) + parseInt(mostroScelto.attacco)*livello/30);
 	var difesaNemico = randomizza25(parseInt(mostroScelto.difesa) + parseInt(mostroScelto.difesa)*livello/30);
@@ -223,8 +223,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 			if (mostroScelto.azioni.length > 0) {
 			var listaPesataAzioni = generaListaPesata(mostroScelto.azioni);
 			attaccoScelto = listaPesataAzioni[numeroRandom(0, listaPesataAzioni.length-1)];
-			// console.log(attaccoScelto.nome);
-			switch(attaccoScelto.nome){ //UN COSO CHE GESTISCE AZIONI SPECIALI PER QUALUNQUE MOSTRO, VEDI IL JSON COME AGGIUNGERE AZIONI AD ALTRI MOSTRI
+			switch(attaccoScelto.nome){ 
 				case "leccaFerite":
 					vitaNemico+= randomizza50(Math.round(maxVitaNemico*0.2));
 					if (vitaNemico > maxVitaNemico)
@@ -236,7 +235,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				break;
 				case "pugnoLato":
 					aggiungiLog(nomeNemico +" tira un pugno di lato");
-					attaccoNemico = baseAttaccoNemico; //RESI STI VALORI DELLE PERCENTUALI DELL ATTACCO BASE DEL MOSTRO COSI LI POSSIAMO USARE ANCHE SU TROLL ETC
+					attaccoNemico = baseAttaccoNemico;
 				break;
 				case "colpoCoda":
 					difesa -= 5;
@@ -273,8 +272,8 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso", false);
 		
 
-		aggiungiLog(nomeNemico +" infligge "+ dannoNemico + " danni", "rosso");
-		aggiungiLog(nomeEroe + " infligge " + dannoEroe + " danni", "viola");
+		aggiungiLog(nomeNemico +" infligge "+ "(" + attaccoNemicoTemp + " - " + difesa + "): " + dannoNemico + " danni", "rosso");
+		aggiungiLog(nomeEroe +" infligge "+ "(" + attaccoTemp + " - " + difesaNemico + "): " + dannoEroe + " danni", "viola");
 			
 			
 			if(salute <= 0 || vitaNemico <= 0) {
@@ -299,6 +298,7 @@ function scontro(mostroScelto){ //UN UNICO COSO PER GESTIRE SCONTRI CON NEMICI E
 				else
 				{
 					aggiungiLog(nomeEroe + " è morto", "morto");
+					$("#bottone-start").val("Morto..");
 					stop= true;
 					setTimeout(function(){ 
 						var r = confirm(nomeEroe + " é morto! Riprova?\n\n Livello Raggiunto: "+livello);
