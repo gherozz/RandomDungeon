@@ -1,0 +1,152 @@
+{
+	"stringhe": [
+		{
+			"ita": "In combattimento..",
+			"en": "Fighting.."
+		},
+		{
+			"ita": " incontra: ",
+			"en": " finds: "
+		},
+		{
+			"ita": " torna al villaggio",
+			"en": " gets back to the village"
+		},
+		{
+			"ita": " procede",
+			"en": " proceeds"
+		},
+		{
+			"ita": "Statistiche ",
+			"en": "Stats "
+		},
+		{
+			"ita": " ha raggiunto il livello del dungeon: ",
+			"en": " reached the dungeon level: "
+		},
+		{
+			"ita": " rigenera le sue ferite",
+			"en": " regenerate its wounds"
+		},
+		{
+			"ita": " artiglia ",
+			"en": " claws "
+		},
+		{
+			"ita": " sferra un colpo con la coda, abbassando le difese dell'eroe di ",
+			"en": " attacks with its tail, lowering the hero defense by "
+		},
+		{
+			"ita": " genera la sua corazza spinata!",
+			"en": " generate its spined armor!"
+		},
+		{
+			"ita": "infligge ",
+			"en": "inflicts "
+		},
+		{
+			"ita": " danni",
+			"en": " damage"
+		},
+		{
+			"ita": " attacca con ",
+			"en": " attacks with "
+		},
+		{
+			"ita": " ha sconfitto ",
+			"en": " defeated "
+		},
+		{
+			"ita": "Scende ancora..",
+			"en": "Descend further.."
+		},
+		{
+			"ita": " è morto",
+			"en": " is dead"
+		},
+		{
+			"ita": " é morto! Riprova?\n\n Livello raggiunto: ",
+			"en": " is dead! Try again?\n\n Level reached: "
+		},
+		{
+			"ita": "Stato",
+			"en": "Status"
+		},
+		{
+			"ita": "Tipo",
+			"en": "Type"
+		},
+		{
+			"ita": "Slot",
+			"en": "Slot"
+		},
+		{
+			"ita": "Attacco",
+			"en": "Attack"
+		},
+		{
+			"ita": "Difesa",
+			"en": "Defense"
+		},
+		{
+			"ita": "Salute",
+			"en": "Health"
+		},
+		{
+			"ita": "Max Salute",
+			"en": "Max Health"
+		},
+		{
+			"ita": " ha trovato: ",
+			"en": " found: "
+		},
+		{
+			"ita": "  non ha uno slot libero per questo oggetto!",
+			"en": "  don't have a free slot for this item!"
+		},
+		{
+			"ita": " ha equipaggiato ",
+			"en": " equipped "
+		},
+		{
+			"ita": "  ha consumato ",
+			"en": "  consumed "
+		},
+		{
+			"ita": "salute di ",
+			"en": ""
+		},
+		{
+			"ita": " al massimo",
+			"en": "'s health maxed"
+		},
+		{
+			"ita": "mano",
+			"en": "hand"
+		},
+		{
+			"ita": "2 mani",
+			"en": "2 hands"
+		},
+		{
+			"ita": "testa",
+			"en": "head"
+		},
+		{
+			"ita": "corpo",
+			"en": "body"
+		},
+		{
+			"ita": "equip",
+			"en": "equip"
+		},
+		{
+			"ita": "uso",
+			"en": "use"
+		},
+		{
+			"ita": " ha rimosso ",
+			"en": " removed "
+		}
+	]
+}

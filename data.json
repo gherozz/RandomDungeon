@@ -1,7 +1,8 @@
 {
 	"oggetti": [
 		{
-			"nomeEsterno":  "Spada di Ferro",
+			"nomeIta":  "Spada di Ferro",
+			"nomeEn":  "Iron Sword",
 			"nome": "spada",
 			"tipo": "equip",
 			"slot": "mano",
@@ -12,7 +13,8 @@
 			"chance": "50"
 		}, 
 		{
-			"nomeEsterno":  "Scudo di Ferro",
+			"nomeIta":  "Scudo di Ferro",
+			"nomeEn":  "Iron Shield",
 			"nome": "scudo",
 			"tipo": "equip",
 			"slot": "mano",
@@ -23,7 +25,8 @@
 			"chance": "50"
 		}, 
 		{
-			"nomeEsterno":  "Pozione di Cura I",
+			"nomeIta":  "Pozione di Cura I",
+			"nomeEn":  "Healing Potion I",
 			"nome": "pozione-cura-i",
 			"tipo": "uso",
 			"slot": "nessuno",
@@ -34,7 +37,8 @@
 			"chance": "100"
 		}, 
 		{
-			"nomeEsterno":  "Spada +1",
+			"nomeIta":  "Spada +1",
+			"nomeEn":  "Sword +1",
 			"nome": "spada-incantata",
 			"tipo": "equip",
 			"slot": "mano",
@@ -45,7 +49,8 @@
 			"chance": "25"
 		},
 		{
-			"nomeEsterno":  "Armatura di Ferro",
+			"nomeIta":  "Armatura di Ferro",
+			"nomeEn":  "Iron Armor",
 			"nome": "armatura-ferro",
 			"tipo": "equip",
 			"slot": "corpo",
@@ -57,7 +62,8 @@
 			"chance": "25"
 		},
 		{
-			"nomeEsterno":  "Arco",
+			"nomeIta":  "Arco",
+			"nomeEn":  "Bow",
 			"nome": "arco",
 			"tipo": "equip",
 			"slot": "2 mani",
@@ -68,7 +74,8 @@
 			"chance": "50"
 		},
 		{
-			"nomeEsterno":  "Excalibur",
+			"nomeIta":  "Excalibur",
+			"nomeEn":  "Excalibur",
 			"nome": "excalibur",
 			"tipo": "equip",
 			"slot": "mano",
@@ -81,7 +88,8 @@
 			"chance": "1"
 		},
 		{
-			"nomeEsterno":  "Spada Arrugginita",
+			"nomeIta":  "Spada Arrugginita",
+			"nomeEn":  "Rusty Sword",
 			"nome": "spada-arrugginita",
 			"tipo": "equip",
 			"slot": "mano",
@@ -92,7 +100,8 @@
 			"chance": "100"
 		},
 		{
-			"nomeEsterno":  "Spada di Legno",
+			"nomeIta":  "Spada di Legno",
+			"nomeEn":  "Wooden Sword",
 			"nome": "spada-legno",
 			"tipo": "equip",
 			"slot": "mano",
@@ -103,7 +112,8 @@
 			"chance": "100"
 		},
 		{
-			"nomeEsterno":  "Spada d'Oro",
+			"nomeIta":  "Spada d'Oro",
+			"nomeEn":  "Golden Sword",
 			"nome": "spada-oro",
 			"tipo": "equip",
 			"slot": "mano",
@@ -114,7 +124,8 @@
 			"chance": "25"
 		},
 		{
-			"nomeEsterno":  "Spada Venefica",
+			"nomeIta":  "Spada Venefica",
+			"nomeEn":  "Poisoning Sword",
 			"nome": "spada-venefica",
 			"tipo": "equip",
 			"slot": "mano",
@@ -125,7 +136,8 @@
 			"chance": "10"
 		},
 		{
-			"nomeEsterno":  "Giavellotto",
+			"nomeIta":  "Giavellotto",
+			"nomeEn":  "Javelin",
 			"nome": "giavellotto",
 			"tipo": "equip",
 			"slot": "2 mani",
@@ -137,7 +149,8 @@
 			"chance": "100"
 		},
 		{
-			"nomeEsterno":  "Pala",
+			"nomeIta":  "Pala",
+			"nomeEn":  "Shovel",
 			"nome": "pala",
 			"tipo": "equip",
 			"slot": "mano",
@@ -148,7 +161,8 @@
 			"chance": "100"
 		},
 		{
-			"nomeEsterno":  "Spada di Fuoco",
+			"nomeIta":  "Spada Ardente",
+			"nomeEn":  "Fiery Sword",
 			"nome": "spada-fuoco",
 			"tipo": "equip",
 			"slot": "mano",
@@ -159,7 +173,8 @@
 			"chance": "10"
 		},
 		{
-			"nomeEsterno":  "Spada Maledetta",
+			"nomeIta":  "Spada Maledetta",
+			"nomeEn":  "Cursed Sword",
 			"nome": "spada-maledetta",
 			"tipo": "equip",
 			"slot": "2 mani",
@@ -172,7 +187,8 @@
 			"chance": "10"
 		},
 		{
-			"nomeEsterno":  "Arco Maledetto",
+			"nomeIta":  "Arco Maledetto",
+			"nomeEn":  "Cursed Bow",
 			"nome": "arco-maledetto",
 			"tipo": "equip",
 			"slot": "2 mani",
@@ -185,7 +201,8 @@
 			"chance": "10"
 		},
 		{
-			"nomeEsterno":  "Arco +1",
+			"nomeIta":  "Arco +1",
+			"nomeEn":  "Bow +1",
 			"nome": "arco-incantato",
 			"tipo": "equip",
 			"slot": "2 mani",
@@ -196,7 +213,8 @@
 			"chance": "25"
 		},
 		{
-			"nomeEsterno":  "Aloxidil",
+			"nomeIta":  "Aloxidil",
+			"nomeEn":  "Aloxidil",
 			"nome": "aloxidil",
 			"tipo": "equip",
 			"slot": "mano",
@@ -208,7 +226,8 @@
 			"chance": "5"
 		},
 		{
-			"nomeEsterno":  "Distruttore",
+			"nomeIta":  "Distruttore",
+			"nomeEn":  "Buster Sword",
 			"nome": "distruttore",
 			"tipo": "equip",
 			"slot": "2 mani",
@@ -224,7 +243,8 @@
 	
 	"nemici": [
 		{
-			"nome": "goblin",
+			"nomeIta": "goblin",
+			"nomeEn": "goblin",
 			"attacco": "10",
 			"difesa": "0",
 			"vita": "30",
@@ -235,7 +255,8 @@
 							]
 		}, 
 		{
-			"nome": "orco",
+			"nomeIta": "orco",
+			"nomeEn": "orc",
 			"attacco": "15",
 			"difesa": "5",
 			"vita": "40",
@@ -246,7 +267,8 @@
 							]
 		}, 
 		{
-			"nome": "troll",
+			"nomeIta": "troll",
+			"nomeEn": "troll",
 			"attacco": "20",
 			"difesa": "10",
 			"vita": "70",
@@ -258,7 +280,8 @@
 							]
 		},
 		{
-			"nome": "boss",
+			"nomeIts": "boss",
+			"nomeEn": "boss",
 			"attacco": "30",
 			"difesa": "10",
 			"vita": "100",
