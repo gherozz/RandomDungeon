@@ -1,8 +1,6 @@
-
 var livello = 0;
-var testo;
-var stop = false;
 var livelloBoss = 10;
+
 var attacco = 10;
 var difesa = 10;
 var maxSalute = 200;
@@ -10,37 +8,82 @@ var salute = maxSalute;
 var critico =10;
 var mana = 0;
 var monete = 0;
+
 var nomeEroe;
-var livello = 0;
+
 var roundTimer = 700;
 var fattoreScala = 50;
+
+var stop = false;
+var lingua = "en";
 
 var manoDx = false;
 var manoSx = false;
 var testa = false;
 var corpo = false;
-var heightwindow;
+
 var numDungeon = 1;
+
+var listaMostri = [];
+var listaOggetti = [];
+var locIta = [];
+var locEn = [];
+var locCorrente = [];
 
 var arrayInventario = [];
 var arrayEquip = [];
 
+$.getJSON( "localizzazione.json", function(data) {
+	$.each(data.stringhe, function( key, val ) 
+	{
+		locIta[val.ita] = val.ita;
+		locEn[val.ita] = val.en;
+		console.log(val.ita+val.en);
+	});
+})
+.done(function() {
+	console.log( "JSON letto con successo, analisi liste:" );
+	console.log(locIta);
+	console.log(locEn);
+})
+.fail( function(d, textStatus, error) {
+	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+});
+
+$.getJSON( "data.json", function(data) {
+	$.each(data.nemici, function( key, val ) 
+	{
+		listaMostri[val.nomeIta] = val;
+		// console.log(val);
+	});
+	$.each(data.oggetti, function( key, val )
+	{
+		listaOggetti[val.nome] = val;
+		// console.log(val);
+	});
+})
+.done(function() {
+	console.log( "JSON letto con successo, analisi liste:" );
+	console.log(listaMostri);
+	console.log(listaOggetti);
+})
+.fail( function(d, textStatus, error) {
+	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+});
+
 $(document).ready( function(){
+	locCorrente = locEn;
 	dungeon(numDungeon);
-	heightwindow = $( window ).height();
+	var heightwindow = $(window).height();
 	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
 	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, "slow");		
-	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");		
-	$("#equipaggiamento").inventariStep(42);
-	$("#inventario").inventariStep(42);
+	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");	
 	
 	$(window).resize(function () { 
-		heightwindow =$( window ).height();
+		var heightwindow =$( window ).height();
 		$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
 		$('#gioco').animate({height: (heightwindow/5*3)+'px'}, 200);		
 		$('#arena').animate({height: (heightwindow/5*2)+'px'}, 200);	
-		$("#equipaggiamento").inventariStep(42);
-		$("#inventario").inventariStep(42);
 	});
 
 	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
@@ -56,20 +99,23 @@ $(document).ready( function(){
 	$(".avvia-gioco").click(function(){
 		gioco();
 	});
+	
+	var s1 = nomeEroe + locCorrente[" torna al villaggio"];
+	var s2 = nomeEroe + locCorrente[" procede"];
 
-	$("#alert-villaggio").dialog({		//POPUP DI FINE GIOCO
+	$("#alert-villaggio").dialog({
 		autoOpen: false,
 		dialogClass: "no-close",
 		modal: true,
 		buttons: {
-			"Torna al villaggio": function(){
+			s1: function(){
 				$(this).dialog("close");
 				villaggio();
 				stop = true;
 			},
-			"Vai avanti": function(){
+			s2: function(){
 				$(this).dialog("close");
-				aggiungiLog("VAI AVANTI", "titolo-livello");
+				aggiungiLog(nomeEroe + locCorrente[" procede"], "titolo-livello");
 				dungeon(numDungeon);
 				spazio();	
 				stop = false;
@@ -78,44 +124,6 @@ $(document).ready( function(){
 			}
 		}
 	})
-});
-
-$.fn.inventariStep = function(step)
-{
-	var width = $('.colonna-sx').width();
-	$(this).css('max-width', width*0.96 - (width*0.96)%step + 17);
-}
-
-var mappaMostri = {};
-var mappaOggetti = {};
-var listaMostri = [];
-var listaOggetti = [];
-
-console.log( "lettura JSON:" );
-$.getJSON( "data.json", function(data) {
-	$.each(data.nemici, function( key, val ) 
-	{
-		mappaMostri[val.nome] = val;
-		listaMostri.push(val);
-		// console.log(val);
-	});
-	$.each(data.oggetti, function( key, val )
-	{
-		mappaOggetti[val.nome] = val;
-		listaOggetti.push(val);
-		// console.log(val);
-	});
-})
-.done(function() {
-	console.log( "" );
-	console.log( "JSON letto con successo, analisi mappe e liste:" );
-	console.log(mappaMostri);
-	console.log(mappaOggetti);
-	console.log(listaMostri);
-	console.log(listaOggetti);
-})
-.fail( function(d, textStatus, error) {
-	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
 });
 	
 function sistemaNome(){
@@ -131,7 +139,7 @@ function sistemaNome(){
 		$("#nomeEroe").val(nomeEroe);
 	}
 	
-	$(".stats-eroe h3").html("Statistiche "+nomeEroe);
+	$(".stats-eroe h3").html(locCorrente["Statistiche "] + nomeEroe);
 	
 	blocco("#nomeEroe", true);
 }
@@ -140,33 +148,31 @@ function blocco(input,toggle){
 	$(input).prop("disabled", toggle);
 }
 	
- function numeroRandom(min, max) { 
+ function numeroRandom(min, max) 
+{ 
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function randomizza50(valore) {
+function randomizza50(valore) 
+{
 	return Math.round((valore/2)+(valore*Math.random()));
 }
 
-function randomizza25(valore) {
+function randomizza25(valore) 
+{
 	return Math.round((valore/4*3)+(valore*Math.random())/2);
 }
  
-var estraiDaListaPesata = function(lista) 
+function estraiDaListaPesata(lista) 
 {
 	var listaPesata = [];
-	// console.log(" ");
-	// console.log("roll chances:");
 	
-	for (var i = 0; i < lista.length; i++) 
+	for(key in lista)
 	{
-		var multiples = lista[i].chance * 100;
-		
-		// console.log("chances " + lista[i].nome + " = " + lista[i].chance)
-
+		var multiples = lista[key].chance * 100;
 		for (var j = 0; j < multiples; j++) 
 		{
-			listaPesata.push(lista[i]);
+			listaPesata.push(lista[key]);
 		}
 	}
 	return listaPesata[numeroRandom(0, listaPesata.length-1)];
@@ -180,10 +186,10 @@ function gioco()
 	
 	if(stop == false){
 		livello++;
-		testo= nomeEroe + " è al livello " + livello;
+		var testo= nomeEroe + locCorrente[" ha raggiunto il livello del dungeon: "] + livello;
 		if(livello == livelloBoss){
-			aggiungiLog(testo+", Boss!!!", "titolo-livello");
-			scontro(mappaMostri['boss']);
+			aggiungiLog(testo+", Boss!", "titolo-livello");
+			scontro(listaMostri["boss"]);
 			stop= true;
 			livelloBoss += randomizza50(10);
 		} else if(livello != livelloBoss){
@@ -200,20 +206,34 @@ function gioco()
 
 function evento(){
 	var mostroScelto = estraiDaListaPesata(listaMostri);
-	aggiungiLog("incontri: " + mostroScelto.nome + "!", "rosso");
 	scontro(mostroScelto);
 }
 
-function scontro(mostroScelto){ 
-	var nomeNemico = mostroScelto.nome;
+function nomeLocalizzato(mostroObj)
+{
+	if (locCorrente == locEn)
+	{
+		return mostroObj.nomeEn;
+	}
+	else if (locCorrente == locIta)
+	{
+		return mostroObj.nomeIta;
+	}
+}
+
+function scontro(mostroScelto) { 
+	var nomeNemico = nomeLocalizzato(mostroScelto) ;
 	var baseAttaccoNemico = randomizza25(parseInt(mostroScelto.attacco) + parseInt(mostroScelto.attacco)*livello/fattoreScala);
 	var difesaNemico = randomizza25(parseInt(mostroScelto.difesa) + parseInt(mostroScelto.difesa)*livello/fattoreScala);
 	var maxVitaNemico = randomizza25(parseInt(mostroScelto.vita) + parseInt(mostroScelto.vita)*livello/fattoreScala);
 	var vitaNemico = maxVitaNemico;
 	var attaccoNemico = baseAttaccoNemico;
 	
+	
+	aggiungiLog(nomeEroe + locCorrente[" incontra: "] + nomeNemico + "!", "rosso");
+	
 	blocco("#bottone-start",true);	
-	$("#bottone-start").val("In combattimento..");
+	$("#bottone-start").val(locCorrente["In combattimento.."]);
 	$("#bottone-start").removeClass("bottone-verde");
 	$("#bottone-start").addClass("bottone-rosso");
 	
@@ -233,23 +253,23 @@ function scontro(mostroScelto){
 						vitaNemico = maxVitaNemico;
 					}
 					attaccoNemico= 0;
-					aggiungiLog(nomeNemico +" rigenera le sue ferite", "risultato-scontro");
+					aggiungiLog(nomeNemico + locCorrente[" rigenera le sue ferite"], "risultato-scontro");
 				break;
 				case "artiglio":
-					aggiungiLog(nomeNemico +" artiglia " + nomeEroe, "risultato-scontro");
+					aggiungiLog(nomeNemico + locCorrente[" artiglia "] + nomeEroe, "risultato-scontro");
 					attaccoNemico = baseAttaccoNemico;
 				break;
 				case "colpoCoda":
 					difesa -= 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-					aggiungiLog(nomeNemico +" sferra un colpo con la coda, abbassando le difese di "  + nomeEroe, "risultato-scontro");
+					aggiungiLog(nomeNemico + locCorrente[" sferra un colpo con la coda, abbassando le difese dell'eroe di "]  + nomeEroe, "risultato-scontro");
 					modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 
 				break;
 				case "corazzaSpine":
 					difesaNemico += 5;
 					attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-					aggiungiLog(nomeNemico +" genera la sua corazza spinata!", "risultato-scontro");
+					aggiungiLog(nomeNemico + locCorrente[" genera la sua corazza spinata!"], "risultato-scontro");
 					modificaStatsVisualizzate("#difesa-mostro-value", difesaNemico, "blu");
 				break;
 			}
@@ -269,13 +289,28 @@ function scontro(mostroScelto){
 		salute -= dannoNemico;
 		vitaNemico -= dannoEroe;
 		
-		$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer);
+		$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
 		modificaStatsVisualizzate("#salute-value", salute, "rosso");
 		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 		
-		aggiungiLog(nomeNemico + " <span class='flaticon-roll'></span>(<span class='flaticon-attacco'></span>" + attaccoNemicoTemp + " - <span class='flaticon-difesa'></span>" + difesa + "): " + "infligge " + dannoNemico + " danni", "rosso");
-		aggiungiLog(nomeEroe +" attacca con arma 1 e arma 2", "risultato-scontro");
-		aggiungiLog(nomeEroe+ " <span class='flaticon-roll'></span>(<span class='flaticon-attacco'></span>" + attaccoTemp + " - <span class='flaticon-difesa'></span>" + difesaNemico + "): " + "infligge " + dannoEroe + " danni", "viola");
+		aggiungiLog(nomeNemico
+		+ " <span class='flaticon-roll'> </span>(<span class='flaticon-attacco'> </span>"
+		+ attaccoNemicoTemp + " - <span class='flaticon-difesa'> </span>" 
+		+ difesa
+		+ "): "
+		+ locCorrente["infligge "]
+		+ dannoNemico
+		+ locCorrente[" danni"], "rosso");
+		aggiungiLog(nomeEroe + locCorrente[" attacca con "], "risultato-scontro");
+		aggiungiLog(nomeEroe 
+		+ " <span class='flaticon-roll'> </span>(<span class='flaticon-attacco'> </span>" 
+		+ attaccoTemp 
+		+ " - <span class='flaticon-difesa'> </span>" 
+		+ difesaNemico 
+		+ "): " 
+		+ locCorrente["infligge "] 
+		+ dannoEroe 
+		+ locCorrente[" danni"], "viola");
 			
 			
 			if(salute <= 0 || vitaNemico <= 0) {
@@ -283,7 +318,7 @@ function scontro(mostroScelto){
 				if (salute > 0)
 				{
 					spazio();
-					aggiungiLog(nomeEroe + " ha sconfitto " + nomeNemico, "morto");
+					aggiungiLog(nomeEroe + locCorrente[" ha sconfitto "] + nomeNemico, "morto");
 					
 					blocco("#bottone-start", false);
 					$('.stats-mostro').children().fadeOut(700, function(){
@@ -293,7 +328,7 @@ function scontro(mostroScelto){
 					{
 						generaOggetto();
 					}
-					$("#bottone-start").val("Scende ancora..");
+					$("#bottone-start").val(locCorrente["Scende ancora.."]);
 					$("#bottone-start").removeClass("bottone-rosso");
 					$("#bottone-start").addClass("bottone-verde");
 					spazio();
@@ -301,11 +336,11 @@ function scontro(mostroScelto){
 				else
 				{
 					spazio();
-					aggiungiLog(nomeEroe + " è morto", "morto");
-					$("#bottone-start").val("Morto..");
+					aggiungiLog(nomeEroe + locCorrente[" è morto"], "morto");
+					$("#bottone-start").val(locCorrente["Morto.."]);
 					stop = true;
 					setTimeout(function(){ 
-						var r = confirm(nomeEroe + " é morto! Riprova?\n\n Livello Raggiunto: "+livello);
+						var r = confirm(nomeEroe + locCorrente[" é morto! Riprova?\n\n Livello raggiunto: "] + livello);
 						if(r == true){
 							location.reload();
 						}
@@ -338,25 +373,25 @@ function aggiornamentoVisualOggetti( idContenitore)
 		$(nuovoElemento).prop("oggetto",oggettoObj);
 
 		$(nuovoElemento).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
-		var info = '<div class="info"><p>' + oggettoObj.nomeEsterno + '</p>';
-		info += '<p>Stato: ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
-		info += '<p>Tipo: ' + oggettoObj.tipo + '</p>';
-		info += '<p>Slot: ' + oggettoObj.slot + '</p>';
+		var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
+		info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
+		info += '<p>' + locCorrente["Tipo"] + ': ' + locCorrente[oggettoObj.tipo] + '</p>';
+		info += '<p>' + locCorrente["Slot"] + ': ' + locCorrente[oggettoObj.slot] + '</p>';
 		if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
 		{
-			info += '<p><span class="flaticon-attacco"></span>  Attacco: ' + oggettoObj.attacco + '</p>';
+			info += '<p><span class="flaticon-attacco"></span>  ' + locCorrente["Attacco"] + ': ' + oggettoObj.attacco + '</p>';
 		}
 		if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
 		{
-			info += '<p><span class="flaticon-difesa"></span>  Difesa: ' + oggettoObj.difesa + '</p>';
+			info += '<p><span class="flaticon-difesa"></span>  ' + locCorrente["Difesa"] + ': ' + oggettoObj.difesa + '</p>';
 		}
 		if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
 		{
-			info += '<p><span class="flaticon-salute"></span>  Salute: ' + oggettoObj.salute + '</p>';
+			info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Salute"] + ': ' + oggettoObj.salute + '</p>';
 		}
 		if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
 		{
-			info += '<p><span class="flaticon-salute"></span>  Max Salute: ' + oggettoObj.maxSalute + '</p>';
+			info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Max Salute"] + ': ' + oggettoObj.maxSalute + '</p>';
 		}
 		$(nuovoElemento).append("<div>"+info+"</div>");
 	}
@@ -365,7 +400,7 @@ function aggiornamentoVisualOggetti( idContenitore)
 function generaOggetto(){
 	var oggettoScelto = estraiDaListaPesata(listaOggetti);
 	spazio();
-	aggiungiLog(nomeEroe + " ha trovato: " + oggettoScelto.nomeEsterno + "!", oggettoScelto.coloreTesto);
+	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoScelto) + "!", oggettoScelto.coloreTesto);
 	arrayInventario.push(oggettoScelto);
 	aggiornamentoVisualOggetti("lista");
 }
@@ -412,23 +447,23 @@ function muoviOggetto(oggettoObj, idContenitorePartenza, idContenitoreArrivo){
 			} 
 			else
 			{
-				aggiungiLog(nomeEroe + "  non ha uno slot libero per questo oggetto!");
+				aggiungiLog(nomeEroe + locCorrente["  non ha uno slot libero per questo oggetto!"]);
 				spazio();
 				return;
 			}
-			text = nomeEroe + " ha equipaggiato " + oggettoObj.nomeEsterno + ",";
+			text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
 			aggiornaStatsEquip(oggettoObj, text, true);
 		} 
 		else if (oggettoObj.tipo == "uso") 
 		{
 			if(salute < maxSalute){
-				text = nomeEroe + "  ha consumato " + oggettoObj.nomeEsterno + ",";
+				text = nomeEroe + locCorrente["  ha consumato "] + nomeLocalizzato(oggettoObj) + ",";
 				aggiornaStatsEquip(oggettoObj, text, true);		
 				arrayPartenza.splice($.inArray(oggettoObj, arrayPartenza),1);
 				aggiornamentoVisualOggetti(idContenitorePartenza);
 				return;
 			} else{
-				aggiungiLog("salute di " + nomeEroe + " al massimo");
+				aggiungiLog(locCorrente["salute di "] + nomeEroe + locCorrente[" al massimo"]);
 				return;
 			}
 		}
@@ -462,7 +497,7 @@ function muoviOggetto(oggettoObj, idContenitorePartenza, idContenitoreArrivo){
 			manoSx = false;
 			manoDx = false;
 		}
-		text = nomeEroe + " ha rimosso " + oggettoObj.nomeEsterno + ",";
+		text = nomeEroe + locCorrente[" ha rimosso "] + nomeLocalizzato(oggettoObj) + ",";
 		aggiornaStatsEquip(oggettoObj, text, false);
 		spazio();	
 	}
@@ -491,13 +526,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		{
 			attacco += parseInt(oggettoObj.attacco);
 			modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
-			text += " <span class='flaticon-attacco'></span> attacco + " + oggettoObj.attacco;
+			text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " + " + oggettoObj.attacco;
 		} 
 		else 
 		{
 			attacco -= parseInt(oggettoObj.attacco);
 			modificaStatsVisualizzate("#attacco-value", attacco, "blu");
-			text += " <span class='flaticon-attacco'></span> attacco - " + oggettoObj.attacco;
+			text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " - " + oggettoObj.attacco;
 		}
 		
 	}
@@ -507,13 +542,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		{
 			difesa += parseInt(oggettoObj.difesa);
 			modificaStatsVisualizzate("#difesa-value", difesa, "blu");
-			text += " <span class='flaticon-difesa'></span> difesa + " + oggettoObj.difesa;
+			text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " + " + oggettoObj.difesa;
 		} 
 		else 
 		{
 			difesa -= parseInt(oggettoObj.difesa);
 			modificaStatsVisualizzate("#difesa-value", difesa, "arancione");
-			text += " <span class='flaticon-difesa'></span> difesa - " + oggettoObj.difesa;
+			text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " - " + oggettoObj.difesa;
 		}
 	}
 	if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
@@ -526,7 +561,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 				salute = maxSalute;		
 			}
 			modificaStatsVisualizzate("#salute-value", salute, "verde");
-			text += " <span class='flaticon-salute'></span> salute + " + oggettoObj.salute;
+			text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " + " + oggettoObj.salute;
 		} 
 		else 
 		{
@@ -536,7 +571,7 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 				salute = maxSalute;		
 			}
 			modificaStatsVisualizzate("#salute-value", salute, "rosso");
-			text += " <span class='flaticon-salute'></span> salute - " + oggettoObj.salute;
+			text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " - " + oggettoObj.salute;
 		}
 	}
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
@@ -545,13 +580,13 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 		{
 			maxSalute += parseInt(oggettoObj.maxSalute);
 			modificaStatsVisualizzate("#maxSalute-value", maxSalute, "verde");
-			text += " <span class='flaticon-salute'></span> maxSalute + " + oggettoObj.maxSalute;
+			text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " + " + oggettoObj.maxSalute;
 		} 
 		else 
 		{
 			maxSalute -= parseInt(oggettoObj.maxSalute);
 			modificaStatsVisualizzate("#maxSalute-value", maxSalute, "rosso");
-			text += " <span class='flaticon-salute'></span> maxSalute - " + oggettoObj.salute;
+			text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " - " + oggettoObj.salute;
 		}
 	}
 	aggiungiLog(text, oggettoObj.coloreTesto);
@@ -561,18 +596,18 @@ function aggiornaStatsEquip(oggettoObj, text, equipaggiato)
 function aggiungiLog(testo, classe){
 	var nuovoElemento = '<p class="'+classe+'">'+testo+'</p>';
  	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(300);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/2);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
 }
 
 function aggiungiLogComplesso(testo){
 	var nuovoElemento = testo;
  	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(300);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/2);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
 }
 
 function spazio(){
 	$("#gioco").append("<br/>");
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/2);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
 }
 
 function popup(){
@@ -584,8 +619,8 @@ function modificaStatsVisualizzate(div, nuovoValore, classe){
 	$(div).append(" " + nuovoValore);
 	$(div).addClass(classe);
 	$(div).addClass("bold");
-	$(div).toggleClass( classe, roundTimer, "easeInOutCubic" );
-	$(div).toggleClass( "bold", roundTimer, "easeInOutCubic" );
+	$(div).toggleClass( classe, roundTimer/2, "easeInOutCubic" );
+	$(div).toggleClass( "bold", roundTimer/2, "easeInOutCubic" );
 		
 	if (div.indexOf("salute-mostro") != -1)
 	{		
@@ -594,7 +629,7 @@ function modificaStatsVisualizzate(div, nuovoValore, classe){
 	}
 	else if (div.indexOf("salute") != -1)
 	{
-		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);		
+		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer/2);		
 		$(".salute-bar").addClass("bgBianco");		
 		$(".salute-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );	
 	}
