@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 22/02/2016 02:35
+  	Creation date: 23/02/2016 22:42
   	*/
 
 @font-face {
@@ -23,15 +23,15 @@
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-  font-family: Flaticon;
-        font-size: 20px;
-font-style: normal;
-margin-right: 10px;
+	font-family: Flaticon;
+	font-size: 17px;
+	font-style: normal;
 }
 
-.flaticon-medical:before { content: "\f100"; }
-.flaticon-medieval:before { content: "\f101"; }
-.flaticon-money:before { content: "\f102"; }
-.flaticon-shapes:before { content: "\f103"; }
-.flaticon-target:before { content: "\f104"; }
-.flaticon-weapon:before { content: "\f105"; }
+.flaticon-attacco:before { content: "\f100"; }
+.flaticon-critico:before { content: "\f101"; }
+.flaticon-difesa:before { content: "\f102"; }
+.flaticon-mana:before { content: "\f103"; }
+.flaticon-monete:before { content: "\f104"; }
+.flaticon-roll:before { content: "\f105"; }
+.flaticon-salute:before { content: "\f106"; }

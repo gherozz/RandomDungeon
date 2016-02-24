@@ -6,30 +6,30 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "15",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "30"
+			"chance": "50"
 		}, 
 		{
 			"nomeEsterno":  "Scudo di Ferro",
 			"nome": "scudo",
 			"tipo": "equip",
 			"slot": "mano",
-			"attacco": "0",
 			"difesa": "10",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "blu",
-			"chance": "30"
+			"chance": "50"
 		}, 
 		{
 			"nomeEsterno":  "Pozione di Cura I",
 			"nome": "pozione-cura-i",
 			"tipo": "uso",
 			"slot": "nessuno",
-			"attacco": "0",
-			"difesa": "0",
 			"salute": "30",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "verde",
 			"chance": "100"
 		}, 
@@ -39,21 +39,22 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "30",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "25"
 		},
 		{
 			"nomeEsterno":  "Armatura di Ferro",
 			"nome": "armatura-ferro",
 			"tipo": "equip",
 			"slot": "corpo",
-			"attacco": "0",
-			"difesa": "20",
-			"salute": "0",
+			"difesa": "10",
+			"maxSalute": "20",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "blu",
-			"chance": "5"
+			"chance": "25"
 		},
 		{
 			"nomeEsterno":  "Arco",
@@ -61,10 +62,10 @@
 			"tipo": "equip",
 			"slot": "2 mani",
 			"attacco": "20",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "15"
+			"chance": "50"
 		},
 		{
 			"nomeEsterno":  "Excalibur",
@@ -73,9 +74,11 @@
 			"slot": "mano",
 			"attacco": "20",
 			"difesa": "20",
-			"salute": "0",
+			"maxSalute": "10",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "2"
+			"chance": "1"
 		},
 		{
 			"nomeEsterno":  "Spada Arrugginita",
@@ -83,10 +86,10 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "10",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "40"
+			"chance": "100"
 		},
 		{
 			"nomeEsterno":  "Spada di Legno",
@@ -94,10 +97,10 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "5",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "50"
+			"chance": "100"
 		},
 		{
 			"nomeEsterno":  "Spada d'Oro",
@@ -105,10 +108,10 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "5",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "25"
 		},
 		{
 			"nomeEsterno":  "Spada Venefica",
@@ -116,10 +119,10 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "20",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "10"
 		},
 		{
 			"nomeEsterno":  "Giavellotto",
@@ -128,9 +131,10 @@
 			"slot": "2 mani",
 			"attacco": "10",
 			"difesa": "5",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "20"
+			"chance": "100"
 		},
 		{
 			"nomeEsterno":  "Pala",
@@ -138,10 +142,10 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "5",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "20"
+			"chance": "100"
 		},
 		{
 			"nomeEsterno":  "Spada di Fuoco",
@@ -149,32 +153,36 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "20",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "10"
 		},
 		{
 			"nomeEsterno":  "Spada Maledetta",
 			"nome": "spada-maledetta",
 			"tipo": "equip",
 			"slot": "2 mani",
-			"attacco": "40",
+			"attacco": "50",
 			"difesa": "-5",
-			"salute": "-10",
+			"maxSalute": "-10",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "10"
 		},
 		{
 			"nomeEsterno":  "Arco Maledetto",
 			"nome": "arco-maledetto",
 			"tipo": "equip",
 			"slot": "2 mani",
-			"attacco": "40",
+			"attacco": "50",
 			"difesa": "-5",
-			"salute": "-10",
+			"maxSalute": "-10",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "10"
 		},
 		{
 			"nomeEsterno":  "Arco +1",
@@ -182,10 +190,10 @@
 			"tipo": "equip",
 			"slot": "2 mani",
 			"attacco": "40",
-			"difesa": "0",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
-			"chance": "5"
+			"chance": "25"
 		},
 		{
 			"nomeEsterno":  "Aloxidil",
@@ -194,7 +202,8 @@
 			"slot": "mano",
 			"attacco": "10",
 			"difesa": "30",
-			"salute": "0",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
 			"chance": "5"
 		},
@@ -204,8 +213,9 @@
 			"tipo": "equip",
 			"slot": "2 mani",
 			"attacco": "50",
-			"difesa": "-20",
-			"salute": "0",
+			"difesa": "-10",
+			"stato": "100",
+			"statoAttuale": "100",
 			"coloreTesto": "arancione",
 			"chance": "5"
 		}
@@ -221,7 +231,7 @@
 			"boss": false,
 			"chance": "50",
 			"azioni": 	[
-								{"nome": "pugnoLato", "chance":"10"}
+								{"nome": "artiglio", "chance":"10"}
 							]
 		}, 
 		{
@@ -232,7 +242,7 @@
 			"boss": false,
 			"chance": "20",
 			"azioni": 	[
-								{"nome": "pugnoLato", "chance":"10"}
+								{"nome": "artiglio", "chance":"10"}
 							]
 		}, 
 		{
@@ -243,8 +253,8 @@
 			"boss": false,
 			"chance": "5",
 			"azioni": 	[
-								{"nome": "leccaFerite", "chance":"25"},
-								{"nome": "pugnoLato", "chance":"50"}
+								{"nome": "rigenera", "chance":"25"},
+								{"nome": "artiglio", "chance":"50"}
 							]
 		},
 		{
@@ -255,10 +265,10 @@
 			"boss": true,
 			"chance": "0",
 			"azioni": 	[	
-								{"nome": "leccaFerite", "chance":"25"},
-								{"nome": "pugnoLato", "chance":"50"},
+								{"nome": "rigenera", "chance":"25"},
+								{"nome": "artiglio", "chance":"50"},
 								{"nome": "colpoCoda", "chance":"15"}, 
-								{"nome": "corazzaLava", "chance":"15"}
+								{"nome": "corazzaSpine", "chance":"15"}
 							]
 		}
 	]
