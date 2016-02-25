@@ -303,6 +303,7 @@ function scontro(mostroScelto) {
 		salute -= dannoNemico;
 		vitaNemico -= dannoEroe;
 		
+		$(".numeri-mostro").css("height", $(".numeri-eroe").height());
 		$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
 		modificaStatsVisualizzate("#salute-value", salute, "rosso");
 		modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
