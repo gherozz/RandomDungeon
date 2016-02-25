@@ -101,6 +101,18 @@
 			"en": "Max Health"
 		},
 		{
+			"ita": "Monete",
+			"en": "Coins"
+		},
+		{
+			"ita": "Mana",
+			"en": "Mana"
+		},
+		{
+			"ita": "Critico",
+			"en": "Crit"
+		},
+		{
 			"ita": " ha trovato: ",
 			"en": " found: "
 		},
@@ -155,6 +167,22 @@
 		{
 			"ita": " ha rimosso ",
 			"en": " removed "
+		},
+		{
+			"ita": "Inventario",
+			"en": "Inventory"
+		},
+		{
+			"ita": "Equipaggiato",
+			"en": "Equipped"
+		},
+		{
+			"ita": "Inizio",
+			"en": "Start"
+		},
+		{
+			"ita": "Inserisci il nome dell'Eroe",
+			"en": "Insert Hero name"
 		}
 	]
 }
