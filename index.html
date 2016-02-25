@@ -21,41 +21,6 @@
 		<script src="htmlcreate.js"></script>
 		<script src="script.js"></script>
 		
-		<script>
-
-		// MODIFICHE ALTEZZA ARENA/GIOCO, DA INTEGRARE NEL SCRIPT.JS (O LASCIARE QUI BOH VEDIAMO)
-
-		$(document).ready( function(){
-			dungeon(numDungeon);
-			heightwindow = $( window ).height();
-			$('.colonna-sx').css("height", heightwindow/5*4);
-			$(".header").css("height", $(".colonna-sx").height()*0.13);
-			$(".toggle-container").css("height", $(".colonna-sx").height()*0.7);
-			$("#scelta-nome").css("height", $(".colonna-sx").height()*0.17);
-			$("#bottone-start").css("height", $(".colonna-sx").height()*0.17);
-			$("#gioco").css("height", heightwindow/5*4);
-			$("#arena").css("height", heightwindow/5*1);
-
-			$(".footer-content").css({height: $("footer").height()-5});
-
-			$(".footer-pull,.triangolo,footer").click(function(){
-				$("footer").slideToggle("slow");
-			})
-		});	
-		$(window).resize(function () { 
-			heightwindow =$( window ).height();
-			$('.colonna-sx').css("height", heightwindow/5*4);
-			$(".header").css("height", $(".colonna-sx").height()*0.13);
-			$(".toggle-container").css("height", $(".colonna-sx").height()*0.7);
-			$("#scelta-nome").css("height", $(".colonna-sx").height()*0.17);
-			$("#bottone-start").css("height", $(".colonna-sx").height()*0.17);
-			$("#gioco").css("height", heightwindow/5*4);
-			$("#arena").css("height", heightwindow/5*1);
-		});
-
-		</script>
-		
-
 	</head>
 	<body>
 		

@@ -69,23 +69,26 @@ $.getJSON( "data.json", function(data) {
 })
 .fail( function(d, textStatus, error) {
 	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
-});
+});	
 
 $(document).ready( function(){
 	locCorrente = locEn;
 	dungeon(numDungeon);
-//	var heightwindow = $(window).height();
-//	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
-//	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, "slow");		
-//	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");	
-	
-//	$(window).resize(function () { 
-//		var heightwindow =$( window ).height();
-//		$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
-//		$('#gioco').animate({height: (heightwindow/5*3)+'px'}, 200);		
-//		$('#arena').animate({height: (heightwindow/5*2)+'px'}, 200);	
-//	});
+	dungeon(numDungeon);
+	heightwindow = $( window ).height();
+	$('.colonna-sx').css("height", heightwindow/5*4);
+	$(".header").css("height", $(".colonna-sx").height()*0.13);
+	$(".toggle-container").css("height", $(".colonna-sx").height()*0.7);
+	$("#scelta-nome").css("height", $(".colonna-sx").height()*0.17);
+	$("#bottone-start").css("height", $(".colonna-sx").height()*0.17);
+	$("#gioco").css("height", heightwindow/5*4);
+	$("#arena").css("height", heightwindow/5*1);
 
+	$(".footer-content").css({height: $("footer").height()-5});
+
+	$(".footer-pull,.triangolo,footer").click(function(){
+		$("footer").slideToggle("slow");
+	})
 	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
 	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
 	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
@@ -124,6 +127,17 @@ $(document).ready( function(){
 			}
 		}
 	})
+});
+
+$(window).resize(function () { 
+	heightwindow =$( window ).height();
+	$('.colonna-sx').css("height", heightwindow/5*4);
+	$(".header").css("height", $(".colonna-sx").height()*0.13);
+	$(".toggle-container").css("height", $(".colonna-sx").height()*0.7);
+	$("#scelta-nome").css("height", $(".colonna-sx").height()*0.17);
+	$("#bottone-start").css("height", $(".colonna-sx").height()*0.17);
+	$("#gioco").css("height", heightwindow/5*4);
+	$("#arena").css("height", heightwindow/5*1);
 });
 	
 function sistemaNome(){
