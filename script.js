@@ -74,17 +74,17 @@ $.getJSON( "data.json", function(data) {
 $(document).ready( function(){
 	locCorrente = locEn;
 	dungeon(numDungeon);
-	var heightwindow = $(window).height();
-	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
-	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, "slow");		
-	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");	
+//	var heightwindow = $(window).height();
+//	$('.colonna-sx').animate({height: (heightwindow)+'px'}, "slow");
+//	$('#gioco').animate({height: (heightwindow/5*3)+'px'}, "slow");		
+//	$('#arena').animate({height: (heightwindow/5*2)+'px'}, "slow");	
 	
-	$(window).resize(function () { 
-		var heightwindow =$( window ).height();
-		$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
-		$('#gioco').animate({height: (heightwindow/5*3)+'px'}, 200);		
-		$('#arena').animate({height: (heightwindow/5*2)+'px'}, 200);	
-	});
+//	$(window).resize(function () { 
+//		var heightwindow =$( window ).height();
+//		$('.colonna-sx').animate({height: (heightwindow)+'px'}, 200);
+//		$('#gioco').animate({height: (heightwindow/5*3)+'px'}, 200);		
+//		$('#arena').animate({height: (heightwindow/5*2)+'px'}, 200);	
+//	});
 
 	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
 	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");

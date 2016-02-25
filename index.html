@@ -14,8 +14,47 @@
 		<script src="js/jquery-2.2.0.min.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
 		<script src="js/jquery.scrollTo.min.js"></script>
+
+		<!--NUOVO FILE MENU LATERALI-->
+		<script src="lateralSlide.js"></script>  
+
 		<script src="htmlcreate.js"></script>
 		<script src="script.js"></script>
+		
+		<script>
+
+		// MODIFICHE ALTEZZA ARENA/GIOCO, DA INTEGRARE NEL SCRIPT.JS (O LASCIARE QUI BOH VEDIAMO)
+
+		$(document).ready( function(){
+			dungeon(numDungeon);
+			heightwindow = $( window ).height();
+			$('.colonna-sx').css("height", heightwindow/5*4);
+			$(".header").css("height", $(".colonna-sx").height()*0.13);
+			$(".toggle-container").css("height", $(".colonna-sx").height()*0.7);
+			$("#scelta-nome").css("height", $(".colonna-sx").height()*0.17);
+			$("#bottone-start").css("height", $(".colonna-sx").height()*0.17);
+			$("#gioco").css("height", heightwindow/5*4);
+			$("#arena").css("height", heightwindow/5*1);
+
+			$(".footer-content").css({height: $("footer").height()-5});
+
+			$(".footer-pull,.triangolo,footer").click(function(){
+				$("footer").slideToggle("slow");
+			})
+		});	
+		$(window).resize(function () { 
+			heightwindow =$( window ).height();
+			$('.colonna-sx').css("height", heightwindow/5*4);
+			$(".header").css("height", $(".colonna-sx").height()*0.13);
+			$(".toggle-container").css("height", $(".colonna-sx").height()*0.7);
+			$("#scelta-nome").css("height", $(".colonna-sx").height()*0.17);
+			$("#bottone-start").css("height", $(".colonna-sx").height()*0.17);
+			$("#gioco").css("height", heightwindow/5*4);
+			$("#arena").css("height", heightwindow/5*1);
+		});
+
+		</script>
+		
 
 	</head>
 	<body>
@@ -25,77 +64,74 @@
 			<p>Dove vai?</p>
 		</div>
 		
+		
+		
+		<div class="colonna-sx">
+		
+			<div class="header">
+				<h1><a href="index.html"></a></h1>
+			</div>
+			<div class="toggle-container">
+				<div class="toggle1">
+					<div id="pull1" class="pull"><span>Inventario</span></div>
+					<div class="main" id="main1">
+						<h3>Inventario</h3>
+						<div id="inventario">
+							<ul id="lista">	
+							</ul>
+						</div>
+						<h3>Equipaggiato</h3>
+						<div id="equipaggiamento">
+							<ul id="equip-lista">
+							</ul>
+						</div>		
+					</div>
+					
+				</div>
+				<div class="toggle2">
+				<div id="pull2" class="pull"><span>Mappa</span></div>
+					<div class="main" id="main2">
+						<div id="mappa-container">
+							<h1>mappa</h1>
+						</div>
+					</div>
+					
+				</div>
+				<div class="toggle3">
+					<div id="pull3" class="pull"><span>Quests</span></div>
+					<div class="main" id="main3">
+						<div id="mappa-container">
+							<h1>quest</h1>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+				<div id="scelta-nome">
+					<input type="text" id="nomeEroe" placeholder="Inserisci il nome dell'Eroe" autocomplete="off" autofocus>
+				</div>
+				
+			<input type="button" value="Inizio" id="bottone-start" class="avvia-gioco bottone-verde">
+			
+		</div>
 		<div id="gioco">
 		</div>
 		
 		<div id="arena">
-			<div class="stats-mostro">
-
-			<!-- GENERATO AUTOMATICAMENTE DAL FILE HTMLCREATE.JS-->
-				<!-- <h3>Statistiche Mostro</h3>
-				<div class="stats">
-					<ul>
-						<li>
-							<span class="flaticon-medieval"></span>
-							<span class="attacco"></span>
-							<span id="attacco-mostro-value"></span>
-						</li>
-						<li>
-							<span class="flaticon-weapon"></span>
-							<span class="difesa"></span>
-							<span id="difesa-mostro-value"></span>
-						</li>
-						<li>
-							<span class="flaticon-shapes"></span>
-							<span class="salute"></span>
-							<span id="salute-mostro-value"></span>
-							<span id="maxSalute-mostro-value"></span>
-						</li>
-					</ul>
-				</div>
-				<div class="salute-container">
-					<div id="salute-mostro-max">
-						<div id="salute-mostro-bar" style="height: 20px; background: red;"></div>
-					</div>
-				</div> -->
-				
-			</div>
 			
 			<div class="stats-eroe">
-			
-				<div class="salute-container">
-					<div id="salute-max">
-						<div class="salute-bar"></div>
-					</div>
-				</div>
 				
-				<h3></h3>
-				
-				<div class="stats">
+				<div class="numeri-eroe">
 					<ul>
+						
+						
+						
+						
+						
 						<li>
-							<span class="flaticon-attacco"></span>
-							<span class="attacco"></span>
-							<span id="attacco-value"></span>
-						</li>
-						<li>
-							<span class="flaticon-difesa"></span>
-							<span class="difesa"></span>
-							<span id="difesa-value"></span>
-						</li>
-						<li>
-							<span class="flaticon-salute"></span>
-							<span class="salute"></span>
-							<span id="salute-value"></span> /
-							<span id="maxSalute-value"></span>
-							<br />
-							<br />
-						</li>
-						<li>
-							<span class="flaticon-critico"></span>
-							<span class="critico"></span>
-							<span id="critico-value"></span>
-							<span>%</span>
+							<span class="flaticon-monete"></span>
+							<span class="monete"></span>
+							<span id="monete-value"></span>
 						</li>
 						<li>
 							<span class="flaticon-mana"></span>
@@ -103,87 +139,80 @@
 							<span id="mana-value"></span>
 						</li>
 						<li>
-							<span class="flaticon-monete"></span>
-							<span class="monete"></span>
-							<span id="monete-value"></span>
-						</li>
-						
-					</ul>
-				</div>				
-			</div>
-		</div>
-		
-		<div class="colonna-sx">
-		
-			<div class="header">
-				<h1><a href="index.html"></a></h1>
-			</div>
-		
-			<div class="main">
-				<h3>Inventario</h3>
-				
-				<div id="inventario">
-					<ul id="lista">	
-					</ul>
-				</div>
-				
-				<h3>Equipaggiato</h3>
-				
-				<div id="equipaggiamento">
-					<ul id="equip-lista">
-					</ul>
-				</div>
-				
-				<div id="scelta-nome">
-					<input type="text" id="nomeEroe" placeholder="Inserisci il nome dell'Eroe" autocomplete="off" autofocus>
-				</div>
-				
-				
-				<!-- <div class="stats1">
-					<ul>
-						<li>
-							<span class="flaticon-medieval"></span>
-							<span class="attacco"></span>
-							<span id="attacco-value"></span>
+							<span class="flaticon-critico"></span>
+							<span class="critico"></span>
+							<span id="critico-value"></span>%
+							<span></span>
 						</li>
 						<li>
-							<span class="flaticon-weapon"></span>
+							<span class="flaticon-salute"></span>
+							<span class="salute"></span>
+							<span id="salute-value"></span>/
+							<span id="maxSalute-value"></span>
+						</li>
+						<li>
+							<span class="flaticon-difesa"></span>
 							<span class="difesa"></span>
 							<span id="difesa-value"></span>
 						</li>
 						<li>
-							<span class="flaticon-shapes"></span>
-							<span class="salute"></span>
-							<span id="salute-value"></span>
-							<span id="maxSalute-value">/</span>
+							<span class="flaticon-attacco"></span>
+							<span class="attacco"></span>
+							<span id="attacco-value"></span>
 						</li>
 					</ul>
-				</div>
-				<div class="stats2">
-					<ul>
-						<li>
-							<span class="flaticon-target"></span>
-							<span class="critico"></span>
-							<span id="critico-value"></span>
-							<span>%</span>
-						</li>
-						<li>
-							<span class="flaticon-medical"></span>
-							<span class="mana"></span>
-							<span id="mana-value"></span>
-						</li>
-						<li>
-							<span class="flaticon-money"></span>
-							<span class="monete"></span>
-							<span id="monete-value"></span>
-						</li>
-					</ul>
-				</div> -->			
-				
+				</div>	
+				<div class="salute-container">
+					<div id="salute-max">
+						<div class="salute-bar"></div>
+					</div>
+				</div>	
+				<h3></h3>
 			</div>
-				
-			<input type="button" value="Inizio" id="bottone-start" class="avvia-gioco bottone-verde">
 			
+
+			<div class="stats-mostro">
+
+			<!-- GENERATO AUTOMATICAMENTE DAL FILE HTMLCREATE.JS-->
+				<!-- <h3>Nome</h3>
+				<div class="stats">
+				    <ul>
+				        <li><span class="flaticon-medieval"></span><span class="attacco"></span><span id="attacco-mostro-value"></span>
+				        </li>
+				        <li><span class="flaticon-weapon"></span><span class="difesa"></span><span id="difesa-mostro-value"></span>
+				        </li>
+				        <li><span class="flaticon-shapes"></span><span class="salute"></span><span id="salute-mostro-value"></span><span id="maxSalute-mostro-value"></span>
+				        </li>
+				    </ul>
+				</div>
+				<div class="salute-container">
+				    <div id="salute-mostro-max">
+				        <div class="salute-mostro-bar"></div>
+				    </div>
+				</div>			 -->	
+			</div>
 		</div>
-		
+		<div class="triangolo"></div>
+		<div class="footer-pull">
+			<span>Credits: gente più nerd di noi nerd nerd nerd nerd nerd </span>
+		</div>
+		<footer>
+			<div class="triangolo triangolo-down"></div>
+			<div class="footer-content">
+				<div class="footer-column">
+					<h3>about us</h3>
+					<p>nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd nerd </p>
+				</div>
+				<div class="footer-column">
+					
+				</div>
+				<div class="footer-column">
+					<div class="footer-logo"><h2>spazio per un logo o boh qualcosa</h2></div>
+					<div class="paypal">
+						<p>buy us a beer!</p>
+						<a href=""><img src="http://hispaniola.org/site/wp-content/uploads/pay-now-button-afme.png" alt="paypal"></a>
+					</div>
+				</div>
+			</div>
+		</footer>
 	</body>
