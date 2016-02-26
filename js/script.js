@@ -33,7 +33,6 @@ var locCorrente = [];
 var arrayInventario = [];
 var arrayEquip = [];
 
-var oggettoObj;
 
 
 
