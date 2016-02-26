@@ -3,7 +3,7 @@ function dungeon(numdungeon){
 	switch(numdungeon){
 
 		case 1:
-			$('.header').animate({backgroundColor: "#2A7F00"});
+			// $('.header').animate({backgroundColor: "#2A7F00"});
 			$('.colonna-sx').animate({backgroundColor: "#88C159"});
 		break;
 		case 2:
