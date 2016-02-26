@@ -34,6 +34,34 @@ function traduci(){
 	$(".mana").html(locCorrente["Mana"]);
 	$(".monete").html(locCorrente["Monete"]);
 	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
+	$("#lista li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function( index ) {
+		oggettoObj = $(this).prop("oggetto");
+	  $(this).empty();
+	  $(this).prop("oggetto",oggettoObj);
+		this.className = "ui-state-default slot";
+		$(this).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
+		var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
+		info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
+		info += '<p>' + locCorrente["Tipo"] + ': ' + locCorrente[oggettoObj.tipo] + '</p>';
+		info += '<p>' + locCorrente["Slot"] + ': ' + locCorrente[oggettoObj.slot] + '</p>';
+		if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
+		{
+			info += '<p><span class="flaticon-attacco"></span>  ' + locCorrente["Attacco"] + ': ' + oggettoObj.attacco + '</p>';
+		}
+		if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
+		{
+			info += '<p><span class="flaticon-difesa"></span>  ' + locCorrente["Difesa"] + ': ' + oggettoObj.difesa + '</p>';
+		}
+		if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
+		{
+			info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Salute"] + ': ' + oggettoObj.salute + '</p>';
+		}
+		if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
+		{
+			info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Max Salute"] + ': ' + oggettoObj.maxSalute + '</p>';
+		}
+		$(this).append("<div>"+info+"</div>");
+	});
 }
 
 function sistemaNome(){

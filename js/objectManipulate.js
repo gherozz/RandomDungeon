@@ -10,11 +10,11 @@ function generaOggetto()
 	spazio();
 	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto);
 	var nuovoElemento = document.createElement("LI");
-	nuovoElemento.className = "ui-state-default slot";
 	var list = document.getElementById("lista");
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
+	
 	$(nuovoElemento).prop("oggetto",oggettoObj);
-
+	nuovoElemento.className = "ui-state-default slot";
 	$(nuovoElemento).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
 	info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
@@ -42,24 +42,61 @@ function generaOggetto()
 $(document).ready( function(){
 
 	$("#lista").sortable({
-		connectWith: ".connectedSortable",
+		connectWith: "#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx",
 		revert: 100
 	}).disableSelection();
-		
-	$("#equip-lista").sortable({
-		revert: 100,
-		connectWith: ".connectedSortable",
 	
+			
+	$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx").sortable({
+		revert: 100,
+		connectWith: "#lista",		
 		receive: function(e, ui) {
+			traduci();
 			var oggettoObj = ui.item.prop("oggetto");
 			if(oggettoObj.tipo == "equip"){
-				if (checkSlots(oggettoObj)) {
-					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
-					aggiuntaStatsOggetto(oggettoObj, text);
-				} else {
-					aggiungiLog(nomeEroe + locCorrente["  non ha uno slot libero per questo oggetto!"]);
+				if (this.children.length > 1 
+					||
+					($(this).attr('id')) == "equip-manoDx" 
+					&&
+					oggettoObj.slot == "2 mani" 
+					&&
+					($("#equip-manoSx").find("li").length) > 0 
+					||
+					$(this).attr('id') == "equip-manoSx" 
+					&&
+					oggettoObj.slot == "2 mani" 
+					&&
+					($("#equip-manoDx").find("li").length) > 0
+					||
+					($(this).attr('id')) != "equip-manoDx" 
+					&&
+					($(this).attr('id')) != "equip-manoSx" 
+					&&
+					oggettoObj.slot == "mano"
+					||
+					($(this).attr('id')) != "equip-corpo" 
+					&&
+					oggettoObj.slot == "corpo"
+					||
+					($(this).attr('id')) != "equip-testa" 
+					&&
+					oggettoObj.slot == "testa")
+				{
 					spazio();
 					ui.sender.sortable('cancel');
+				} else {
+					console.log($("#equip-manoDx").find("li").length);
+					console.log($("#equip-manoSx").find("li").length);
+					if ($(this).attr('id') == "equip-manoDx" && oggettoObj.slot == "2 mani") 
+					{
+						ui.item.clone().appendTo("#equip-manoSx");
+					} 
+					else if ($(this).attr('id') == "equip-manoSx" && oggettoObj.slot == "2 mani") 
+					{
+						ui.item.clone().appendTo("#equip-manoDx");
+					}
+					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
+					aggiuntaStatsOggetto(oggettoObj, text);
 				}
 			} 
 			else if (oggettoObj.tipo == "uso") 
@@ -74,43 +111,24 @@ $(document).ready( function(){
 				}
 			}				
 		}, 
+		
 		remove: function (e, ui){
+			traduci();
+			var oggettoObj = ui.item.prop("oggetto");
+			if (oggettoObj.slot == "2 mani") {
+				if ($(this).attr('id') == "equip-manoDx") {
+					$("#equip-manoSx").empty();
+				}
+				if ($(this).attr('id') == "equip-manoSx") {
+					$("#equip-manoDx").empty();
+				}
+			}
 			var oggettoObj = ui.item.prop("oggetto");
 			rimozioneStatsOggetto(oggettoObj);
 			spazio();
 		}
 	}).disableSelection();
 });
-
-function checkSlots(oggettoObj){	
-	if (oggettoObj.slot == "mano" && (!manoDx || !manoSx))
-	{
-		if (!manoDx) 
-		{	
-			manoDx = true;
-		}
-		else if (!manoSx) 
-		{
-			manoSx = true;
-		}
-	}
-	else if (oggettoObj.slot == "testa" && !testa)
-	{
-		testa = true;
-	}
-	else if (oggettoObj.slot == "corpo" && !corpo)
-	{
-		corpo = true;
-	}
-	else if (oggettoObj.slot == "2 mani" && (!manoDx && !manoSx))
-	{
-		manoDx = true;
-		manoSx = true;
-	} else {
-		return false;
-	}
-	return true;
-}
 
 function aggiuntaStatsOggetto(oggettoObj, text){
 	if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
@@ -148,30 +166,6 @@ function aggiuntaStatsOggetto(oggettoObj, text){
 }
 
 function rimozioneStatsOggetto(oggettoObj) {
-	if (oggettoObj.slot == "mano" )
-	{
-		if (manoDx) 
-		{	
-			manoDx = false;
-		}
-		else if (manoSx) 
-		{
-			manoSx = false;
-		}
-	}
-	else if (oggettoObj.slot == "testa" )
-	{
-		testa = false;
-	}
-	else if (oggettoObj.slot == "corpo" )
-	{
-		corpo = false;
-	}
-	else if (oggettoObj.slot == "2 mani" )
-	{
-		manoSx = false;
-		manoDx = false;
-	}
 	
 	var text = nomeEroe + locCorrente[" ha rimosso "] + nomeLocalizzato(oggettoObj) + ",";	
 	

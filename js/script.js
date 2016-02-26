@@ -33,6 +33,8 @@ var locCorrente = [];
 var arrayInventario = [];
 var arrayEquip = [];
 
+var oggettoObj;
+
 
 
 $(document).ready( function(){
@@ -165,6 +167,7 @@ function scontro(mostroScelto) {
 	
 	aggiungiLog(nomeEroe + locCorrente[" incontra: "] + nomeNemico + "!", "rosso");
 	
+	$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx, #lista").sortable( "disable" );
 	blocco("#bottone-start",true);	
 	$("#bottone-start").val(locCorrente["In combattimento.."]);
 	$("#bottone-start").removeClass("bottone-verde");
@@ -262,6 +265,8 @@ function scontro(mostroScelto) {
 					{
 						generaOggetto();
 					}
+					$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx, #lista").sortable( "enable" );
+					blocco("#bottone-start", false);
 					$("#bottone-start").val(locCorrente["Scende ancora.."]);
 					$("#bottone-start").removeClass("bottone-rosso");
 					$("#bottone-start").addClass("bottone-verde");
