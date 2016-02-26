@@ -94,18 +94,7 @@ $(document).ready( function(){
 	});
 	
 	$(".avvia-gioco").click(function(){
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
+		gioco();
 	});
 	// var s1 = nomeEroe + locCorrente[" torna al villaggio"];
 	// var s2 = nomeEroe + locCorrente[" procede"];
