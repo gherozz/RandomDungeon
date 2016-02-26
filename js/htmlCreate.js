@@ -35,17 +35,17 @@ $('.stats-mostro').html(
 		'<ul>'+
 			'<li>'+
 			'<span class="flaticon-attacco"> </span>'+
-			'<span class="attacco"></span>'+
+			'<span class="attacco"></span>:'+
 			'<span id="attacco-mostro-value"></span>'+
 			'</li>'+
 			'<li>'+
 			'<span class="flaticon-difesa"> </span>'+
-			'<span class="difesa"></span>'+
+			'<span class="difesa"></span>:'+
 			'<span id="difesa-mostro-value"></span>'+
 			'</li>'+
 			'<li>'+
 			'<span class="flaticon-salute"> </span>'+
-			'<span class="salute"></span>'+
+			'<span class="salute"></span>:'+
 			'<span id="salute-mostro-value"></span>/'+
 			'<span id="maxSalute-mostro-value"></span>'+
 			'</li>'+
@@ -58,7 +58,8 @@ $('.stats-mostro').html(
 	'</div>' +
 	'<h3></h3>'
 );
-
+	
+	traduci();
 	$(".numeri-mostro").css("height", $(".numeri-eroe").height());
 	$(".stats-mostro h3").html(locCorrente["Statistiche "]+nomeNemico);
 	$(".salute-mostro-bar").animate({width: (vita/maxvita)*100 +"%"}, roundTimer);	
