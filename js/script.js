@@ -33,6 +33,8 @@ var locCorrente = [];
 var arrayInventario = [];
 var arrayEquip = [];
 
+var oggettoObj;
+
 
 
 $(document).ready( function(){
@@ -78,7 +80,7 @@ $(document).ready( function(){
 	locCorrente = locEn;
 	dungeon(numDungeon);
 
-	$(".footer-pull,.triangolo,footer").click(function(){
+	$(".footer-pull,footer").click(function(){
 		$("footer").slideToggle("slow");
 	});
 
@@ -90,12 +92,17 @@ $(document).ready( function(){
 		} else{
 			locCorrente = locIta;
 		};
-		traduci();
+		traduci("bandiera");
 	});
 	
 	$(".avvia-gioco").click(function(){
 		gioco();
 	});
+
+	$("#fullscreen").click(function(){
+		screenfull.toggle(); 
+	})
+
 	// var s1 = nomeEroe + locCorrente[" torna al villaggio"];
 	// var s2 = nomeEroe + locCorrente[" procede"];
 

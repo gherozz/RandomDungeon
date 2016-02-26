@@ -183,6 +183,10 @@
 		{
 			"ita": "Inserisci il nome dell'Eroe",
 			"en": "Insert Hero name"
+		},
+		{
+			"ita": "Switch Language",
+			"en": "Cambia Lingua"
 		}
 	]
 }

@@ -24,7 +24,12 @@ function setAltezze(){
 	$("#gioco").css("height", heightwindow/5*4);
 	$("#arena").css("height", heightwindow/5*1);
 };
-function traduci(){
+function traduci(bandiera){
+	if(bandiera == "bandiera"){
+		$("#lingua").toggleClass("eng", function(){
+			$(this).attr("title", locCorrente["Switch Language"])
+		});
+	}
 	$("#inventarioNome").html(locCorrente["Inventario"]);
 	$("#equipaggiamentoNome").html(locCorrente["Equipaggiato"]);
 	$(".attacco").html(locCorrente["Attacco"]);
