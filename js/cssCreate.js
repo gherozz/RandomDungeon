@@ -33,9 +33,7 @@ function traduci(){
 	$(".critico").html(locCorrente["Critico"]);
 	$(".mana").html(locCorrente["Mana"]);
 	$(".monete").html(locCorrente["Monete"]);
-
 	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
-	$("#bottone-start").val(locCorrente["Inizio"]);
 }
 
 function sistemaNome(){

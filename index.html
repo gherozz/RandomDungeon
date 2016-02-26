@@ -17,7 +17,6 @@
 		<script src="js/objectManipulate.js"></script>
 		<script src="js/keysShortcuts.js"></script>
 		<script src="js/cssCreate.js"></script>
-		<!--NUOVO FILE MENU LATERALI-->
 		<script src="js/lateralSlide.js"></script>  
 		<script src="js/personalLib.js"></script>
 		<script src="js/htmlCreate.js"></script>
@@ -37,21 +36,21 @@
 		
 			<div class="header">
 				<h1><a href="index.html"></a></h1>
-				<button id="lingua" style="float: right">Lingua</button>
+				<button id="lingua" style="float: right">Language</button>
 			</div>
 			<div class="toggle-container">
 				<div class="toggle1">
 					<div id="pull1" class="pull"><span>I</span></div>
 					<div class="main" id="main1">
 						<div id="inventario-container">
-							<h3 id="inventarioNome"><!-- Inventario --></h3>
+							<h3 id="inventarioNome"></h3>
 							<div id="inventario">
-								<ul id="lista">	
+								<ul id="lista" class="connectedSortable">	
 								</ul>
 							</div>
-							<h3 id="equipaggiamentoNome"><!-- Equipaggiato --></h3>
+							<h3 id="equipaggiamentoNome"></h3>
 							<div id="equipaggiamento">
-								<ul id="equip-lista">
+								<ul id="equip-lista" class="connectedSortable">
 								</ul>
 							</div>		
 						</div>	
@@ -95,34 +94,34 @@
 					<ul>
 						<li>
 							<span class="flaticon-monete"></span>
-							<span class="monete"></span>
+							<span class="monete"></span>:
 							<span id="monete-value"></span>
 						</li>
 						<li>
 							<span class="flaticon-mana"></span>
-							<span class="mana"></span>
+							<span class="mana"></span>:
 							<span id="mana-value"></span>
 						</li>
 						<li>
 							<span class="flaticon-critico"></span>
-							<span class="critico"></span>
+							<span class="critico"></span>:
 							<span id="critico-value"></span>%
 							<span></span>
 						</li>
 						<li>
 							<span class="flaticon-salute"></span>
-							<span class="salute"></span>
+							<span class="salute"></span>:
 							<span id="salute-value"></span>/
 							<span id="maxSalute-value"></span>
 						</li>
 						<li>
 							<span class="flaticon-difesa"></span>
-							<span class="difesa"></span>
+							<span class="difesa"></span>:
 							<span id="difesa-value"></span>
 						</li>
 						<li>
 							<span class="flaticon-attacco"></span>
-							<span class="attacco"></span>
+							<span class="attacco"></span>:
 							<span id="attacco-value"></span>
 						</li>
 					</ul>

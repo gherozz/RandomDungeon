@@ -36,45 +36,44 @@ var arrayEquip = [];
 
 
 $(document).ready( function(){
+	$.getJSON( "localizzazione.json", function(data) {
+		$.each(data.stringhe, function( key, val ) 
+		{
+			locIta[val.ita] = val.ita;
+			locEn[val.ita] = val.en;
+		});
+	})
+	.done(function() {
+		console.log( "JSON letto con successo, analisi liste:" );
+		console.log(locIta);
+		console.log(locEn);
+		traduci();
+		$("#bottone-start").val(locCorrente["Inizio"]);
+	})
+	.fail( function(d, textStatus, error) {
+		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+	});
 
-$.getJSON( "localizzazione.json", function(data) {
-	$.each(data.stringhe, function( key, val ) 
-	{
-		locIta[val.ita] = val.ita;
-		locEn[val.ita] = val.en;
-		console.log(val.ita+val.en);
-	});
-})
-.done(function() {
-	console.log( "JSON letto con successo, analisi liste:" );
-	console.log(locIta);
-	console.log(locEn);
-	traduci();
-})
-.fail( function(d, textStatus, error) {
-	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
-});
-
-$.getJSON( "data.json", function(data) {
-	$.each(data.nemici, function( key, val ) 
-	{
-		listaMostri[val.nomeIta] = val;
-		// console.log(val);
-	});
-	$.each(data.oggetti, function( key, val )
-	{
-		listaOggetti[val.nome] = val;
-		// console.log(val);
-	});
-})
-.done(function() {
-	console.log( "JSON letto con successo, analisi liste:" );
-	console.log(listaMostri);
-	console.log(listaOggetti);
-})
-.fail( function(d, textStatus, error) {
-	console.error("getJSON failed, status: " + textStatus + ", error: "+error)
-});	
+	$.getJSON( "data.json", function(data) {
+		$.each(data.nemici, function( key, val ) 
+		{
+			listaMostri[val.nomeIta] = val;
+			// console.log(val);
+		});
+		$.each(data.oggetti, function( key, val )
+		{
+			listaOggetti[val.nome] = val;
+			// console.log(val);
+		});
+	})
+	.done(function() {
+		console.log( "JSON letto con successo, analisi liste:" );
+		console.log(listaMostri);
+		console.log(listaOggetti);
+	})
+	.fail( function(d, textStatus, error) {
+		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+	});	
 
 	locCorrente = locEn;
 	dungeon(numDungeon);
@@ -96,9 +95,7 @@ $.getJSON( "data.json", function(data) {
 	
 	$(".avvia-gioco").click(function(){
 		gioco();
-		
 	});
-	
 	// var s1 = nomeEroe + locCorrente[" torna al villaggio"];
 	// var s2 = nomeEroe + locCorrente[" procede"];
 
@@ -134,11 +131,13 @@ function gioco()
 		livello++;
 		var testo= nomeEroe + locCorrente[" ha raggiunto il livello del dungeon: "] + livello;
 		if(livello == livelloBoss){
+			spazio();
 			aggiungiLog(testo+", Boss!", "titolo-livello");
 			scontro(listaMostri["boss"]);
 			stop= false;
 			livelloBoss += randomizza50(10);
 		} else if(livello != livelloBoss){
+			spazio();
 			aggiungiLog(testo, "titolo-livello");
 			evento();
 		}
