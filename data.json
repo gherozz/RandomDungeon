@@ -1,6 +1,17 @@
 {
 	"oggetti": [
 		{
+			"nomeIta":  "Mano Impegnata",
+			"nomeEn":  "Busy Hand",
+			"nome": "mano",
+			"tipo": "equip",
+			"slot": "mano",
+			"stato": "1",
+			"statoAttuale": "1",
+			"coloreTesto": "arancione",
+			"chance": "0"
+		}, 
+		{
 			"nomeIta":  "Spada di Ferro",
 			"nomeEn":  "Iron Sword",
 			"nome": "spada",

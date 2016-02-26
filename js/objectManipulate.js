@@ -9,12 +9,16 @@ function generaOggetto()
 	var oggettoObj = estraiDaListaPesata(listaOggetti);
 	spazio();
 	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto);
+	creaLiOggetto(oggettoObj, "lista");
+}
+
+function creaLiOggetto(oggettoObj, DOM){
 	var nuovoElemento = document.createElement("LI");
-	var list = document.getElementById("lista");
+	var list = document.getElementById(DOM);
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
 	
 	$(nuovoElemento).prop("oggetto",oggettoObj);
-	nuovoElemento.className = "ui-state-default slot";
+	nuovoElemento.className = "slot";
 	$(nuovoElemento).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
 	info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
@@ -54,33 +58,21 @@ $(document).ready( function(){
 			traduci();
 			var oggettoObj = ui.item.prop("oggetto");
 			if(oggettoObj.tipo == "equip"){
-				if (this.children.length > 1 
+				if (
+					this.children.length > 1 
 					||
-					($(this).attr('id')) == "equip-manoDx" 
-					&&
-					oggettoObj.slot == "2 mani" 
-					&&
-					($("#equip-manoSx").find("li").length) > 0 
+					($(this).attr('id')) == "equip-manoDx" && oggettoObj.slot == "2 mani" && ($("#equip-manoSx").find("li").length) > 0 
 					||
-					$(this).attr('id') == "equip-manoSx" 
-					&&
-					oggettoObj.slot == "2 mani" 
-					&&
-					($("#equip-manoDx").find("li").length) > 0
+					$(this).attr('id') == "equip-manoSx" && oggettoObj.slot == "2 mani" && ($("#equip-manoDx").find("li").length) > 0
 					||
-					($(this).attr('id')) != "equip-manoDx" 
-					&&
-					($(this).attr('id')) != "equip-manoSx" 
-					&&
-					oggettoObj.slot == "mano"
+					($(this).attr('id')) != "equip-manoDx" &&	($(this).attr('id')) != "equip-manoSx" && oggettoObj.slot == "mano"
 					||
-					($(this).attr('id')) != "equip-corpo" 
-					&&
-					oggettoObj.slot == "corpo"
+					($(this).attr('id')) != "equip-manoDx" &&	($(this).attr('id')) != "equip-manoSx" && oggettoObj.slot == "2 mani"
 					||
-					($(this).attr('id')) != "equip-testa" 
-					&&
-					oggettoObj.slot == "testa")
+					($(this).attr('id')) != "equip-corpo" && oggettoObj.slot == "corpo"
+					||
+					($(this).attr('id')) != "equip-testa" &&	oggettoObj.slot == "testa"
+					)
 				{
 					spazio();
 					ui.sender.sortable('cancel');
@@ -89,11 +81,11 @@ $(document).ready( function(){
 					console.log($("#equip-manoSx").find("li").length);
 					if ($(this).attr('id') == "equip-manoDx" && oggettoObj.slot == "2 mani") 
 					{
-						ui.item.clone().appendTo("#equip-manoSx");
+						creaLiOggetto(listaOggetti["mano"], "equip-manoSx");
 					} 
 					else if ($(this).attr('id') == "equip-manoSx" && oggettoObj.slot == "2 mani") 
 					{
-						ui.item.clone().appendTo("#equip-manoDx");
+						creaLiOggetto(listaOggetti["mano"], "equip-manoDx");
 					}
 					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
 					aggiuntaStatsOggetto(oggettoObj, text);

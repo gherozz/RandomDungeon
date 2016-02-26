@@ -33,8 +33,6 @@ var locCorrente = [];
 var arrayInventario = [];
 var arrayEquip = [];
 
-var oggettoObj;
-
 
 
 $(document).ready( function(){
@@ -96,7 +94,18 @@ $(document).ready( function(){
 	});
 	
 	$(".avvia-gioco").click(function(){
-		gioco();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
 	});
 	// var s1 = nomeEroe + locCorrente[" torna al villaggio"];
 	// var s2 = nomeEroe + locCorrente[" procede"];
