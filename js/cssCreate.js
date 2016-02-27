@@ -26,7 +26,7 @@ function setAltezze(){
 };
 function traduci(bandiera){
 	if(bandiera == "bandiera"){
-		$("#lingua").toggleClass("ita", function(){
+		$("#lingua").toggleClass("eng", function(){
 			$(this).attr("title", locCorrente["Switch Language"])
 		});
 	}
