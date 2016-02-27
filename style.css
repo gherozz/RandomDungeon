@@ -77,12 +77,13 @@ span{
 #lingua:hover{
 	opacity: 0.8;
 }
-.ita{
-	background: url("images/flagita.png");
-}
 .eng{
 	background: url("images/flagen.png");
 }
+.ita{
+	background: url("images/flagita.png");
+}
+
 
 /*----------------------------------------------------------------*/
 /* -----------------INIZIO STYLE MENù A SCOMPARSA---------------- */
