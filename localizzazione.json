@@ -177,12 +177,24 @@
 			"en": "Equipped"
 		},
 		{
-			"ita": "Inizio",
+			"ita": "Inizia",
 			"en": "Start"
 		},
 		{
 			"ita": "Inserisci il nome dell'Eroe",
 			"en": "Insert Hero name"
+		},
+		{
+			"ita": "In combattimento..",
+			"en": "Fighting.."
+		},
+		{
+			"ita": "Scende ancora..",
+			"en": "Descend further.."
+		},
+		{
+			"ita": "Morto..",
+			"en": "Dead.."
 		},
 		{
 			"ita": "Switch Language",

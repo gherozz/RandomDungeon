@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 23/02/2016 22:42
+    Creation date: 26/02/2016 22:54
     */
 
     @font-face {
@@ -36,18 +36,48 @@
   font-smoothing: antialiased;
     }
 
-    .flaticon-attacco:before { content: "\f100"; }
-.flaticon-critico:before { content: "\f101"; }
-.flaticon-difesa:before { content: "\f102"; }
-.flaticon-mana:before { content: "\f103"; }
-.flaticon-monete:before { content: "\f104"; }
-.flaticon-roll:before { content: "\f105"; }
-.flaticon-salute:before { content: "\f106"; }
+    .flaticon-accetta:before { content: "\f100"; }
+.flaticon-arco:before { content: "\f101"; }
+.flaticon-ascia:before { content: "\f102"; }
+.flaticon-attacco:before { content: "\f103"; }
+.flaticon-castello:before { content: "\f104"; }
+.flaticon-corpo:before { content: "\f105"; }
+.flaticon-critico:before { content: "\f106"; }
+.flaticon-difesa:before { content: "\f107"; }
+.flaticon-infranto:before { content: "\f108"; }
+.flaticon-intero:before { content: "\f109"; }
+.flaticon-inventario:before { content: "\f10a"; }
+.flaticon-mana:before { content: "\f10b"; }
+.flaticon-mano:before { content: "\f10c"; }
+.flaticon-mappa:before { content: "\f10d"; }
+.flaticon-monete:before { content: "\f10e"; }
+.flaticon-quest:before { content: "\f10f"; }
+.flaticon-roll:before { content: "\f110"; }
+.flaticon-salute:before { content: "\f111"; }
+.flaticon-spada:before { content: "\f112"; }
+.flaticon-spadone:before { content: "\f113"; }
+.flaticon-testa-1:before { content: "\f114"; }
+.flaticon-testa-2:before { content: "\f115"; }
     
-    $font-Flaticon-attacco: "\f100";
-    $font-Flaticon-critico: "\f101";
-    $font-Flaticon-difesa: "\f102";
-    $font-Flaticon-mana: "\f103";
-    $font-Flaticon-monete: "\f104";
-    $font-Flaticon-roll: "\f105";
-    $font-Flaticon-salute: "\f106";
+    $font-Flaticon-accetta: "\f100";
+    $font-Flaticon-arco: "\f101";
+    $font-Flaticon-ascia: "\f102";
+    $font-Flaticon-attacco: "\f103";
+    $font-Flaticon-castello: "\f104";
+    $font-Flaticon-corpo: "\f105";
+    $font-Flaticon-critico: "\f106";
+    $font-Flaticon-difesa: "\f107";
+    $font-Flaticon-infranto: "\f108";
+    $font-Flaticon-intero: "\f109";
+    $font-Flaticon-inventario: "\f10a";
+    $font-Flaticon-mana: "\f10b";
+    $font-Flaticon-mano: "\f10c";
+    $font-Flaticon-mappa: "\f10d";
+    $font-Flaticon-monete: "\f10e";
+    $font-Flaticon-quest: "\f10f";
+    $font-Flaticon-roll: "\f110";
+    $font-Flaticon-salute: "\f111";
+    $font-Flaticon-spada: "\f112";
+    $font-Flaticon-spadone: "\f113";
+    $font-Flaticon-testa-1: "\f114";
+    $font-Flaticon-testa-2: "\f115";

@@ -39,10 +39,12 @@ function traduci(bandiera){
 	$(".mana").html(locCorrente["Mana"]);
 	$(".monete").html(locCorrente["Monete"]);
 	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
+	cambiaStatoGioco(statoGioco);
+	
 	$("#lista li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function( index ) {
 		oggettoObj = $(this).prop("oggetto");
-	  $(this).empty();
-	  $(this).prop("oggetto",oggettoObj);
+		$(this).empty();
+		$(this).prop("oggetto",oggettoObj);
 		this.className = "ui-state-default slot";
 		$(this).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 		var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
@@ -71,6 +73,22 @@ function traduci(bandiera){
 
 function sistemaNome(){
 	nomeEroe = $("#nomeEroe").val();
+	if (nomeEroe == "frocini") {
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+		generaOggetto();
+	}
 	if(nomeEroe.indexOf("Ser") >=0 || nomeEroe.indexOf("ser") >=0){
 		$("#nomeEroe").val(nomeEroe);
 	} else{

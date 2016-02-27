@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 23/02/2016 22:42
+  	Creation date: 26/02/2016 22:54
   	*/
 
 @font-face {
@@ -24,14 +24,28 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
 	font-family: Flaticon;
-	font-size: 1vw;
 	font-style: normal;
-}
+	}
 
-.flaticon-attacco:before { content: "\f100"; }
-.flaticon-critico:before { content: "\f101"; }
-.flaticon-difesa:before { content: "\f102"; }
-.flaticon-mana:before { content: "\f103"; }
-.flaticon-monete:before { content: "\f104"; }
-.flaticon-roll:before { content: "\f105"; }
-.flaticon-salute:before { content: "\f106"; }
+.flaticon-accetta:before { content: "\f100"; }
+.flaticon-arco:before { content: "\f101"; }
+.flaticon-ascia:before { content: "\f102"; }
+.flaticon-attacco:before { content: "\f103"; }
+.flaticon-castello:before { content: "\f104"; }
+.flaticon-corpo:before { content: "\f105"; }
+.flaticon-critico:before { content: "\f106"; }
+.flaticon-difesa:before { content: "\f107"; }
+.flaticon-infranto:before { content: "\f108"; }
+.flaticon-intero:before { content: "\f109"; }
+.flaticon-inventario:before { content: "\f10a"; }
+.flaticon-mana:before { content: "\f10b"; }
+.flaticon-mano:before { content: "\f10c"; }
+.flaticon-mappa:before { content: "\f10d"; }
+.flaticon-monete:before { content: "\f10e"; }
+.flaticon-quest:before { content: "\f10f"; }
+.flaticon-roll:before { content: "\f110"; }
+.flaticon-salute:before { content: "\f111"; }
+.flaticon-spada:before { content: "\f112"; }
+.flaticon-spadone:before { content: "\f113"; }
+.flaticon-testa-1:before { content: "\f114"; }
+.flaticon-testa-2:before { content: "\f115"; }
