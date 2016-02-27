@@ -11,10 +11,10 @@ var monete = 0;
 
 var nomeEroe;
 
+var statoGioco;
 var roundTimer = 700;
 var fattoreScala = 50;
 
-var stop = false;
 var lingua = "en";
 
 var manoDx = false;
@@ -37,6 +37,10 @@ var arrayEquip = [];
 
 
 $(document).ready( function(){
+
+	locCorrente = locEn;
+	dungeon(Math.floor(Math.random()*4)+1);
+	
 	$.getJSON( "localizzazione.json", function(data) {
 		$.each(data.stringhe, function( key, val ) 
 		{
@@ -45,11 +49,8 @@ $(document).ready( function(){
 		});
 	})
 	.done(function() {
-		console.log( "JSON letto con successo, analisi liste:" );
-		console.log(locIta);
-		console.log(locEn);
+		cambiaStatoGioco("inizio");
 		traduci();
-		$("#bottone-start").val(locCorrente["Inizio"]);
 	})
 	.fail( function(d, textStatus, error) {
 		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
@@ -59,31 +60,21 @@ $(document).ready( function(){
 		$.each(data.nemici, function( key, val ) 
 		{
 			listaMostri[val.nomeIta] = val;
-			// console.log(val);
 		});
 		$.each(data.oggetti, function( key, val )
 		{
 			listaOggetti[val.nome] = val;
-			// console.log(val);
 		});
 	})
 	.done(function() {
-		console.log( "JSON letto con successo, analisi liste:" );
-		console.log(listaMostri);
-		console.log(listaOggetti);
 	})
 	.fail( function(d, textStatus, error) {
 		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
 	});	
 
-	locCorrente = locEn;
-	dungeon(numDungeon);
-
 	$(".footer-pull,footer").click(function(){
 		$("footer").slideToggle("slow");
 	});
-
-	blocco("#bottone-start",false);	
 	
 	$("#lingua").click(function(){
 		if(locCorrente == locIta){
@@ -131,27 +122,40 @@ $(document).ready( function(){
 
 function gioco()
 {
-	sistemaNome();
-	
-	if(stop == false){
-		livello++;
-		var testo= nomeEroe + locCorrente[" ha raggiunto il livello del dungeon: "] + livello;
-		if(livello == livelloBoss){
-			spazio();
-			aggiungiLog(testo+", Boss!", "titolo-livello");
-			scontro(listaMostri["boss"]);
-			stop= false;
-			livelloBoss += randomizza50(10);
-		} else if(livello != livelloBoss){
-			spazio();
-			aggiungiLog(testo, "titolo-livello");
-			evento();
-		}
-	} else if(stop == true){
+	if (livello == 0) sistemaNome();
+	livello++;
+	var testo= nomeEroe + locCorrente[" ha raggiunto il livello del dungeon: "] + livello;
+	if(livello == livelloBoss){
+		spazio();
 		numDungeon = Math.floor(Math.random()*4)+1;
-		// popup();
-		stop =false;
-		blocco("#bottone-start",true);		
+		aggiungiLog(testo+", Boss!", "titolo-livello");
+		scontro(listaMostri["boss"]);
+		livelloBoss += randomizza50(10);
+	} else if(livello != livelloBoss){
+		spazio();
+		aggiungiLog(testo, "titolo-livello");
+		evento();
+	}
+}
+
+function cambiaStatoGioco(nuovoStatoGioco){
+	statoGioco = nuovoStatoGioco;
+	if (nuovoStatoGioco == "combattimento"){
+		$("#bottone-start").val(locCorrente["In combattimento.."]);
+		$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx, #lista").sortable( "disable" );
+		blocco("#bottone-start",true);	
+		$("#bottone-start").removeClass("bottone-verde");
+		$("#bottone-start").addClass("bottone-rosso");
+	} else if (nuovoStatoGioco == "scende"){
+		$("#bottone-start").val(locCorrente["Scende ancora.."]);
+		$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx, #lista").sortable( "enable" );
+		blocco("#bottone-start", false);
+		$("#bottone-start").removeClass("bottone-rosso");
+		$("#bottone-start").addClass("bottone-verde");
+	} else if (nuovoStatoGioco == "morto"){
+		$("#bottone-start").val(locCorrente["Morto.."]);
+	} else {
+		$("#bottone-start").val(locCorrente["Inizia"]);
 	}
 }
 
@@ -171,11 +175,7 @@ function scontro(mostroScelto) {
 	
 	aggiungiLog(nomeEroe + locCorrente[" incontra: "] + nomeNemico + "!", "rosso");
 	
-	$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx, #lista").sortable( "disable" );
-	blocco("#bottone-start",true);	
-	$("#bottone-start").val(locCorrente["In combattimento.."]);
-	$("#bottone-start").removeClass("bottone-verde");
-	$("#bottone-start").addClass("bottone-rosso");
+	cambiaStatoGioco("combattimento");	
 	
 	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico, nomeNemico);
 
@@ -258,30 +258,27 @@ function scontro(mostroScelto) {
 				clearInterval(loop);
 				if (salute > 0)
 				{
-					spazio();
-					aggiungiLog(nomeEroe + locCorrente[" ha sconfitto "] + nomeNemico, "morto");
 					
-					blocco("#bottone-start", false);
 					$('.stats-mostro').children().fadeOut(700, function(){
 						$(this).empty();
 					});
+					
 					if (numeroRandom(0, 100) > 25) 
 					{
 						generaOggetto();
 					}
-					$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx, #lista").sortable( "enable" );
-					blocco("#bottone-start", false);
-					$("#bottone-start").val(locCorrente["Scende ancora.."]);
-					$("#bottone-start").removeClass("bottone-rosso");
-					$("#bottone-start").addClass("bottone-verde");
+					
+					spazio();
+					aggiungiLog(nomeEroe + locCorrente[" ha sconfitto "] + nomeNemico, "morto");
+					cambiaStatoGioco("scende");
 					spazio();
 				}
 				else
 				{
+					cambiaStatoGioco("morto");
 					spazio();
 					aggiungiLog(nomeEroe + locCorrente[" è morto"], "morto");
-					$("#bottone-start").val(locCorrente["Morto.."]);
-					stop = true;
+					
 					setTimeout(function(){ 
 						var r = confirm(nomeEroe + locCorrente[" é morto! Riprova?\n\n Livello raggiunto: "] + livello);
 						if(r == true){
