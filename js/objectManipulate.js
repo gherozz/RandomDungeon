@@ -18,7 +18,11 @@ function creaLiOggetto(oggettoObj, DOM){
 	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
 	
 	$(nuovoElemento).prop("oggetto",oggettoObj);
-	nuovoElemento.className = "slot";
+	if (oggettoObj.tipo == "uso") {
+		nuovoElemento.className = "slot uso";
+	} else {
+		nuovoElemento.className = "slot";
+	}
 	$(nuovoElemento).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
 	info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
@@ -47,8 +51,27 @@ $(document).ready( function(){
 
 	$("#lista").sortable({
 		connectWith: "#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx",
-		revert: 100
-	}).disableSelection();
+		revert: 100,
+		helper : 'clone',
+	}).disableSelection().on("click", "li", function() {
+		
+		//var otherUL = $("#unassigned_list, #recipients_list").not($(this).closest("ul"));
+		//var li = $(this).closest("li");
+		
+		var li = $(this).closest("li");
+		var oggettoObj = li.prop("oggetto");
+		
+		if (oggettoObj.tipo == "uso") 
+		{
+			if(salute < maxSalute){
+				text = nomeEroe + locCorrente["  ha consumato "] + nomeLocalizzato(oggettoObj) + ",";
+				aggiuntaStatsOggetto(oggettoObj, text);
+				li.remove();
+			} else{
+				aggiungiLog(locCorrente["salute di "] + nomeEroe + locCorrente[" al massimo"]);
+			}
+		}
+	});
 	
 			
 	$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx").sortable({
@@ -90,18 +113,9 @@ $(document).ready( function(){
 					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
 					aggiuntaStatsOggetto(oggettoObj, text);
 				}
-			} 
-			else if (oggettoObj.tipo == "uso") 
-			{
-				if(salute < maxSalute){
-					text = nomeEroe + locCorrente["  ha consumato "] + nomeLocalizzato(oggettoObj) + ",";
-					aggiuntaStatsOggetto(oggettoObj, text);
-					ui.item.remove();
-				} else{
-					aggiungiLog(locCorrente["salute di "] + nomeEroe + locCorrente[" al massimo"]);
-					ui.sender.sortable('cancel');
-				}
-			}				
+			}  else {
+				ui.sender.sortable('cancel');
+			}
 		}, 
 		
 		remove: function (e, ui){
@@ -192,15 +206,3 @@ function rimozioneStatsOggetto(oggettoObj) {
 	aggiungiLog(text, oggettoObj.coloreTesto);
 }
 
-/*
-$(document).on("click", "#lista .slot", function(){
-	var oggettoObj = $(this).prop("oggetto");
-	muoviOggetto(oggettoObj, "lista", "equip-lista");
-});
-
-$(document).on("click", "#equip-lista .slot", function(){
-	var oggettoObj = $(this).prop("oggetto");
-	muoviOggetto(oggettoObj, "equip-lista", "lista");
-});
-
-*/

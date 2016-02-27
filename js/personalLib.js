@@ -59,6 +59,7 @@ function spazio(){
 	$("#gioco").append("<br/>");
 	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
 }
+
 function modificaStatsVisualizzate(div, nuovoValore, classe){	
 	$(div).empty();
 	$(div).append(" " + nuovoValore);
