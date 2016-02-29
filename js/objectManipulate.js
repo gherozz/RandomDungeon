@@ -13,17 +13,17 @@ function generaOggetto()
 }
 
 function creaLiOggetto(oggettoObj, DOM){
-	var nuovoElemento = document.createElement("LI");
-	var list = document.getElementById(DOM);
-	list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
+	//var nuovoElemento = document.createElement("LI");
+	//var list = document.getElementById(DOM);
+	//list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
 	
-	$(nuovoElemento).prop("oggetto",oggettoObj);
-	if (oggettoObj.tipo == "uso") {
-		nuovoElemento.className = "slot uso";
-	} else {
-		nuovoElemento.className = "slot";
-	}
-	$(nuovoElemento).prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
+	//va modernizzato il vecchio codice con jquery
+	var nuovoElemento = $(DOM).append("<li></li>");
+	
+	nuovoElemento.prop("oggetto",oggettoObj);
+	if (oggettoObj.tipo == "uso") nuovoElemento.addClass = "uso";
+	nuovoElemento.addClass = "slot";
+	nuovoElemento.prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
 	info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
 	info += '<p>' + locCorrente["Tipo"] + ': ' + locCorrente[oggettoObj.tipo] + '</p>';
