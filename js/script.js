@@ -194,7 +194,7 @@ function scontro(mostroScelto) {
 				
 				if ($("#equip-manoDx").find("li").length > 0) {
 					var oggetto1 = $("#equip-manoDx li").first().prop("oggetto");
-					if (oggetto1.nome != "mano") arma2 = nomeLocalizzato(oggetto1);
+					if (oggetto1.nome != "mano") arma1 = nomeLocalizzato(oggetto1);
 				}
 				
 				if ($("#equip-manoSx").find("li").length > 0) {
