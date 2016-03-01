@@ -5,9 +5,10 @@
 			"nomeEn":  "Busy Hand",
 			"nome": "mano",
 			"tipo": "equip",
-			"slot": "mano",
+			"slot": "irremovibile",
 			"stato": "1",
 			"statoAttuale": "1",
+			"attacco": "-1000",
 			"coloreTesto": "arancione",
 			"chance": "0"
 		}, 
@@ -254,8 +255,8 @@
 	
 	"nemici": [
 		{
-			"nomeIta": "goblin",
-			"nomeEn": "goblin",
+			"nomeIta": "Goblin",
+			"nomeEn": "Goblin",
 			"attacco": "10",
 			"difesa": "0",
 			"vita": "30",
@@ -266,8 +267,8 @@
 							]
 		}, 
 		{
-			"nomeIta": "orco",
-			"nomeEn": "orc",
+			"nomeIta": "Orco",
+			"nomeEn": "Orc",
 			"attacco": "15",
 			"difesa": "5",
 			"vita": "40",
@@ -278,8 +279,8 @@
 							]
 		}, 
 		{
-			"nomeIta": "troll",
-			"nomeEn": "troll",
+			"nomeIta": "Troll",
+			"nomeEn": "Troll",
 			"attacco": "20",
 			"difesa": "10",
 			"vita": "70",
@@ -291,8 +292,8 @@
 							]
 		},
 		{
-			"nomeIta": "boss",
-			"nomeEn": "boss",
+			"nomeIta": "Boss",
+			"nomeEn": "Boss",
 			"attacco": "30",
 			"difesa": "10",
 			"vita": "100",

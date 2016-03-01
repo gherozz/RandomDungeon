@@ -1,44 +1,33 @@
-
-// L'INVENTARIO RIMANE SEMPRE APERTO, GLI ALTRI MENU SCORRONO A TURNO SOPRA
-// PER RITORNARE ALL'INVENTARIO BASTA PREMERE SUL PULL1 O SU UNA QUAKSIASI PARTE DELL'INVENTARIO
+var numeroSchede = 3;
 
 
 $(document).ready( function(){
-	$("#pull1,#main1").click(function(){
-		if($("#main3").css("display") == "block"){
-			$("#main3").animate({width: "toggle"}, "slow", "easeOutBounce");	
-		}
-		if($("#main2").css("display") == "block"){
-			$("#main2").animate({width: "toggle"}, "slow", "easeOutBounce");	
-		}
+
+	$("#pull1").click(function(){
+		chiudiTuttiApriQuesto("#main1");
 	});
 	$("#pull2").click(function(){
-		$("#main2").css("height", $(".toggle-container").height());
-		if($("#main3").css("display") == "block"){
-			$("#main3").animate({width: "toggle"}, "slow", "easeOutBounce")
-			.queue( function() {
-				$("#main2").animate({width: "toggle"},"slow", "easeOutBounce");
-				$( this ).dequeue();
-			} );
-		}
-		else
-		{
-			$("#main2").animate({width: "toggle"},"slow", "easeOutBounce");
-		}
+		chiudiTuttiApriQuesto("#main2");
 	});
 	$("#pull3").click(function(){
-		$("#main3").css("height", $(".toggle-container").height());
-		if($("#main2").css("display") == "block"){
-			$("#main2").animate({width: "toggle"}, "slow", "easeOutBounce")
+		chiudiTuttiApriQuesto("#main3");
+	});
+});	
+
+function chiudiTuttiApriQuesto(idDaTogglare) {
+	$(idDaTogglare).css("height", $(".toggle-container").height());
+	solo = true;
+	for (var x = numeroSchede; x>0; x--){
+		idMain = "#main" + x;
+ 		if($(idMain).css("display") == "block" && idMain != idDaTogglare){
+			solo = false;
+			$(idMain).animate({width: "toggle"}, "slow", "easeOutBounce")
 			.queue( function() {
-				$("#main3").animate({width: "toggle"},"slow", "easeOutBounce");
+				$(idDaTogglare).animate({width: "toggle"},"slow", "easeOutBounce");
 				$( this ).dequeue();
 			} );
 		}
-		else
-		{
-			$("#main3").animate({width: "toggle"},"slow", "easeOutBounce");
-		}
-	});
-});	
+	}
+	if (solo == true) $(idDaTogglare).animate({width: "toggle"},"slow", "easeOutBounce");
+}
 
