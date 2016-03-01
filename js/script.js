@@ -68,9 +68,9 @@ $(document).ready( function(){
 		});
 	})
 	.done(function() {
-		generaOggetto();
-		generaOggetto();
-		generaOggetto();
+		aggiungiOggetto();
+		aggiungiOggetto();
+		aggiungiOggetto();
 	})
 	.fail( function(d, textStatus, error) {
 		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
@@ -95,32 +95,8 @@ $(document).ready( function(){
 
 	$("#fullscreen").click(function(){
 		screenfull.toggle(); 
-	})
+	});
 	
-	// var s1 = nomeEroe + locCorrente[" torna al villaggio"];
-	// var s2 = nomeEroe + locCorrente[" procede"];
-
-	// $("#alert-villaggio").dialog({
-	// 	autoOpen: false,
-	// 	dialogClass: "no-close",
-	// 	modal: true,
-	// 	buttons: {
-	// 		s1: function(){
-	// 			$(this).dialog("close");
-	// 			villaggio();
-	// 			stop = true;
-	// 		},
-	// 		s2: function(){
-	// 			$(this).dialog("close");
-	// 			aggiungiLog(nomeEroe + locCorrente[" procede"], "titolo-livello");
-	// 			dungeon(numDungeon);
-	// 			spazio();	
-	// 			stop = false;
-	// 			gioco();
-	// 			blocco("#bottone-start",false);
-	// 		}
-	// 	}
-	// })
 });
 
 
@@ -357,7 +333,7 @@ function scontro(mostroScelto) {
 					
 					if (numeroRandom(0, 100) > 25) 
 					{
-						generaOggetto();
+						trovaOggetto();
 					}
 					
 					aggiungiLog(nomeEroe + locCorrente[" ha sconfitto "] + nomeNemico, "morto");

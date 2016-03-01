@@ -71,10 +71,37 @@ function modificaStatsVisualizzate(div, nuovoValore, classe){
 	$(div).toggleClass( classe, roundTimer/2, "easeInOutCubic" );
 	$(div).toggleClass( "bold", roundTimer/2, "easeInOutCubic" );
 		
-	if (div == "#salute-value")
+	if (div == "#salute-value" || div == "#maxSalute-value")
 	{
 		$(".salute-bar").addClass("bgBianco");		
 		$(".salute-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );	
 		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer/2);	
 	}
+}
+
+function setItemInfo(jQ, oggettoObj) {
+	jQ.prop("oggetto",oggettoObj);		
+	jQ.addClass("slot");
+	jQ.prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
+	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
+	if (oggettoObj.statoMax != undefined)info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoMax + '</p>';
+	if (oggettoObj.tipo != undefined)info += '<p>' + locCorrente["Tipo"] + ': ' + locCorrente[oggettoObj.tipo] + '</p>';
+	if (oggettoObj.slot != undefined)info += '<p>' + locCorrente["Slot"] + ': ' + locCorrente[oggettoObj.slot] + '</p>';
+	if (oggettoObj.attacco >= -100 && oggettoObj.attacco != undefined)
+	{
+		info += '<p><span class="flaticon-attacco"></span>  ' + locCorrente["Attacco"] + ': ' + oggettoObj.attacco + '</p>';
+	}
+	if (oggettoObj.difesa >= -100 && oggettoObj.difesa != undefined)
+	{
+		info += '<p><span class="flaticon-difesa"></span>  ' + locCorrente["Difesa"] + ': ' + oggettoObj.difesa + '</p>';
+	}
+	if (oggettoObj.salute >= -100 && oggettoObj.salute != undefined)
+	{
+		info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Salute"] + ': ' + oggettoObj.salute + '</p>';
+	}
+	if (oggettoObj.maxSalute >= -100 && oggettoObj.maxSalute != undefined)
+	{
+		info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Max Salute"] + ': ' + oggettoObj.maxSalute + '</p>';
+	}
+	jQ.append("<div>"+info+"</div>");
 }
