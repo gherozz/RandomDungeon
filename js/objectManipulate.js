@@ -4,40 +4,22 @@
 //http://jqueryui.com/slider/#steps
 //http://jqueryui.com/slider/#slider-vertical
 
-function generaOggetto()
+function trovaOggetto()
 {
 	var oggettoObj = estraiDaListaPesata(listaOggetti);
 	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto);
 	creaLiOggetto(oggettoObj, "#ulInventario");
 }
 
+function aggiungiOggetto()
+{
+	var oggettoObj = estraiDaListaPesata(listaOggetti);
+	creaLiOggetto(oggettoObj, "#ulInventario");
+}
+
 function creaLiOggetto(oggettoObj, DOM){
 	var nuovoElemento = $("<li></li>").appendTo(DOM);
-	
-	nuovoElemento.prop("oggetto",oggettoObj);
-	nuovoElemento.addClass("slot");
-	nuovoElemento.prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
-	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
-	info += '<p>' + locCorrente["Stato"] + ': ' + oggettoObj.statoAttuale + '/' + oggettoObj.statoAttuale + '</p>';
-	info += '<p>' + locCorrente["Tipo"] + ': ' + locCorrente[oggettoObj.tipo] + '</p>';
-	info += '<p>' + locCorrente["Slot"] + ': ' + locCorrente[oggettoObj.slot] + '</p>';
-	if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
-	{
-		info += '<p><span class="flaticon-attacco"></span>  ' + locCorrente["Attacco"] + ': ' + oggettoObj.attacco + '</p>';
-	}
-	if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
-	{
-		info += '<p><span class="flaticon-difesa"></span>  ' + locCorrente["Difesa"] + ': ' + oggettoObj.difesa + '</p>';
-	}
-	if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
-	{
-		info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Salute"] + ': ' + oggettoObj.salute + '</p>';
-	}
-	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
-	{
-		info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Max Salute"] + ': ' + oggettoObj.maxSalute + '</p>';
-	}
-	$(nuovoElemento).append("<div>"+info+"</div>");
+	setItemInfo(nuovoElemento, oggettoObj);
 }
 
 $(document).ready( function(){
@@ -87,8 +69,8 @@ $(document).ready( function(){
 					{
 						li.appendTo("#equip-manoDx");
 						id = "equip-manoDx";
-						creaLiOggetto(listaOggetti["mano"], "#equip-manoSx");
-						aggiuntaStatsOggetto(listaOggetti["mano"], "", "equip-manoSx");
+						creaLiOggetto(listaOggetti["manoOccupata"], "#equip-manoSx");
+						aggiuntaStatsOggetto(listaOggetti["manoOccupata"], "", "equip-manoSx");
 					} 
 					else if (oggettoObj.slot == "mano") 
 					{
@@ -162,13 +144,13 @@ $(document).ready( function(){
 				{
 					if (id == "equip-manoDx" && oggettoObj.slot == "2 mani") 
 					{
-						creaLiOggetto(listaOggetti["mano"], "#equip-manoSx");
-						aggiuntaStatsOggetto(listaOggetti["mano"], "", "equip-manoSx");
+						creaLiOggetto(listaOggetti["manoOccupata"], "#equip-manoSx");
+						aggiuntaStatsOggetto(listaOggetti["manoOccupata"], "", "equip-manoSx");
 					} 
 					else if (id == "equip-manoSx" && oggettoObj.slot == "2 mani") 
 					{
-						creaLiOggetto(listaOggetti["mano"], "#equip-manoDx");
-						aggiuntaStatsOggetto(listaOggetti["mano"], "", "equip-manoDx");
+						creaLiOggetto(listaOggetti["manoOccupata"], "#equip-manoDx");
+						aggiuntaStatsOggetto(listaOggetti["manoOccupata"], "", "equip-manoDx");
 					}
 					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
 					aggiuntaStatsOggetto(oggettoObj, text, id);
@@ -186,11 +168,11 @@ $(document).ready( function(){
 			if (oggettoObj.slot == "2 mani") {
 				if (id == "equip-manoDx") {
 					$("#equip-manoSx").empty();
-					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoSx");
+					rimozioneStatsOggetto(listaOggetti["manoOccupata"], "equip-manoSx");
 				}
 				if (id == "equip-manoSx") {
 					$("#equip-manoDx").empty();
-					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoDx");
+					rimozioneStatsOggetto(listaOggetti["manoOccupata"], "equip-manoDx");
 				}
 			}
 			if (oggettoObj.slot != "irremovibile") rimozioneStatsOggetto(oggettoObj, id);
@@ -205,11 +187,11 @@ $(document).ready( function(){
 			if (oggettoObj.slot == "2 mani") {
 				if (ul.attr('id') == "equip-manoDx") {
 					$("#equip-manoSx").empty();
-					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoSx");
+					rimozioneStatsOggetto(listaOggetti["manoOccupata"], "equip-manoSx");
 				}
 				if (ul.attr('id') == "equip-manoSx") {
 					$("#equip-manoDx").empty();
-					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoDx");
+					rimozioneStatsOggetto(listaOggetti["manoOccupata"], "equip-manoDx");
 				}
 			}
 			rimozioneStatsOggetto(oggettoObj, ul.attr('id'));
@@ -220,90 +202,143 @@ $(document).ready( function(){
 });
 
 function aggiuntaStatsOggetto(oggettoObj, text, idSlot){
+	var colore;
+	
 	if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
 	{
 		{
+		if (oggettoObj.attacco > 0){
+			colore = "arancione";
+		} else {
+			colore = "blu";
+		}
 		if (idSlot == "equip-manoDx") {
 			attaccoDx += parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, "arancione");
+			modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, colore);
 		} else if (idSlot == "equip-manoSx"){
 			attaccoSx += parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, "arancione");
+			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, colore);
 		}
 		text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " + " + oggettoObj.attacco;
 		} 
 	}
+	
 	if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
 	{
+		if (oggettoObj.difesa > 0){
+			colore = "blu";
+		} else {
+			colore = "arancione";
+		}
 		difesa += parseInt(oggettoObj.difesa);
-		modificaStatsVisualizzate("#difesa-value", difesa, "blu");
+		modificaStatsVisualizzate("#difesa-value", difesa, colore);
 		text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " + " + oggettoObj.difesa;
 	}
+	
 	if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
 	{
+		if (oggettoObj.salute > 0){
+			colore = "verde";
+		} else {
+			colore = "rosso";
+		}
 		salute += parseInt(oggettoObj.salute);
 		if (salute > maxSalute)		
 		{		
 			salute = maxSalute;		
 		}
-		modificaStatsVisualizzate("#salute-value", salute, "verde");
+		modificaStatsVisualizzate("#salute-value", salute, colore);
 		text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " + " + oggettoObj.salute;
 	}
+	
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
 	{
+		if (oggettoObj.maxSalute > 0){
+			colore = "verde";
+		} else {
+			colore = "rosso";
+		}
+		maxSalute += parseInt(oggettoObj.maxSalute);
 		if (salute > maxSalute)		
 		{		
 			salute = maxSalute;		
 		}
-		maxSalute += parseInt(oggettoObj.maxSalute);
-		modificaStatsVisualizzate("#maxSalute-value", maxSalute, "verde");
+		modificaStatsVisualizzate("#maxSalute-value", maxSalute, colore);
+		modificaStatsVisualizzate("#salute-value", salute, colore);
 		text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " + " + oggettoObj.maxSalute;
 	}
-	if (oggettoObj.nome != "mano") aggiungiLog(text, oggettoObj.coloreTesto);
+	
+	if (oggettoObj.nome != "manoOccupata") aggiungiLog(text, oggettoObj.coloreTesto);
 }
 
 function rimozioneStatsOggetto(oggettoObj, idSlot) {
 	
 	var text = nomeEroe + locCorrente[" ha rimosso "] + nomeLocalizzato(oggettoObj) + ",";	
+	var colore;
 	
 	if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
 	{
+		if (oggettoObj.attacco > 0){
+			colore = "rosso";
+		} else {
+			colore = "verde";
+		}
 		if (idSlot == "equip-manoDx") {
 			attaccoDx -= parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, "blu");
-		} else {
+			modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, colore);
+		} else if (idSlot == "equip-manoSx"){
 			attaccoSx -= parseInt(oggettoObj.attacco);
-			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, "blu");
+			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, colore);
 		}
 		
 		text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " - " + oggettoObj.attacco;
 	}
+	
 	if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
 	{
+		if (oggettoObj.difesa > 0){
+			colore = "arancione";
+		} else {
+			colore = "blu";
+		}
 		difesa -= parseInt(oggettoObj.difesa);
-		modificaStatsVisualizzate("#difesa-value", difesa, "arancione");
+		modificaStatsVisualizzate("#difesa-value", difesa, colore);
 		text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " - " + oggettoObj.difesa;
 	}
+	
 	if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
 	{
+		if (oggettoObj.salute > 0){
+			colore = "rosso";
+		} else {
+			colore = "verde";
+		}
 		salute -= parseInt(oggettoObj.salute);
 		if (salute > maxSalute)		
 		{		
 			salute = maxSalute;		
 		}
-		modificaStatsVisualizzate("#salute-value", salute, "rosso");
+		modificaStatsVisualizzate("#salute-value", salute, colore);
 		text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " - " + oggettoObj.salute;
 	}
+	
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
 	{
+		if (oggettoObj.maxSalute > 0){
+			colore = "rosso";
+		} else {
+			colore = "verde";
+		}
+		maxSalute -= parseInt(oggettoObj.maxSalute);
 		if (salute > maxSalute)		
 		{		
 			salute = maxSalute;		
 		}
-		maxSalute -= parseInt(oggettoObj.maxSalute);
-		modificaStatsVisualizzate("#maxSalute-value", maxSalute, "rosso");
+		modificaStatsVisualizzate("#maxSalute-value", maxSalute, colore);
+		modificaStatsVisualizzate("#salute-value", salute, colore);
 		text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " - " + oggettoObj.salute;
 	}
-	if (oggettoObj.nome != "mano") aggiungiLog(text, oggettoObj.coloreTesto);
+	
+	if (oggettoObj.nome != "manoOccupata") aggiungiLog(text, oggettoObj.coloreTesto);
 }
 

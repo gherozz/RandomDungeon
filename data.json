@@ -3,11 +3,8 @@
 		{
 			"nomeIta":  "Mano Impegnata",
 			"nomeEn":  "Busy Hand",
-			"nome": "mano",
-			"tipo": "equip",
+			"nome": "manoOccupata",
 			"slot": "irremovibile",
-			"stato": "1",
-			"statoAttuale": "1",
 			"attacco": "-1000",
 			"coloreTesto": "arancione",
 			"chance": "0"
@@ -19,8 +16,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "15",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "50"
 		}, 
@@ -31,8 +28,9 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"difesa": "10",
-			"stato": "100",
+			"attacco": "-1000",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "blu",
 			"chance": "50"
 		}, 
@@ -43,8 +41,8 @@
 			"tipo": "uso",
 			"slot": "nessuno",
 			"salute": "30",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "verde",
 			"chance": "100"
 		}, 
@@ -55,8 +53,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "30",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "25"
 		},
@@ -68,8 +66,8 @@
 			"slot": "corpo",
 			"difesa": "10",
 			"maxSalute": "20",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "blu",
 			"chance": "25"
 		},
@@ -80,8 +78,8 @@
 			"tipo": "equip",
 			"slot": "2 mani",
 			"attacco": "20",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "50"
 		},
@@ -94,8 +92,8 @@
 			"attacco": "20",
 			"difesa": "20",
 			"maxSalute": "10",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "1"
 		},
@@ -106,8 +104,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "10",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "100"
 		},
@@ -118,8 +116,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "5",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "100"
 		},
@@ -130,8 +128,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "5",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "25"
 		},
@@ -142,8 +140,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "20",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "10"
 		},
@@ -155,8 +153,8 @@
 			"slot": "2 mani",
 			"attacco": "10",
 			"difesa": "5",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "100"
 		},
@@ -167,8 +165,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "5",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "100"
 		},
@@ -179,8 +177,8 @@
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "20",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "10"
 		},
@@ -193,8 +191,8 @@
 			"attacco": "50",
 			"difesa": "-5",
 			"maxSalute": "-10",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "10"
 		},
@@ -207,8 +205,8 @@
 			"attacco": "50",
 			"difesa": "-5",
 			"maxSalute": "-10",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "10"
 		},
@@ -219,8 +217,8 @@
 			"tipo": "equip",
 			"slot": "2 mani",
 			"attacco": "40",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "25"
 		},
@@ -232,8 +230,8 @@
 			"slot": "mano",
 			"attacco": "10",
 			"difesa": "30",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "5"
 		},
@@ -245,8 +243,8 @@
 			"slot": "2 mani",
 			"attacco": "50",
 			"difesa": "-10",
-			"stato": "100",
 			"statoAttuale": "100",
+			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "5"
 		}
