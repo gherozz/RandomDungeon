@@ -7,21 +7,14 @@
 function generaOggetto()
 {
 	var oggettoObj = estraiDaListaPesata(listaOggetti);
-	spazio();
 	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto);
-	creaLiOggetto(oggettoObj, "#lista");
+	creaLiOggetto(oggettoObj, "#ulInventario");
 }
 
 function creaLiOggetto(oggettoObj, DOM){
-	//var nuovoElemento = document.createElement("LI");
-	//var list = document.getElementById(DOM);
-	//list.insertBefore(nuovoElemento, list.childNodes[list.length]);  
-	
-	//va modernizzato il vecchio codice con jquery
 	var nuovoElemento = $("<li></li>").appendTo(DOM);
 	
 	nuovoElemento.prop("oggetto",oggettoObj);
-	if (oggettoObj.tipo == "uso") nuovoElemento.addClass("uso");
 	nuovoElemento.addClass("slot");
 	nuovoElemento.prepend('<img id="theImg" src="images/' + oggettoObj.nome + '.png" />');
 	var info = '<div class="info"><p>' + nomeLocalizzato(oggettoObj) + '</p>';
@@ -49,26 +42,77 @@ function creaLiOggetto(oggettoObj, DOM){
 
 $(document).ready( function(){
 
-	$("#lista").sortable({
+	$("#ulInventario").sortable({
 		connectWith: "#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx",
 		revert: 100,
 		helper : 'clone',
-	}).disableSelection().on("click", "li", function() {
-		
-		//var otherUL = $("#unassigned_list, #recipients_list").not($(this).closest("ul"));
-		//var li = $(this).closest("li");
-		
-		var li = $(this).closest("li");
-		var oggettoObj = li.prop("oggetto");
-		
-		if (oggettoObj.tipo == "uso") 
-		{
-			if(salute < maxSalute){
-				text = nomeEroe + locCorrente["  ha consumato "] + nomeLocalizzato(oggettoObj) + ",";
-				aggiuntaStatsOggetto(oggettoObj, text);
-				li.remove();
-			} else{
-				aggiungiLog(locCorrente["salute di "] + nomeEroe + locCorrente[" al massimo"]);
+		receive: function(e, ui) {
+			var oggettoObj = ui.item.prop("oggetto");
+			if (oggettoObj.slot == "irremovibile"){
+				ui.sender.sortable('cancel');
+			}
+		}
+	}).disableSelection().on("click", "li", function() {	
+		if (statoGioco != "combattimento"){
+			var li = $(this).closest("li");
+			var oggettoObj = li.prop("oggetto");
+			var id;
+			
+			var dxLength = $("#equip-manoDx").find("li").length;
+			var sxLength = $("#equip-manoSx").find("li").length;
+			var testaLength = $("#equip-testa").find("li").length;
+			var corpoLength = $("#equip-corpo").find("li").length;
+			
+			if (oggettoObj.tipo == "uso") 
+			{
+				if(salute < maxSalute){
+					text = nomeEroe + locCorrente["  ha consumato "] + nomeLocalizzato(oggettoObj) + ",";
+					aggiuntaStatsOggetto(oggettoObj, text);
+					li.remove();
+				} else{
+					aggiungiLog(locCorrente["salute di "] + nomeEroe + locCorrente[" al massimo"]);
+				}
+			} else {
+				if (
+					(dxLength == 0 && sxLength == 0 && oggettoObj.slot == "2 mani")
+					||
+					((dxLength == 0 || sxLength == 0) && oggettoObj.slot == "mano")
+					||
+					(testaLength == 0 && oggettoObj.slot == "testa")
+					||
+					(corpoLength == 0 && oggettoObj.slot == "corpo")
+					)
+				{
+					if (oggettoObj.slot == "2 mani") 
+					{
+						li.appendTo("#equip-manoDx");
+						id = "equip-manoDx";
+						creaLiOggetto(listaOggetti["mano"], "#equip-manoSx");
+						aggiuntaStatsOggetto(listaOggetti["mano"], "", "equip-manoSx");
+					} 
+					else if (oggettoObj.slot == "mano") 
+					{
+						if (dxLength == 0) {
+							li.appendTo("#equip-manoDx");
+							id = "equip-manoDx";
+						} else {
+							li.appendTo("#equip-manoSx");
+							id = "equip-manoSx";
+						}
+					}
+					else if (oggettoObj.slot == "testa") 
+					{
+						li.appendTo("#equip-testa");
+						id = "equip-testa";
+					}
+					else if (oggettoObj.slot == "corpo") 
+					{
+						li.appendTo("#equip-corpo");
+						id = "equip-corpo";
+					}
+					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
+					aggiuntaStatsOggetto(oggettoObj, text, id);
+				}
 			}
 		}
 	});
@@ -76,71 +120,116 @@ $(document).ready( function(){
 			
 	$("#equip-testa, #equip-corpo, #equip-manoDx, #equip-manoSx").sortable({
 		revert: 100,
-		connectWith: "#lista",		
+		connectWith: "#ulInventario",	
 		receive: function(e, ui) {
-			traduci();
 			var oggettoObj = ui.item.prop("oggetto");
+			
+			var dxLength = $("#equip-manoDx").find("li").length;
+			var sxLength = $("#equip-manoSx").find("li").length;
+			var testaLength = $("#equip-testa").find("li").length;
+			var corpoLength = $("#equip-corpo").find("li").length;
+			var id = $(this).attr('id');
+			
+			if (id == "equip-manoDx") {
+				dxLength -= 1;
+			} else if (id == "equip-manoSx") {
+				sxLength -= 1;
+			} else if (id == "equip-testa") {
+				testaLength -= 1;
+			} else if (id == "equip-corpo") {
+				corpoLength -= 1;
+			}
+			
 			if(oggettoObj.tipo == "equip"){
 				if (
-					this.children.length > 1 
+					(dxLength == 0
+						&& sxLength == 0
+						&& oggettoObj.slot == "2 mani" 
+						&& (id == "equip-manoDx" || id == "equip-manoSx"))
 					||
-					($(this).attr('id')) == "equip-manoDx" && oggettoObj.slot == "2 mani" && ($("#equip-manoSx").find("li").length) > 0 
+					((dxLength == 0 || sxLength  == 0)
+						&& oggettoObj.slot == "mano" 
+						&& (id == "equip-manoDx" || id == "equip-manoSx"))
 					||
-					$(this).attr('id') == "equip-manoSx" && oggettoObj.slot == "2 mani" && ($("#equip-manoDx").find("li").length) > 0
+					(testaLength  == 0
+						&& oggettoObj.slot == "testa" 
+						&& id == "equip-testa")
 					||
-					($(this).attr('id')) != "equip-manoDx" &&	($(this).attr('id')) != "equip-manoSx" && oggettoObj.slot == "mano"
-					||
-					($(this).attr('id')) != "equip-manoDx" &&	($(this).attr('id')) != "equip-manoSx" && oggettoObj.slot == "2 mani"
-					||
-					($(this).attr('id')) != "equip-corpo" && oggettoObj.slot == "corpo"
-					||
-					($(this).attr('id')) != "equip-testa" &&	oggettoObj.slot == "testa"
+					(corpoLength  == 0
+						&& oggettoObj.slot == "corpo" 
+						&& id == "equip-corpo")
 					)
 				{
-					spazio();
-					ui.sender.sortable('cancel');
-				} else {
-					
-					if ($(this).attr('id') == "equip-manoDx" && oggettoObj.slot == "2 mani") 
+					if (id == "equip-manoDx" && oggettoObj.slot == "2 mani") 
 					{
 						creaLiOggetto(listaOggetti["mano"], "#equip-manoSx");
+						aggiuntaStatsOggetto(listaOggetti["mano"], "", "equip-manoSx");
 					} 
-					else if ($(this).attr('id') == "equip-manoSx" && oggettoObj.slot == "2 mani") 
+					else if (id == "equip-manoSx" && oggettoObj.slot == "2 mani") 
 					{
 						creaLiOggetto(listaOggetti["mano"], "#equip-manoDx");
+						aggiuntaStatsOggetto(listaOggetti["mano"], "", "equip-manoDx");
 					}
 					var text = nomeEroe + locCorrente[" ha equipaggiato "] + nomeLocalizzato(oggettoObj) + ",";
-					aggiuntaStatsOggetto(oggettoObj, text);
+					aggiuntaStatsOggetto(oggettoObj, text, id);
+					
+				} else {
+					ui.sender.sortable('cancel');
 				}
 			}  else {
 				ui.sender.sortable('cancel');
 			}
 		}, 
-		
 		remove: function (e, ui){
-			traduci();
 			var oggettoObj = ui.item.prop("oggetto");
+			var id = $(this).attr('id');
 			if (oggettoObj.slot == "2 mani") {
-				if ($(this).attr('id') == "equip-manoDx") {
+				if (id == "equip-manoDx") {
 					$("#equip-manoSx").empty();
+					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoSx");
 				}
-				if ($(this).attr('id') == "equip-manoSx") {
+				if (id == "equip-manoSx") {
 					$("#equip-manoDx").empty();
+					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoDx");
 				}
 			}
-			var oggettoObj = ui.item.prop("oggetto");
-			rimozioneStatsOggetto(oggettoObj);
-			spazio();
+			if (oggettoObj.slot != "irremovibile") rimozioneStatsOggetto(oggettoObj, id);
 		}
-	}).disableSelection();
+	}).disableSelection().on("click", "li", function() {	
+		var li = $(this).closest("li");
+		var ul = $(this).closest("ul");
+		var oggettoObj = li.prop("oggetto");
+		if (statoGioco != "combattimento" && oggettoObj.slot != "irremovibile"){
+			traduci();	
+			
+			if (oggettoObj.slot == "2 mani") {
+				if (ul.attr('id') == "equip-manoDx") {
+					$("#equip-manoSx").empty();
+					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoSx");
+				}
+				if (ul.attr('id') == "equip-manoSx") {
+					$("#equip-manoDx").empty();
+					rimozioneStatsOggetto(listaOggetti["mano"], "equip-manoDx");
+				}
+			}
+			rimozioneStatsOggetto(oggettoObj, ul.attr('id'));
+			li.appendTo("#ulInventario");
+		}
+	});
+	
 });
 
-function aggiuntaStatsOggetto(oggettoObj, text){
+function aggiuntaStatsOggetto(oggettoObj, text, idSlot){
 	if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
 	{
 		{
-		attacco += parseInt(oggettoObj.attacco);
-		modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+		if (idSlot == "equip-manoDx") {
+			attaccoDx += parseInt(oggettoObj.attacco);
+			modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, "arancione");
+		} else if (idSlot == "equip-manoSx"){
+			attaccoSx += parseInt(oggettoObj.attacco);
+			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, "arancione");
+		}
 		text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " + " + oggettoObj.attacco;
 		} 
 	}
@@ -162,22 +251,31 @@ function aggiuntaStatsOggetto(oggettoObj, text){
 	}
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
 	{
+		if (salute > maxSalute)		
+		{		
+			salute = maxSalute;		
+		}
 		maxSalute += parseInt(oggettoObj.maxSalute);
 		modificaStatsVisualizzate("#maxSalute-value", maxSalute, "verde");
 		text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " + " + oggettoObj.maxSalute;
 	}
-	aggiungiLog(text, oggettoObj.coloreTesto);
-	spazio();
+	if (oggettoObj.nome != "mano") aggiungiLog(text, oggettoObj.coloreTesto);
 }
 
-function rimozioneStatsOggetto(oggettoObj) {
+function rimozioneStatsOggetto(oggettoObj, idSlot) {
 	
 	var text = nomeEroe + locCorrente[" ha rimosso "] + nomeLocalizzato(oggettoObj) + ",";	
 	
 	if (oggettoObj.attacco != 0 && oggettoObj.attacco != undefined)
 	{
-		attacco -= parseInt(oggettoObj.attacco);
-		modificaStatsVisualizzate("#attacco-value", attacco, "blu");
+		if (idSlot == "equip-manoDx") {
+			attaccoDx -= parseInt(oggettoObj.attacco);
+			modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, "blu");
+		} else {
+			attaccoSx -= parseInt(oggettoObj.attacco);
+			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, "blu");
+		}
+		
 		text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " - " + oggettoObj.attacco;
 	}
 	if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
@@ -198,10 +296,14 @@ function rimozioneStatsOggetto(oggettoObj) {
 	}
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
 	{
+		if (salute > maxSalute)		
+		{		
+			salute = maxSalute;		
+		}
 		maxSalute -= parseInt(oggettoObj.maxSalute);
 		modificaStatsVisualizzate("#maxSalute-value", maxSalute, "rosso");
 		text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " - " + oggettoObj.salute;
 	}
-	aggiungiLog(text, oggettoObj.coloreTesto);
+	if (oggettoObj.nome != "mano") aggiungiLog(text, oggettoObj.coloreTesto);
 }
 

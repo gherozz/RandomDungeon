@@ -2,7 +2,8 @@ $(document).ready(function(){
 	setAltezze();
 
 	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
-	modificaStatsVisualizzate("#attacco-value", attacco, "arancione");
+	modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, "arancione");
+	modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, "arancione");
 	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 	modificaStatsVisualizzate("#salute-value", salute, "verde");
 	$("#maxSalute-value").append(" " + maxSalute);
@@ -41,7 +42,7 @@ function traduci(bandiera){
 	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
 	cambiaStatoGioco(statoGioco);
 	
-	$("#lista li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function( index ) {
+	$("#ulInventario li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function( index ) {
 		oggettoObj = $(this).prop("oggetto");
 		$(this).empty();
 		$(this).prop("oggetto",oggettoObj);

@@ -45,22 +45,25 @@ function nomeLocalizzato(mostroObj)
 
 function aggiungiLog(testo, classe){
 	var nuovoElemento = '<p class="'+classe+'">'+testo+'</p>';
- 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(300);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
+ 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(roundTimer/4);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/4);
+	spazio();
 }
 
 function aggiungiLogComplesso(testo){
 	var nuovoElemento = testo;
- 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(300);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
+ 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(roundTimer/4);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/4);
+	spazio();
 }
 
 function spazio(){
 	$("#gioco").append("<br/>");
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/3);
+	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/4);
 }
 
 function modificaStatsVisualizzate(div, nuovoValore, classe){	
+	if (nuovoValore < 0) nuovoValore = 0;
 	$(div).empty();
 	$(div).append(" " + nuovoValore);
 	$(div).addClass(classe);
@@ -68,15 +71,10 @@ function modificaStatsVisualizzate(div, nuovoValore, classe){
 	$(div).toggleClass( classe, roundTimer/2, "easeInOutCubic" );
 	$(div).toggleClass( "bold", roundTimer/2, "easeInOutCubic" );
 		
-	if (div.indexOf("salute-mostro") != -1)
-	{		
-		$(".salute-mostro-bar").addClass("bgBianco");		
-		$(".salute-mostro-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );
-	}
-	else if (div.indexOf("salute") != -1)
+	if (div == "#salute-value")
 	{
-		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer/2);		
 		$(".salute-bar").addClass("bgBianco");		
 		$(".salute-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );	
+		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer/2);	
 	}
 }

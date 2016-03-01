@@ -199,6 +199,18 @@
 		{
 			"ita": "Switch Language",
 			"en": "Cambia Lingua"
+		},
+		{
+			"ita": "irremovibile",
+			"en": "irremovable"
+		},
+		{
+			"ita": "infligge un CRITICO per ",
+			"en": "CRITICAL strike for "
+		},
+		{
+			"ita": "pugni nudi!",
+			"en": "bare fists!"
 		}
 	]
 }

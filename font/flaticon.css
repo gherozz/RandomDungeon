@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 26/02/2016 22:54
+  	Creation date: 01/03/2016 08:52
   	*/
 
 @font-face {
@@ -23,29 +23,78 @@
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-	font-family: Flaticon;
-	font-style: normal;
-	}
+  font-family: Flaticon;
+font-style: normal;
+}
 
-.flaticon-accetta:before { content: "\f100"; }
-.flaticon-arco:before { content: "\f101"; }
-.flaticon-ascia:before { content: "\f102"; }
-.flaticon-attacco:before { content: "\f103"; }
-.flaticon-castello:before { content: "\f104"; }
-.flaticon-corpo:before { content: "\f105"; }
-.flaticon-critico:before { content: "\f106"; }
-.flaticon-difesa:before { content: "\f107"; }
-.flaticon-infranto:before { content: "\f108"; }
-.flaticon-intero:before { content: "\f109"; }
-.flaticon-inventario:before { content: "\f10a"; }
-.flaticon-mana:before { content: "\f10b"; }
-.flaticon-mano:before { content: "\f10c"; }
-.flaticon-mappa:before { content: "\f10d"; }
-.flaticon-monete:before { content: "\f10e"; }
-.flaticon-quest:before { content: "\f10f"; }
-.flaticon-roll:before { content: "\f110"; }
-.flaticon-salute:before { content: "\f111"; }
-.flaticon-spada:before { content: "\f112"; }
-.flaticon-spadone:before { content: "\f113"; }
-.flaticon-testa-1:before { content: "\f114"; }
-.flaticon-testa-2:before { content: "\f115"; }
+.flaticon-accampamento:before { content: "\f100"; }
+.flaticon-accetta:before { content: "\f101"; }
+.flaticon-alabarda:before { content: "\f102"; }
+.flaticon-arco:before { content: "\f103"; }
+.flaticon-armatura-borchiata:before { content: "\f104"; }
+.flaticon-armatura-completa:before { content: "\f105"; }
+.flaticon-armatura-cuoio:before { content: "\f106"; }
+.flaticon-armatura-pelle:before { content: "\f107"; }
+.flaticon-armatura-piastre:before { content: "\f108"; }
+.flaticon-armatura-tunica:before { content: "\f109"; }
+.flaticon-ascia:before { content: "\f10a"; }
+.flaticon-attacco:before { content: "\f10b"; }
+.flaticon-bussola:before { content: "\f10c"; }
+.flaticon-castello:before { content: "\f10d"; }
+.flaticon-corpo:before { content: "\f10e"; }
+.flaticon-critico:before { content: "\f10f"; }
+.flaticon-daga:before { content: "\f110"; }
+.flaticon-difesa:before { content: "\f111"; }
+.flaticon-gladio:before { content: "\f112"; }
+.flaticon-infranto:before { content: "\f113"; }
+.flaticon-intero:before { content: "\f114"; }
+.flaticon-inventario:before { content: "\f115"; }
+.flaticon-kama:before { content: "\f116"; }
+.flaticon-katana:before { content: "\f117"; }
+.flaticon-kirpan:before { content: "\f118"; }
+.flaticon-lancia:before { content: "\f119"; }
+.flaticon-mana:before { content: "\f11a"; }
+.flaticon-manganello:before { content: "\f11b"; }
+.flaticon-mano:before { content: "\f11c"; }
+.flaticon-mappa:before { content: "\f11d"; }
+.flaticon-martello:before { content: "\f11e"; }
+.flaticon-mazza:before { content: "\f11f"; }
+.flaticon-monete:before { content: "\f120"; }
+.flaticon-nunchaku:before { content: "\f121"; }
+.flaticon-pala:before { content: "\f122"; }
+.flaticon-pelle:before { content: "\f123"; }
+.flaticon-peso:before { content: "\f124"; }
+.flaticon-piccone:before { content: "\f125"; }
+.flaticon-pugnale:before { content: "\f126"; }
+.flaticon-quest:before { content: "\f127"; }
+.flaticon-roll:before { content: "\f128"; }
+.flaticon-saio:before { content: "\f129"; }
+.flaticon-salute:before { content: "\f12a"; }
+.flaticon-scimitarra:before { content: "\f12b"; }
+.flaticon-scimitarra-1:before { content: "\f12c"; }
+.flaticon-scudo-asimmetrico:before { content: "\f12d"; }
+.flaticon-scudo-buckler:before { content: "\f12e"; }
+.flaticon-scudo-elfico:before { content: "\f12f"; }
+.flaticon-scudo-grande:before { content: "\f130"; }
+.flaticon-scudo-lama:before { content: "\f131"; }
+.flaticon-scudo-medio:before { content: "\f132"; }
+.flaticon-scudo-nanico:before { content: "\f133"; }
+.flaticon-scudo-piccolo:before { content: "\f134"; }
+.flaticon-scudo-rinforzato:before { content: "\f135"; }
+.flaticon-scudo-runico:before { content: "\f136"; }
+.flaticon-scudo-scaglie:before { content: "\f137"; }
+.flaticon-scudo-spinato:before { content: "\f138"; }
+.flaticon-scudo-torre:before { content: "\f139"; }
+.flaticon-scudo-umano:before { content: "\f13a"; }
+.flaticon-spada:before { content: "\f13b"; }
+.flaticon-spada-bastarda:before { content: "\f13c"; }
+.flaticon-spada-incantata:before { content: "\f13d"; }
+.flaticon-spadone:before { content: "\f13e"; }
+.flaticon-stiletto:before { content: "\f13f"; }
+.flaticon-tempo:before { content: "\f140"; }
+.flaticon-testa-1:before { content: "\f141"; }
+.flaticon-testa-2:before { content: "\f142"; }
+.flaticon-testa-cappello:before { content: "\f143"; }
+.flaticon-testa-elmo:before { content: "\f144"; }
+.flaticon-torcia:before { content: "\f145"; }
+.flaticon-tridente:before { content: "\f146"; }
