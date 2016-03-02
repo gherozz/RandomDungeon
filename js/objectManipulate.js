@@ -7,7 +7,7 @@
 function trovaOggetto()
 {
 	var oggettoObj = estraiDaListaPesata(listaOggetti);
-	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto);
+	aggiungiLog("<span class='flaticon-inventario'></span> " + nomeEroe + locCorrente[" ha trovato "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto + " loot");
 	creaLiOggetto(oggettoObj, "#ulInventario");
 }
 

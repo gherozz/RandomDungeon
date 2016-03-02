@@ -34,9 +34,10 @@ function statsMostro(vita,maxvita, attacco, difesa,nomeNemico){
 		'<div class="numeri-mostro">'+
 			'<ul>'+
 				'<li>'+
-				'<span class="flaticon-attacco"> </span>'+
-				'<span class="attacco"></span>:'+
-				'<span id="attacco-mostro-value"></span>'+
+				'<span class="flaticon-salute"> </span>'+
+				'<span class="salute"></span>:'+
+				'<span id="salute-mostro-value"></span>/'+
+				'<span id="maxSalute-mostro-value"></span>'+
 				'</li>'+
 				'<li>'+
 				'<span class="flaticon-difesa"> </span>'+
@@ -44,10 +45,9 @@ function statsMostro(vita,maxvita, attacco, difesa,nomeNemico){
 				'<span id="difesa-mostro-value"></span>'+
 				'</li>'+
 				'<li>'+
-				'<span class="flaticon-salute"> </span>'+
-				'<span class="salute"></span>:'+
-				'<span id="salute-mostro-value"></span>/'+
-				'<span id="maxSalute-mostro-value"></span>'+
+				'<span class="flaticon-attacco"> </span>'+
+				'<span class="attacco"></span>:'+
+				'<span id="attacco-mostro-value"></span>'+
 				'</li>'+
 			'</ul>'+
 		'</div>'+

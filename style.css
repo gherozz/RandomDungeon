@@ -23,10 +23,9 @@ a{
 }
 p{
 	padding: 0;
-	text-indent: 20px;
 }
 span{
-	text-indent: 20px;
+
 }
 
 /*HEADER */
@@ -39,7 +38,7 @@ span{
 	-webkit-box-shadow: 0px 2px 12px 0px rgba(50, 50, 50, 0.1);
 	-moz-box-shadow:    0px 2px 12px 0px rgba(50, 50, 50, 0.1);
 	box-shadow:         0px 2px 12px 0px rgba(50, 50, 50, 0.1);
-	z-index: 1;
+	z-index: 10;
 }
 .header h1{
 	padding: 1%;
@@ -163,21 +162,21 @@ span{
 }
 
 #pull1{
-	z-index: 3;
+	z-index: 10;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.1);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.1);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.1);
 }
 #pull2{
 	top: 15%;
-	z-index: 4;
+	z-index: 20;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.3);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.3);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.3);
 }
 #pull3{
 	top: 30%;
-	z-index: 5;
+	z-index: 30;
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.5);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.5);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.5);
@@ -206,15 +205,15 @@ span{
 
 
 #inventarioNome {
-	right: 5%;
+	right: 35%;
 	position: absolute;
-	top:5%;
+	top: -25%;
 	font-size: 2.5vw;
 }
 
 #equipaggiamentoNome {
-	right: 68%;
-	top:5%;
+	right: -12%;
+	top:-25%;
 	position: absolute;
 	font-size: 2.5vw;
 }
@@ -255,8 +254,8 @@ span{
 
 .icona-equip{
 	position: absolute;
-	height: 42px;
-	width:60px;
+	height: 40px;
+	width:40px;
 	z-index: 1;
 	font-size: 38px;
 	opacity: 0.5;
@@ -283,7 +282,7 @@ span{
 	height: 40px;
 	border: solid 1px #222;
 	cursor: pointer;	
-	z-index: 24;
+	z-index: 2;
 }
 .slot img{
 	width: 40px;
@@ -291,7 +290,7 @@ span{
 	position: relative;
 	top: 0px;
 	left:0px;
-	z-index: 20;
+	z-index: 9;
 	background-color: #ddd;
 	transition: background-color 0.5s;
 }
@@ -335,7 +334,7 @@ span{
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	z-index: 9;
+	z-index: 40;
 	background: #ddd;
 	-webkit-box-shadow: 0px -5px 25px 0px rgba(50, 50, 50, 0.35);
 	-moz-box-shadow:    0px -5px 25px 0px rgba(50, 50, 50, 0.35);
@@ -377,7 +376,6 @@ span{
 	-webkit-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	-moz-box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
 	box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.6);
-	width:95%;
 }
 
 .numeri-eroe{
@@ -394,12 +392,14 @@ span{
 }
 
 .numeri-mostro ul{
-	float: left;
-	margin: 5px;
+	float: right;
+	margin: 5px 0;
 }
 .numeri-mostro ul li, .numeri-eroe ul li{
-	 display: inline;
-	 margin: 10px;
+	 display: inline-block;
+	 float: right;
+	 text-align: center;
+	 margin: 0 10px;
 }
 
 .salute-bar, .salute-mostro-bar{
@@ -442,7 +442,7 @@ span{
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	z-index: 10;
+	z-index: 40;
 	-webkit-box-shadow: 0px -5px 12px 0px rgba(50, 50, 50, 0.55);
 	-moz-box-shadow:    0px -5px 12px 0px rgba(50, 50, 50, 0.55);
 	box-shadow:         0px -5px 12px 0px rgba(50, 50, 50, 0.55);
@@ -452,7 +452,7 @@ span{
 	width:90%;
 	border: none;
 	color: #fff;
-	font-size: 2em;
+	font-size: 2vw;
 	font-weight: bold;
 	line-height: 300%;
 	text-transform: capitalize;
@@ -484,14 +484,14 @@ input:placeholder-shown {
 	position:absolute;
 	bottom: 0;
 	left:0;
-	z-index: 10;
+	z-index: 40;
 	cursor: pointer;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     text-align: center;
     text-decoration: none;
-    font-size: 3em;
+    font-size: 3vw;
 	line-height: 200%;
 	-webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -531,12 +531,8 @@ input:placeholder-shown {
 	bottom: 0;
 	width: 100%;
 	height:95%;
+	width:95%;
 	overflow: auto;
-}
-#area-log p{
-	margin-left: 10px;
-	font-family: 'Bangers';
-	font-size: 1.3em;
 }
 
 /* FINE GIOCO */
@@ -650,7 +646,7 @@ input:placeholder-shown {
 	position: absolute;
 	bottom: 0;
 	background: #222;
-	z-index: 1000000;
+	z-index: 10;
 	color: #999;
 }
 .footer-pull span{
@@ -662,7 +658,7 @@ input:placeholder-shown {
 	bottom: 20px;
 	right: 0;
 	left: 0;
-	z-index: 100000;
+	z-index: 10;
 	margin: 0 auto;
 	width: 0;
 	height: 0;
@@ -676,7 +672,7 @@ footer{
 	background: #222;
 	position: absolute;
 	bottom: 0;
-	z-index: 10000;
+	z-index: 10;
 	color: #bbb;
 	display: none;
 }
@@ -685,7 +681,7 @@ footer{
 	top: 0;
 	right: 0;
 	left: 0;
-	z-index: 1000000;
+	z-index: 10;
 	width: 0;
 	height: 0;
 	border-top: 5px solid #999;
@@ -742,6 +738,9 @@ footer{
 .rosso{
 	color: red;
 }
+.rossoCrit {
+	color: maroon;
+}
 .viola{
 	color: purple;
 }
@@ -772,12 +771,28 @@ footer{
 	text-indent: 0;
 	margin-top: 10px;
 }
-.risultato-scontro{
-	font-weight: bold;
-}
 .morto{
-	font-weight: bold;
+	font-size: 1.5em;
 	color: red;
+	margin-top: 1em;
+}
+.loot{
+	font-size: 1.3em;
+	margin-top: 1em;
+}
+.incontro{
+	font-size: 1.5em;
+	margin-top: 1em;
+}
+
+.azione{
+	font-size: 1.3em;
+	margin-left: 0.5em;
+	margin-top: 1em;
+}
+
+.criticoTxt{
+	font-size: 1.2em;
 }
 
 .header-red{

@@ -113,8 +113,8 @@
 			"en": "Crit"
 		},
 		{
-			"ita": " ha trovato: ",
-			"en": " found: "
+			"ita": " ha trovato ",
+			"en": " found "
 		},
 		{
 			"ita": "  non ha uno slot libero per questo oggetto!",
@@ -207,6 +207,14 @@
 		{
 			"ita": "infligge un CRITICO per ",
 			"en": "CRITICAL strike for "
+		},
+		{
+			"ita": "pugno",
+			"en": "fist"
+		},
+		{
+			"ita": " danni con ",
+			"en": " damage with "
 		},
 		{
 			"ita": "pugni nudi!",
