@@ -43,23 +43,24 @@ function nomeLocalizzato(mostroObj)
 	}
 }
 
-function aggiungiLog(testo, classe){
+function aggiungiLog(testo, classe, txtEffect){
 	var nuovoElemento = '<p class="'+classe+'">'+testo+'</p>';
- 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(roundTimer/4);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/4);
+ 	$(nuovoElemento).hide().appendTo($("#area-log")).fadeIn(roundTimer/4);
+	$("#area-log").animate({scrollTop:$("#area-log")[0].scrollHeight}, roundTimer/4);
+	if (txtEffect == "shake") $("#area-log p:last-child").effect(txtEffect, {times:6, distance:5, direction:"up"}, roundTimer);
 	spazio();
 }
 
 function aggiungiLogComplesso(testo){
 	var nuovoElemento = testo;
- 	$(nuovoElemento).hide().appendTo($("#gioco")).fadeIn(roundTimer/4);
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/4);
+ 	$(nuovoElemento).hide().appendTo($("#area-log")).fadeIn(roundTimer/4);
+	$("#area-log").animate({scrollTop:$("#area-log")[0].scrollHeight}, roundTimer/4);
 	spazio();
 }
 
 function spazio(){
-	$("#gioco").append("<br/>");
-	$("#gioco").animate({scrollTop:$("#gioco")[0].scrollHeight}, roundTimer/4);
+	$("#area-log").append("<br/>");
+	$("#area-log").animate({scrollTop:$("#area-log")[0].scrollHeight}, roundTimer/4);
 }
 
 function modificaStatsVisualizzate(div, nuovoValore, classe){	

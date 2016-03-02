@@ -195,12 +195,14 @@ function scontro(mostroScelto) {
 				
 					var txt = locCorrente["infligge "];
 					var classe = "viola";
+					var txtEffect;
 					
 					attaccoTemp = randomizza50(attaccoDx);
 					if (Math.random()*100 < critico) {
 						attaccoTemp *=2;
 						txt = locCorrente["infligge un CRITICO per "]
 						classe = "morto";
+						txtEffect = "shake";
 					}
 					dannoEroe = attaccoTemp-difesaNemico;
 					if (dannoEroe <= 0)
@@ -220,19 +222,21 @@ function scontro(mostroScelto) {
 					+ "): " 
 					+ txt
 					+ dannoEroe 
-					+ locCorrente[" danni"], classe);
+					+ locCorrente[" danni"], classe, txtEffect);
 				}
 				
 				if (attaccoSx > 0) {
 				
 					var txt = locCorrente["infligge "];
 					var classe = "viola";
+					var txtEffect;
 					
 					attaccoTemp = randomizza50(attaccoSx);
 					if (Math.random()*100 < critico) {
 						attaccoTemp *=2;
 						txt = locCorrente["infligge un CRITICO per "]
 						classe = "morto";
+						txtEffect = "shake";
 					}
 					dannoEroe = attaccoTemp-difesaNemico;
 					if (dannoEroe <= 0)
@@ -252,7 +256,7 @@ function scontro(mostroScelto) {
 					+ "): " 
 					+ txt 
 					+ dannoEroe 
-					+ locCorrente[" danni"], classe);
+					+ locCorrente[" danni"], classe, txtEffect);
 				}
 				$(".salute-mostro-bar").addClass("bgBianco");		
 				$(".salute-mostro-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );
@@ -292,12 +296,14 @@ function scontro(mostroScelto) {
 				
 				var txt = locCorrente["infligge "];
 				var classe = "rosso";
+				var txtEffect;
 				
 				attaccoNemicoTemp = randomizza50(attaccoNemico);
 				if (Math.random()*100 < 10) {
 					attaccoTemp *=2;
 					txt = locCorrente["infligge un CRITICO per "]
 					classe = "morto";
+					txtEffect = "shake";
 				}
 				dannoNemico = attaccoNemicoTemp-difesa;
 				if ( dannoNemico <= 0)
@@ -317,7 +323,7 @@ function scontro(mostroScelto) {
 				+ "): "
 				+ txt
 				+ dannoNemico
-				+ locCorrente[" danni"], classe);
+				+ locCorrente[" danni"], classe, txtEffect);
 				
 				turnoEroe = !turnoEroe;
 			}
