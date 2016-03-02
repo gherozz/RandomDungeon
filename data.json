@@ -39,7 +39,6 @@
 			"nomeEn":  "Healing Potion I",
 			"nome": "pozione-cura-i",
 			"tipo": "uso",
-			"slot": "nessuno",
 			"salute": "30",
 			"statoAttuale": "100",
 			"statoMax": "100",
