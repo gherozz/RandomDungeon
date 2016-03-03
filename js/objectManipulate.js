@@ -7,7 +7,7 @@
 function trovaOggetto()
 {
 	var oggettoObj = estraiDaListaPesata(listaOggetti);
-	aggiungiLog(nomeEroe + locCorrente[" ha trovato: "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto);
+	aggiungiLog("<span class='flaticon-inventario'></span> " + nomeEroe + locCorrente[" ha trovato "] + nomeLocalizzato(oggettoObj) + "!", oggettoObj.coloreTesto + " loot");
 	creaLiOggetto(oggettoObj, "#ulInventario");
 }
 
@@ -219,7 +219,7 @@ function aggiuntaStatsOggetto(oggettoObj, text, idSlot){
 			attaccoSx += parseInt(oggettoObj.attacco);
 			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, colore);
 		}
-		text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " + " + oggettoObj.attacco;
+		if (oggettoObj.attacco > -900) text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " + " + oggettoObj.attacco;
 		} 
 	}
 	
@@ -232,7 +232,7 @@ function aggiuntaStatsOggetto(oggettoObj, text, idSlot){
 		}
 		difesa += parseInt(oggettoObj.difesa);
 		modificaStatsVisualizzate("#difesa-value", difesa, colore);
-		text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " + " + oggettoObj.difesa;
+		if (oggettoObj.difesa > -900) text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " + " + oggettoObj.difesa;
 	}
 	
 	if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
@@ -248,7 +248,7 @@ function aggiuntaStatsOggetto(oggettoObj, text, idSlot){
 			salute = maxSalute;		
 		}
 		modificaStatsVisualizzate("#salute-value", salute, colore);
-		text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " + " + oggettoObj.salute;
+		if (oggettoObj.salute > -900) text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " + " + oggettoObj.salute;
 	}
 	
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
@@ -265,7 +265,7 @@ function aggiuntaStatsOggetto(oggettoObj, text, idSlot){
 		}
 		modificaStatsVisualizzate("#maxSalute-value", maxSalute, colore);
 		modificaStatsVisualizzate("#salute-value", salute, colore);
-		text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " + " + oggettoObj.maxSalute;
+		if (oggettoObj.maxSalute > -900) text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " + " + oggettoObj.maxSalute;
 	}
 	
 	if (oggettoObj.nome != "manoOccupata") aggiungiLog(text, oggettoObj.coloreTesto);
@@ -291,7 +291,7 @@ function rimozioneStatsOggetto(oggettoObj, idSlot) {
 			modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, colore);
 		}
 		
-		text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " - " + oggettoObj.attacco;
+		if (oggettoObj.attacco > -900) text += " <span class='flaticon-attacco'></span> " + locCorrente['Attacco'] + " - " + oggettoObj.attacco;
 	}
 	
 	if (oggettoObj.difesa != 0 && oggettoObj.difesa != undefined)
@@ -303,7 +303,7 @@ function rimozioneStatsOggetto(oggettoObj, idSlot) {
 		}
 		difesa -= parseInt(oggettoObj.difesa);
 		modificaStatsVisualizzate("#difesa-value", difesa, colore);
-		text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " - " + oggettoObj.difesa;
+		if (oggettoObj.difesa > -900) text += " <span class='flaticon-difesa'></span> " + locCorrente['Difesa'] + " - " + oggettoObj.difesa;
 	}
 	
 	if (oggettoObj.salute != 0 && oggettoObj.salute != undefined)
@@ -319,7 +319,7 @@ function rimozioneStatsOggetto(oggettoObj, idSlot) {
 			salute = maxSalute;		
 		}
 		modificaStatsVisualizzate("#salute-value", salute, colore);
-		text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " - " + oggettoObj.salute;
+		if (oggettoObj.salute > -900) text += " <span class='flaticon-salute'></span> " + locCorrente['Salute'] + " - " + oggettoObj.salute;
 	}
 	
 	if (oggettoObj.maxSalute != 0 && oggettoObj.maxSalute != undefined)
@@ -336,7 +336,7 @@ function rimozioneStatsOggetto(oggettoObj, idSlot) {
 		}
 		modificaStatsVisualizzate("#maxSalute-value", maxSalute, colore);
 		modificaStatsVisualizzate("#salute-value", salute, colore);
-		text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " - " + oggettoObj.salute;
+		if (oggettoObj.maxSalute > -900) text += " <span class='flaticon-salute'></span> " + locCorrente['Max Salute'] + " - " + oggettoObj.salute;
 	}
 	
 	if (oggettoObj.nome != "manoOccupata") aggiungiLog(text, oggettoObj.coloreTesto);

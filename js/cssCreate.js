@@ -34,6 +34,7 @@ function traduci(bandiera){
 	}
 	$("#inventarioNome").html(locCorrente["Inventario"]);
 	$("#equipaggiamentoNome").html(locCorrente["Equipaggiato"]);
+	$(".stats-eroe h3").html(locCorrente["Statistiche "] + nomeEroe);
 	$(".attacco").html(locCorrente["Attacco"]);
 	$(".difesa").html(locCorrente["Difesa"]);
 	$(".salute").html(locCorrente["Salute"]);

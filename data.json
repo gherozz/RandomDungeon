@@ -6,25 +6,30 @@
 			"nome": "manoOccupata",
 			"slot": "irremovibile",
 			"attacco": "-1000",
-			"coloreTesto": "arancione",
-			"chance": "0"
+			"chance": "0",
+			"immagine": "flaticon-mano-occupata"
 		}, 
 		{
-			"nomeIta":  "Spada di Ferro",
-			"nomeEn":  "Iron Sword",
+			"nomeIta":  "Spada",
+			"nomeEn":  "Sword",
+			"materiale": "metallo",
 			"nome": "spada",
+			"qualita": "",
 			"tipo": "equip",
 			"slot": "mano",
 			"attacco": "15",
 			"statoAttuale": "100",
 			"statoMax": "100",
 			"coloreTesto": "arancione",
-			"chance": "50"
+			"chance": "50",
+			"immagine": "flaticon-spada"
 		}, 
 		{
-			"nomeIta":  "Scudo di Ferro",
-			"nomeEn":  "Iron Shield",
+			"nomeIta":  "Scudo",
+			"nomeEn":  "Shield",
+			"materiale": "metallo",
 			"nome": "scudo",
+			"qualita": "",
 			"tipo": "equip",
 			"slot": "mano",
 			"difesa": "10",
@@ -32,220 +37,111 @@
 			"statoAttuale": "100",
 			"statoMax": "100",
 			"coloreTesto": "blu",
-			"chance": "50"
+			"chance": "50",
+			"immagine": "flaticon-scudo-asimmetrico"
 		}, 
 		{
-			"nomeIta":  "Pozione di Cura I",
-			"nomeEn":  "Healing Potion I",
-			"nome": "pozione-cura-i",
+			"nomeIta":  "Pozione",
+			"nomeEn":  "Potion",
+			"materiale": "pozione",
+			"nome": "pozione",
+			"qualita": "",
 			"tipo": "uso",
-			"salute": "30",
-			"statoAttuale": "100",
-			"statoMax": "100",
 			"coloreTesto": "verde",
+			"chance": "50",
+			"immagine": "flaticon-mana"
+		}
+	],
+	
+	"qualita": [
+		{
+			"nomeIta":  "Scarsa",
+			"nomeEn":  "Poor",
+			"nome": "scarsa",
+			"stats": "0",
 			"chance": "100"
 		}, 
 		{
-			"nomeIta":  "Spada +1",
-			"nomeEn":  "Sword +1",
-			"nome": "spada-incantata",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "30",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "25"
-		},
-		{
-			"nomeIta":  "Armatura di Ferro",
-			"nomeEn":  "Iron Armor",
-			"nome": "armatura-ferro",
-			"tipo": "equip",
-			"slot": "corpo",
-			"difesa": "10",
-			"maxSalute": "20",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "blu",
-			"chance": "25"
-		},
-		{
-			"nomeIta":  "Arco",
-			"nomeEn":  "Bow",
-			"nome": "arco",
-			"tipo": "equip",
-			"slot": "2 mani",
-			"attacco": "20",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
+			"nomeIta":  "Normale",
+			"nomeEn":  "Normal",
+			"nome": "normale",
+			"stats": "0",
 			"chance": "50"
-		},
+		}, 
 		{
-			"nomeIta":  "Excalibur",
-			"nomeEn":  "Excalibur",
-			"nome": "excalibur",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "20",
-			"difesa": "20",
-			"maxSalute": "10",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "1"
-		},
-		{
-			"nomeIta":  "Spada Arrugginita",
-			"nomeEn":  "Rusty Sword",
-			"nome": "spada-arrugginita",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "10",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "100"
-		},
-		{
-			"nomeIta":  "Spada di Legno",
-			"nomeEn":  "Wooden Sword",
-			"nome": "spada-legno",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "5",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "100"
-		},
-		{
-			"nomeIta":  "Spada d'Oro",
-			"nomeEn":  "Golden Sword",
-			"nome": "spada-oro",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "5",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
+			"nomeIta":  "Buona",
+			"nomeEn":  "Good",
+			"nome": "buona",
+			"stats": "0",
 			"chance": "25"
-		},
+		}, 
 		{
-			"nomeIta":  "Spada Venefica",
-			"nomeEn":  "Poisoning Sword",
-			"nome": "spada-venefica",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "20",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
+			"nomeIta":  "Eccellente",
+			"nomeEn":  "Excellent",
+			"nome": "eccellente",
+			"stats": "0",
 			"chance": "10"
-		},
+		}, 
 		{
-			"nomeIta":  "Giavellotto",
-			"nomeEn":  "Javelin",
-			"nome": "giavellotto",
-			"tipo": "equip",
-			"slot": "2 mani",
-			"attacco": "10",
-			"difesa": "5",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "100"
-		},
-		{
-			"nomeIta":  "Pala",
-			"nomeEn":  "Shovel",
-			"nome": "pala",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "5",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "100"
-		},
-		{
-			"nomeIta":  "Spada Ardente",
-			"nomeEn":  "Fiery Sword",
-			"nome": "spada-fuoco",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "20",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "10"
-		},
-		{
-			"nomeIta":  "Spada Maledetta",
-			"nomeEn":  "Cursed Sword",
-			"nome": "spada-maledetta",
-			"tipo": "equip",
-			"slot": "2 mani",
-			"attacco": "50",
-			"difesa": "-5",
-			"maxSalute": "-10",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "10"
-		},
-		{
-			"nomeIta":  "Arco Maledetto",
-			"nomeEn":  "Cursed Bow",
-			"nome": "arco-maledetto",
-			"tipo": "equip",
-			"slot": "2 mani",
-			"attacco": "50",
-			"difesa": "-5",
-			"maxSalute": "-10",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "10"
-		},
-		{
-			"nomeIta":  "Arco +1",
-			"nomeEn":  "Bow +1",
-			"nome": "arco-incantato",
-			"tipo": "equip",
-			"slot": "2 mani",
-			"attacco": "40",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "25"
-		},
-		{
-			"nomeIta":  "Aloxidil",
-			"nomeEn":  "Aloxidil",
-			"nome": "aloxidil",
-			"tipo": "equip",
-			"slot": "mano",
-			"attacco": "10",
-			"difesa": "30",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
+			"nomeIta":  "Perfetta",
+			"nomeEn":  "Perfect",
+			"nome": "perfetta",
+			"stats": "0",
 			"chance": "5"
+		}
+	],
+	
+	"materiali": [
+		{
+			"metalli": [
+				{
+					"nomeIta":  "Rame",
+					"nomeEn":  "Copper",
+					"nome": "rame",
+					"stats": "0",
+					"chance": "100"
+				}, 
+				{
+					"nomeIta":  "Bronzo",
+					"nomeEn":  "Bronze",
+					"nome": "bronzo",
+					"stats": "0",
+					"chance": "50"
+				}, 
+				{
+					"nomeIta":  "Ferro",
+					"nomeEn":  "Iron",
+					"nome": "ferro",
+					"stats": "0",
+					"chance": "25"
+				}, 
+				{
+					"nomeIta":  "Acciaio",
+					"nomeEn":  "Steel",
+					"nome": "acciaio",
+					"stats": "0",
+					"chance": "10"
+				}, 
+				{
+					"nomeIta":  "Ethernite",
+					"nomeEn":  "Ethernite",
+					"nome": "ethernite",
+					"stats": "0",
+					"chance": "5"
+				}
+			]
 		},
 		{
-			"nomeIta":  "Distruttore",
-			"nomeEn":  "Buster Sword",
-			"nome": "distruttore",
-			"tipo": "equip",
-			"slot": "2 mani",
-			"attacco": "50",
-			"difesa": "-10",
-			"statoAttuale": "100",
-			"statoMax": "100",
-			"coloreTesto": "arancione",
-			"chance": "5"
+			"pozioni": [
+				{
+					"nomeIta":  "Cura",
+					"nomeEn":  "Healing",
+					"nome": "cura",
+					"stats": "0",
+					"salute": "30",
+					"chance": "100"
+				}
+			]
 		}
 	],
 	

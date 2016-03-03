@@ -10,7 +10,9 @@ var critico = 10;
 var mana = 0;
 var monete = 0;
 
-var nomeEroe;
+var coloreEroe = "viola";
+var coloreNemico = "rosso";
+var nomeEroe = "Ser Random";
 
 var statoGioco;
 var roundTimer = 600;
@@ -27,6 +29,9 @@ var numDungeon = 1;
 
 var listaMostri = [];
 var listaOggetti = [];
+var listaMetalli = [];
+var listaPozioni = [];
+var listaQualita = [];
 var locIta = [];
 var locEn = [];
 var locCorrente = [];
@@ -66,11 +71,26 @@ $(document).ready( function(){
 		{
 			listaOggetti[val.nome] = val;
 		});
+		$.each(data.qualita, function( key, val )
+		{
+			listaQualita[val.nome] = val;
+		});
+		$.each(data.materiali, function( key, val )
+		{
+			$.each(val.metalli, function( key, val )
+			{
+				listaMetalli[val.nome] = val;
+			});
+			$.each(val.pozioni, function( key, val )
+			{
+				listaPozioni[val.nome] = val;
+			});
+		});
 	})
 	.done(function() {
-		aggiungiOggetto();
-		aggiungiOggetto();
-		aggiungiOggetto();
+	trovaOggetto();
+	trovaOggetto();
+	trovaOggetto();
 	})
 	.fail( function(d, textStatus, error) {
 		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
@@ -152,7 +172,7 @@ function scontro(mostroScelto) {
 	
 	var turnoEroe = true;
 	
-	aggiungiLog(nomeEroe + locCorrente[" incontra: "] + nomeNemico + "!", "rosso");
+	aggiungiLog(nomeEroe + locCorrente[" incontra: "] + nomeNemico + "!", "incontro");
 	
 	cambiaStatoGioco("combattimento");	
 	
@@ -168,100 +188,42 @@ function scontro(mostroScelto) {
 				var arma1, arma2;
 				var text = "";
 				
-				if ($("#equip-manoDx").find("li").length > 0) {
-					var oggetto1 = $("#equip-manoDx li").first().prop("oggetto");
-					if (oggetto1.nome != "mano") arma1 = nomeLocalizzato(oggetto1);
-				}
-				
-				if ($("#equip-manoSx").find("li").length > 0) {
-					var oggetto2 = $("#equip-manoSx li").first().prop("oggetto");
-					if (oggetto2.nome != "mano") arma2 = nomeLocalizzato(oggetto2);
-				}
+				arma1 =  nomeArma("#equip-manoDx");
+				arma2 =  nomeArma("#equip-manoSx");
 				
 				if (arma1 != undefined) {
 					text += arma1;
 				} 
 				if (text != "" && arma2 != undefined) {
-					text += " and " + arma2;
+					text += locCorrente[" e "] + arma2;
 				} else if (text == "" && arma2 != undefined) {
 					text += arma2;
 				} else if (text == "") {
 					text = locCorrente["pugni nudi!"];
 				}
 				
-				aggiungiLog(nomeEroe + locCorrente[" attacca con "] + text, "risultato-scontro");
+				aggiungiLog(nomeEroe + locCorrente[" attacca con "] + text, "azione");
 			
 				if (attaccoDx > 0) {
-				
-					var txt = locCorrente["infligge "];
-					var classe = "viola";
-					var txtEffect;
-					
-					attaccoTemp = randomizza50(attaccoDx);
-					if (Math.random()*100 < critico) {
-						attaccoTemp *=2;
-						txt = locCorrente["infligge un CRITICO per "]
-						classe = "morto";
-						txtEffect = "shake";
-					}
-					dannoEroe = attaccoTemp-difesaNemico;
-					if (dannoEroe <= 0)
-					{
-						dannoEroe = 1;
-					}
-					vitaNemico -= dannoEroe;
-					
-					modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
-					$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
-					
-					aggiungiLog(nomeEroe 
-					+ " <span class='flaticon-roll'> </span>(<span class='flaticon-attacco'> </span>" 
-					+ attaccoTemp 
-					+ " - <span class='flaticon-difesa'> </span>" 
-					+ difesaNemico 
-					+ "): " 
-					+ txt
-					+ dannoEroe 
-					+ locCorrente[" danni"], classe, txtEffect);
+					setTimeout(function() {
+						vitaNemico -= attaccoEroe (attaccoDx, difesaNemico, arma1);
+						$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
+						}, roundTimer/3);
 				}
 				
 				if (attaccoSx > 0) {
-				
-					var txt = locCorrente["infligge "];
-					var classe = "viola";
-					var txtEffect;
-					
-					attaccoTemp = randomizza50(attaccoSx);
-					if (Math.random()*100 < critico) {
-						attaccoTemp *=2;
-						txt = locCorrente["infligge un CRITICO per "]
-						classe = "morto";
-						txtEffect = "shake";
-					}
-					dannoEroe = attaccoTemp-difesaNemico;
-					if (dannoEroe <= 0)
-					{
-						dannoEroe = 1;
-					}
-					vitaNemico -= dannoEroe;
-					
-					modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");			
-					$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
-					
-					aggiungiLog(nomeEroe 
-					+ " <span class='flaticon-roll'> </span>(<span class='flaticon-attacco'> </span>" 
-					+ attaccoTemp 
-					+ " - <span class='flaticon-difesa'> </span>" 
-					+ difesaNemico 
-					+ "): " 
-					+ txt 
-					+ dannoEroe 
-					+ locCorrente[" danni"], classe, txtEffect);
+					setTimeout(function() {
+						vitaNemico -= attaccoEroe (attaccoSx, difesaNemico, arma2);
+						$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
+					}, roundTimer/3*2);
 				}
+				
+				modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 				$(".salute-mostro-bar").addClass("bgBianco");		
 				$(".salute-mostro-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );
+				
 				turnoEroe = !turnoEroe;
-			} else {
+			} else if (vitaNemico > 0) {
 				if (mostroScelto.azioni.length > 0) {
 					var attaccoScelto = estraiDaListaPesata(mostroScelto.azioni);
 					switch(attaccoScelto.nome){ 
@@ -272,37 +234,37 @@ function scontro(mostroScelto) {
 								vitaNemico = maxVitaNemico;
 							}
 							attaccoNemico= 0;
-							aggiungiLog(nomeNemico + locCorrente[" rigenera le sue ferite"], "risultato-scontro");
+							aggiungiLog(nomeNemico + locCorrente[" rigenera le sue ferite"], "azione");
 						break;
 						case "artiglio":
-							aggiungiLog(nomeNemico + locCorrente[" artiglia "] + nomeEroe, "risultato-scontro");
+							aggiungiLog(nomeNemico + locCorrente[" artiglia "] + nomeEroe, "azione");
 							attaccoNemico = baseAttaccoNemico;
 						break;
 						case "colpoCoda":
 							difesa -= 5;
 							attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-							aggiungiLog(nomeNemico + locCorrente[" sferra un colpo con la coda, abbassando le difese dell'eroe di "]  + nomeEroe, "risultato-scontro");
+							aggiungiLog(nomeNemico + locCorrente[" sferra un colpo con la coda, abbassando le difese dell'eroe di "]  + nomeEroe, "azione");
 							modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 
 						break;
 						case "corazzaSpine":
 							difesaNemico += 5;
 							attaccoNemico = Math.round(baseAttaccoNemico*0.25);
-							aggiungiLog(nomeNemico + locCorrente[" genera la sua corazza spinata!"], "risultato-scontro");
+							aggiungiLog(nomeNemico + locCorrente[" genera la sua corazza spinata!"], "azione");
 							modificaStatsVisualizzate("#difesa-mostro-value", difesaNemico, "blu");
 						break;
 					}
 				}
 				
 				var txt = locCorrente["infligge "];
-				var classe = "rosso";
+				var classe = coloreNemico;
 				var txtEffect;
 				
 				attaccoNemicoTemp = randomizza50(attaccoNemico);
 				if (Math.random()*100 < 10) {
-					attaccoTemp *=2;
+					attaccoNemicoTemp *=2;
 					txt = locCorrente["infligge un CRITICO per "]
-					classe = "morto";
+					classe = "criticoTxt " + coloreNemico;
 					txtEffect = "shake";
 				}
 				dannoNemico = attaccoNemicoTemp-difesa;
@@ -310,60 +272,102 @@ function scontro(mostroScelto) {
 				{
 					dannoNemico = 1;
 				}
-				salute -= dannoNemico;
+				setTimeout(function() {
+					salute -= dannoNemico;
+					modificaStatsVisualizzate("#salute-value", salute, "rosso");
+					$(".numeri-mostro").css("height", $(".numeri-eroe").height());
 				
-				modificaStatsVisualizzate("#salute-value", salute, "rosso");
-				$(".numeri-mostro").css("height", $(".numeri-eroe").height());
-				
-				
-				aggiungiLog(nomeNemico
-				+ " <span class='flaticon-roll'> </span>(<span class='flaticon-attacco'> </span>"
-				+ attaccoNemicoTemp + " - <span class='flaticon-difesa'> </span>" 
-				+ difesa
-				+ "): "
-				+ txt
-				+ dannoNemico
-				+ locCorrente[" danni"], classe, txtEffect);
+				aggiungiLog(
+				"<span class='flaticon-roll'>   "
+					+	nomeNemico 
+					+ " </span>(<span class='flaticon-attacco'> </span>"
+					+ attaccoNemicoTemp + " - <span class='flaticon-difesa'> </span>" 
+					+ difesa
+					+ "): "
+					+ txt
+					+ dannoNemico
+					+ locCorrente[" danni"], classe, txtEffect);
 				
 				turnoEroe = !turnoEroe;
+				}, roundTimer/2);
 			}
 			
 			if(salute <= 0 || vitaNemico <= 0) {
 				clearInterval(loop);
-				if (salute > 0)
-				{
-					
-					$('.stats-mostro').children().fadeOut(700, function(){
-						$(this).empty();
-					});
-					
-					if (numeroRandom(0, 100) > 25) 
+				setTimeout(function()  {
+					if (salute > 0)
 					{
-						trovaOggetto();
-					}
-					
-					aggiungiLog(nomeEroe + locCorrente[" ha sconfitto "] + nomeNemico, "morto");
-					cambiaStatoGioco("scende");
-				}
-				else
-				{
-					cambiaStatoGioco("morto");
-					aggiungiLog(nomeEroe + locCorrente[" è morto"], "morto");
-					
-					setTimeout(function(){ 
-						var r = confirm(nomeEroe + locCorrente[" é morto! Riprova?\n\n Livello raggiunto: "] + livello);
-						if(r == true){
-							location.reload();
+						
+						$('.stats-mostro').children().fadeOut(700, function(){
+							$(this).empty();
+						});
+						
+						aggiungiLog(nomeEroe + locCorrente[" ha sconfitto "] + nomeNemico, "morto");
+						
+						if (numeroRandom(0, 100) > 25) 
+						{
+							trovaOggetto();
 						}
-					}, 2000);
-				}
+						
+						cambiaStatoGioco("scende");
+					}
+					else
+					{
+						cambiaStatoGioco("morto");
+						aggiungiLog(nomeEroe + locCorrente[" è morto"], "morto");
+						
+						setTimeout(function(){ 
+							var r = confirm(nomeEroe + locCorrente[" é morto! Riprova?\n\n Livello raggiunto: "] + livello);
+							if(r == true){
+								location.reload();
+							}
+						}, roundTimer*2);
+					}
+				}, roundTimer);
 			}
 		}, roundTimer*2);
 	}
 }
 
-// function popup(){
-// 	$("#alert-villaggio").dialog("open");
-// };
-	
+function nomeArma(slot) {
+	if ($(slot).find("li").length > 0) {
+		var oggetto = $(slot + " li").first().prop("oggetto");
+		if (oggetto.attacco >= 0 && oggetto.attacco != undefined) {
+			return nomeLocalizzato(oggetto);
+		}
+	} else {
+		return locCorrente["pugno"];
+	}
+}
 
+function attaccoEroe (attacco, difesaNemico, arma) {
+	var txt = locCorrente["infligge "];
+	var classe = coloreEroe;
+	var txtEffect;
+	
+	attaccoTemp = randomizza50(attacco);
+	if (Math.random()*100 < critico) {
+		attaccoTemp *=2;
+		txt = locCorrente["infligge un CRITICO per "]
+		classe = "criticoTxt " + coloreEroe;
+		txtEffect = "shake";
+	}
+	dannoEroe = attaccoTemp-difesaNemico;
+	if (dannoEroe <= 0)
+	{
+		dannoEroe = 1;
+	}	
+	aggiungiLog(
+	"<span class='flaticon-roll'>   " 
+	+ nomeEroe 
+	+ " </span>(<span class='flaticon-attacco'> </span>" 
+	+ attaccoTemp 
+	+ " - <span class='flaticon-difesa'> </span>" 
+	+ difesaNemico 
+	+ "): " 
+	+ txt
+	+ dannoEroe 
+	+ locCorrente[" danni con "] + arma, classe, txtEffect);
+	
+	return dannoEroe;
+}
