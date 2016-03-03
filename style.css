@@ -135,7 +135,6 @@ span{
 }
 
 .pull{
-	width: 10%;
 	height: 100%;
 	position: relative;
 	cursor: pointer;
@@ -151,23 +150,25 @@ span{
 	font-size: 2em;
 	position: relative;
 	top: 5%;
-	
 }
 
 #pull1:hover, #pull2:hover, #pull3:hover{
-	width: 13%;
+	width: 12%;
 }
 
 #pull1{
 	z-index: 10;
+	width: 10%;
 }
 #pull2{
 	top: 15%;
 	z-index: 20;
+	width: 9%;
 }
 #pull3{
 	top: 30%;
 	z-index: 30;
+	width: 8%;
 }
 
 #pull3 span{
