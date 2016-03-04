@@ -44,7 +44,7 @@ function traduci(bandiera){
 	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
 	cambiaStatoGioco(statoGioco);
 	
-	$("#ulInventario li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function( index ) {
+	$("#ulInventario li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function() {
 		oggettoObj = $(this).prop("oggetto");
 		$(this).empty();
 		setItemInfo($(this),oggettoObj);

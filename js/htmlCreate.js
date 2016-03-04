@@ -3,21 +3,20 @@ function dungeon(numdungeon){
 	switch(numdungeon){
 
 		case 1:
-			// $('.header').animate({backgroundColor: "#2A7F00"});
-			$('.colonna-sx').animate({backgroundColor: "#88C159"});
+			//$('.header').animate({backgroundColor: "#2A7F00"});
+			//$('.colonna-sx').animate({backgroundColor: "#88C159"});
 		break;
 		case 2:
 			//$('.header').animate({backgroundColor: "#ef4410"});
-			$('.colonna-sx').animate({backgroundColor: "#f27d3e"});
+			//$('.colonna-sx').animate({backgroundColor: "#f27d3e"});
 		break;
 		case 3:
 			//$('.header').animate({backgroundColor: "#8C8181"});
-			$('.colonna-sx').animate({backgroundColor: "#9E7E7E"});
+			//$('.colonna-sx').animate({backgroundColor: "#9E7E7E"});
 		break;
 		case 4:
 			//$('.header').animate({backgroundColor: "#474141"});
-			$('.colonna-sx').animate({backgroundColor: "#684E4E"});
-		
+			//$('.colonna-sx').animate({backgroundColor: "#684E4E"});
 	}
 }
 
