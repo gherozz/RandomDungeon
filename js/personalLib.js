@@ -83,6 +83,14 @@ function modificaStatsVisualizzate(div, nuovoValore, classe){
 		$(".salute-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );	
 		$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer/2);	
 	}
+	if (div == "#attaccoSx-value" && nuovoValore == 0)
+	{
+		$(div).empty();
+	} 
+	else if (div == "#attaccoDx-value" && nuovoValore == 0)
+	{
+		$(div).empty();
+	}
 }
 
 function setItemInfo(jQ, oggettoObj) {
