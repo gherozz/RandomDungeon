@@ -1,10 +1,11 @@
 var livello = 0;
 var livelloBoss = 10;
 
-var attaccoDx = 5;
-var attaccoSx = 5;
+var attaccoManiNude = 5;
+var attaccoDx = attaccoManiNude;
+var attaccoSx = attaccoManiNude;
 var difesa = 0;
-var maxSalute = 200;
+var maxSalute = 100;
 var salute = maxSalute;
 var critico = 10;
 var mana = 0;
@@ -15,7 +16,7 @@ var coloreNemico = "rosso";
 var nomeEroe = "Ser Random";
 
 var statoGioco;
-var roundTimer = 600;
+var roundTimer = 700;
 var fattoreScala = 50;
 
 var lingua = "en";
@@ -206,19 +207,20 @@ function scontro(mostroScelto) {
 			
 				if (attaccoDx > 0) {
 					setTimeout(function() {
-						vitaNemico -= attaccoEroe (attaccoDx, difesaNemico, arma1);
+						vitaNemico -= attaccoEroe(attaccoDx, difesaNemico, arma1);
 						$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
+						modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 						}, roundTimer/3);
 				}
 				
 				if (attaccoSx > 0) {
 					setTimeout(function() {
-						vitaNemico -= attaccoEroe (attaccoSx, difesaNemico, arma2);
+						vitaNemico -= attaccoEroe(attaccoSx, difesaNemico, arma2);
 						$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
+						modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 					}, roundTimer/3*2);
 				}
 				
-				modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 				$(".salute-mostro-bar").addClass("bgBianco");		
 				$(".salute-mostro-bar").toggleClass("bgBianco", roundTimer/2, "easeInOutCubic" );
 				
@@ -257,7 +259,7 @@ function scontro(mostroScelto) {
 				}
 				
 				var txt = locCorrente["infligge "];
-				var classe = coloreNemico;
+				var classe = coloreNemico + " roll";;
 				var txtEffect;
 				
 				attaccoNemicoTemp = randomizza50(attaccoNemico);
@@ -340,9 +342,9 @@ function nomeArma(slot) {
 	}
 }
 
-function attaccoEroe (attacco, difesaNemico, arma) {
+function attaccoEroe(attacco, difesaNemico, arma) {
 	var txt = locCorrente["infligge "];
-	var classe = coloreEroe;
+	var classe = coloreEroe + " roll";
 	var txtEffect;
 	
 	attaccoTemp = randomizza50(attacco);

@@ -77,8 +77,8 @@
 			"en": "Status"
 		},
 		{
-			"ita": "Tipo",
-			"en": "Type"
+			"ita": "Uso",
+			"en": "Usage"
 		},
 		{
 			"ita": "Slot",
@@ -161,8 +161,8 @@
 			"en": "equip"
 		},
 		{
-			"ita": "uso",
-			"en": "use"
+			"ita": "consumabile",
+			"en": "consumable"
 		},
 		{
 			"ita": " ha rimosso ",
@@ -219,6 +219,14 @@
 		{
 			"ita": " e ",
 			"en": " and "
+		},
+		{
+			"ita": "Tipo",
+			"en": "Type"
+		},
+		{
+			"ita": "Qualitá",
+			"en": "Quality"
 		},
 		{
 			"ita": "pugni nudi!",

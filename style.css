@@ -44,20 +44,18 @@ span{
 	font-size: 4vw;
 	float: left;
 	color: #c95314;
-	text-shadow:0px 0px 0 rgb(177,59,-4),1px 1px 0 rgb(162,44,-19),2px 2px 0 rgb(148,30,-33),3px 3px 0 rgb(133,15,-48),4px 4px 0 rgb(119,1,-62),5px 5px 0 rgb(104,-14,-77), 6px 6px 0 rgb(90,-28,-91),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+	text-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
 .header h1 a:after{
 	content: "Random Dungeon";
 }
 #lingua-blur{
-	background-color: #ccc;
-	float: right;
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-right: 2%;
-	width: 6%;
-	height: 40%;
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    width: 6vw;
+    height: 3.5vw;
+	box-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
 #lingua{
 	width: 100%;
@@ -86,7 +84,6 @@ span{
 
 .colonna-sx{
 	width: 55%;
-	background: #88C159;
 	position: relative;
 }
 
@@ -147,9 +144,10 @@ span{
 }
 
 .pull span{
-	font-size: 2em;
+	font-size: 2.5vw;
 	position: relative;
 	top: 5%;
+	color: #403008;
 }
 
 #pull1:hover, #pull2:hover, #pull3:hover{
@@ -182,7 +180,7 @@ span{
 }
 
 #mappa-container h2, #quest-container h2, #inventario-container h2{
-	font-size: 5em;
+	font-size: 5vw;
 }
 
 /* FINE MAIN PULLS */
@@ -193,25 +191,25 @@ span{
 #inventarioNome {
 	right: 35%;
 	position: absolute;
-	top: -25%;
+	top: -15%;
 	font-size: 2.5vw;
 	color: #c95314;
-	text-shadow:0px 0px 0 rgb(177,59,-4),1px 1px 0 rgb(162,44,-19),2px 2px 0 rgb(148,30,-33),3px 3px 0 rgb(133,15,-48),4px 4px 0 rgb(119,1,-62),5px 5px 0 rgb(104,-14,-77), 6px 6px 0 rgb(90,-28,-91),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+	text-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
 
 #equipaggiamentoNome {
 	right: -12%;
-	top:-25%;
+	top:-15%;
 	position: absolute;
 	font-size: 2.5vw;
 	color: #c95314;
-	text-shadow:0px 0px 0 rgb(177,59,-4),1px 1px 0 rgb(162,44,-19),2px 2px 0 rgb(148,30,-33),3px 3px 0 rgb(133,15,-48),4px 4px 0 rgb(119,1,-62),5px 5px 0 rgb(104,-14,-77), 6px 6px 0 rgb(90,-28,-91),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+	text-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
 
 #inventario, #equipaggiamento{
 	position: absolute;
-	height: 60%;
-	top:20%;
+	height: 80%;
+	top:15%;
 }
 #inventario{	
 	right: 5%;
@@ -231,17 +229,17 @@ span{
 .equip{
 	position: absolute;
 	list-style-type: none;
-	height: 3.5em;
-	width:3.5em;
+	height: 3.5vw;
+	width:3.5vw;
 	box-shadow:0px 0px 0 rgb(178,132,4),1px 1px 0 rgb(163,117,-11),2px 2px 0 rgb(149,103,-25),3px 3px 0 rgb(134,88,-40),4px 4px 0 rgb(120,74,-54),5px 5px 0 rgb(105,59,-69), 6px 6px 0 rgb(91,45,-83),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
 
 .icona-equip{
 	position: absolute;
 	z-index: 1;
-	font-size: 3em;
+	font-size: 3vw;
 	opacity: 0.2;
-	margin: 2px 4px;
+	margin: 2px;
 }
 
 .area-testa{	
@@ -249,26 +247,26 @@ span{
 }
 .area-corpo{	
 	right: 5%;
-	top: 100%;
+	top: 40%;
 }
 .area-manoDx{	
 	right: 5%;
-	top: 33%;
+	top: 20%;
 }
 .area-manoSx{	
-	right: 5%;
-	top: 66%;
+	right: 45%;
+	top: 20%;
 }
 .slot{
 	float: left;
-	height: 3.5em;
-	width:3.5em;
+	height: 3.5vw;
+	width:3.5vw;
 	z-index: 2;
 }
 .imgSlot{
 	width: 100%;
 	height: 100%;
-	font-size: 2.8em;
+	font-size: 2.5vw;
     position: relative;
 	top: 0px;
 	left:0px;
@@ -281,14 +279,15 @@ span{
 	height: 100%;
 	float: right;
 	z-index: 8;
-	text-indent: 3px;
 	transition: 0.5s;
+	text-indent: 0.3vw;
+	line-height: 3.3vw;
 }
 
 .imgSlot span:hover{
 	-webkit-box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
--moz-box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
-box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
+	-moz-box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
+	box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
 }
 
 .imgSlot:hover {
@@ -299,22 +298,22 @@ box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
 	z-index: 20;
 }
 .info{
-	background-color: #010101;
+	background-color: #000;
 	color: #fff;
 	border-radius: 5px;
 	padding: 5px;
-	width: 100px;
-	position: absolute;
-	margin-left: -26px;
+	width: 9vw;
+	position: relative;
+    left: -2.3vw;
 	z-index: 8;
-	font-size: 1em;
+	font-size: 1.2vw;
 	opacity: 0;
 	transition: opacity 0.5s;
 	text-align: center;
 	text-transform: capitalize;
 }
 .imgSlot:hover + div .info{
- 	opacity: 1;
+ 	opacity: 0.9;
  	z-index: 100;
 }
 .info p{
@@ -356,7 +355,7 @@ box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
 	clear: both;
 	margin:0 50px;
 	text-transform: capitalize;
-	font-size: 2em;
+	font-size: 2.5vw;
 	color: #222;
 	text-shadow:0px 0px 0 rgb(185,185,185),1px 1px 0 rgb(170,170,170),2px 2px 0 rgb(156,156,156),3px 3px 0 rgb(141,141,141),4px 4px 0 rgb(127,127,127),5px 5px 0 rgb(112,112,112), 6px 6px 0 rgb(98,98,98),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
@@ -370,7 +369,7 @@ box-shadow: inset 0px 0px 0px 0px rgba(202,155,28,0.5);
 }
 
 .numeri-eroe, .numeri-mostro{
-	font-size: 1em;
+	font-size: 1.2vw;
 	margin: 5px;
 	color: #222;
 	background: #f2f1f1;
@@ -641,7 +640,7 @@ input:placeholder-shown {
 	position: absolute;
 	bottom: 0;
 	background: #222;
-	z-index: 10;
+	z-index: 50;
 	color: #999;
 }
 .footer-pull span{
@@ -653,7 +652,7 @@ input:placeholder-shown {
 	bottom: 20px;
 	right: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 50;
 	margin: 0 auto;
 	width: 0;
 	height: 0;
@@ -667,7 +666,7 @@ footer{
 	background: #222;
 	position: absolute;
 	bottom: 0;
-	z-index: 10;
+	z-index: 50;
 	color: #bbb;
 	display: none;
 }
@@ -676,7 +675,7 @@ footer{
 	top: 0;
 	right: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 50;
 	width: 0;
 	height: 0;
 	border-top: 5px solid #999;
@@ -731,55 +730,88 @@ footer{
 
 /* COLORI  */
 
-
+.pelle{
+	text-shadow:0px 0px 0 rgb(208,130,62),1px 1px 0 rgb(193,115,47),2px 2px 0 rgb(179,101,33),3px 3px 0 rgb(164,86,18),4px 4px 0 rgb(150,72,4),5px 5px 0 rgb(135,57,-11), 6px 6px 0 rgb(121,43,-25),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+}
+.pelle-colore{
+	color: #e89a56;
+}
 .cura{
-	color: #e60000;
 	text-shadow:0px 0px 0 rgb(206,-24,-24),1px 1px 0 rgb(191,-39,-39),2px 2px 0 rgb(177,-53,-53),3px 3px 0 rgb(162,-68,-68),4px 4px 0 rgb(148,-82,-82),5px 5px 0 rgb(133,-97,-97), 6px 6px 0 rgb(119,-111,-111),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
+.cura-colore{
+	color: #e60000;
+}
 .rame{
-	color: #C87533;
 	text-shadow:0px 0px 0 rgb(176,94,27),1px 1px 0 rgb(161,79,12),2px 2px 0 rgb(147,65,-2),3px 3px 0 rgb(132,50,-17),4px 4px 0 rgb(118,36,-31),5px 5px 0 rgb(103,21,-46), 6px 6px 0 rgb(89,7,-60),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
+.rame-colore{
+	color: #C87533;
+}
 .bronzo{
-	color: #994d00;
 	text-shadow:0px 0px 0 rgb(129,53,-24),1px 1px 0 rgb(114,38,-39),2px 2px 0 rgb(100,24,-53),3px 3px 0 rgb(85,9,-68),4px 4px 0 rgb(71,-5,-82),5px 5px 0 rgb(56,-20,-97), 6px 6px 0 rgb(42,-34,-111),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
+.bronzo-colore{
+	color: #994d00;
+}
 .ferro{
-	color: #D1D2D5;
 	text-shadow:0px 0px 0 rgb(185,186,189),1px 1px 0 rgb(170,171,174),2px 2px 0 rgb(156,157,160),3px 3px 0 rgb(141,142,145),4px 4px 0 rgb(127,128,131),5px 5px 0 rgb(112,113,116), 6px 6px 0 rgb(98,99,102),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
+.ferro-colore{
+	color: #D1D2D5;
+}
 .acciaio{
-	color: #b0c4de;
 	text-shadow:0px 0px 0 rgb(152,172,198),1px 1px 0 rgb(137,157,183),2px 2px 0 rgb(123,143,169),3px 3px 0 rgb(108,128,154),4px 4px 0 rgb(94,114,140),5px 5px 0 rgb(79,99,125), 6px 6px 0 rgb(65,85,111),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
 }
+.acciaio-colore{
+	color: #b0c4de;
+}
 .ethernite{
-	color: #b3ffd9;
 	text-shadow:0px 0px 0 rgb(155,231,193),1px 1px 0 rgb(140,216,178),2px 2px 0 rgb(126,202,164),3px 3px 0 rgb(111,187,149),4px 4px 0 rgb(97,173,135),5px 5px 0 rgb(82,158,120), 6px 6px 0 rgb(68,144,106),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+}
+.ethernite-colore{
+	color: #b3ffd9;
 }
 .scarsa{
 	-webkit-box-shadow: inset 0px 0px 0px 4px rgba(99,50,12,0.5);
 	-moz-box-shadow: inset 0px 0px 0px 4px rgba(99,50,12,0.5);
 	box-shadow: inset 0px 0px 0px 4px rgba(99,50,12,0.5);
 }
+.scarsa-colore{
+	color: #63320c;
+}
 .normale{
 	-webkit-box-shadow: inset 0px 0px 0px 4px rgba(255,239,138,0.5);
 	-moz-box-shadow: inset 0px 0px 0px 4px rgba(255,239,138,0.5);
 	box-shadow: inset 0px 0px 0px 4px rgba(255,239,138,0.5);
+}
+.normale-colore{
+	color: #ffef8a;
 }
 .buona{
 	-webkit-box-shadow: inset 0px 0px 0px 4px rgba(95,217,95,0.5);
 	-moz-box-shadow: inset 0px 0px 0px 4px rgba(95,217,95,0.5);
 	box-shadow: inset 0px 0px 0px 4px rgba(95,217,95,0.5);
 }
+.buona-colore{
+	color: #5fd95f;
+}
 .eccellente{
 	-webkit-box-shadow: inset 0px 0px 0px 4px rgba(138,255,249,0.5);
 	-moz-box-shadow: inset 0px 0px 0px 4px rgba(138,255,249,0.5);
 	box-shadow: inset 0px 0px 0px 4px rgba(138,255,249,0.5);
 }
+.eccellente-colore{
+	color: #8afff9;
+}
 .perfetta{
 	-webkit-box-shadow: inset 0px 0px 0px 4px rgba(255,255,255,0.5);
 	-moz-box-shadow: inset 0px 0px 0px 4px rgba(255,255,255,0.5);
 	box-shadow: inset 0px 0px 0px 4px rgba(255,255,255,0.5);
+}
+.perfetta-colore{
+	color: #fff;
+	text-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.75);
 }
 .rosso{
 	color: red;
@@ -813,41 +845,40 @@ footer{
 }
 .titolo-livello{
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 2vw;
 	text-indent: 0;
-	margin-top: 10px;
+	margin-top: 1vw;
 }
 .morto{
-	font-size: 1.5em;
+	font-size: 1.5vw;
 	color: red;
-	margin-top: 1em;
+	margin-top: 1vw;
 }
 .loot{
-	font-size: 1.3em;
-	margin-top: 1em;
+	font-size: 1.3vw;
+	margin-top: 1vw;
 }
 .incontro{
-	font-size: 1.5em;
-	margin-top: 1em;
+	font-size: 1.5vw;
+	margin-top: 1vw;
 }
 
 .azione{
-	font-size: 1.3em;
-	margin-left: 0.5em;
-	margin-top: 1em;
+	font-size: 1.3vw;
+	margin-left: 0.5vw;
+	margin-top: 1vw;
 }
 
 .criticoTxt{
-	font-size: 1.2em;
+	font-size: 1.2vw;
 }
-
+.roll{
+	font-size: 1vw;
+	margin-top: 1vw;
+}
 .header-red{
 	background: #ef4410;
 }
 .colonna-sx-red{
 	background: #f27d3e;
-}
-
-.rapporto{
-	text-decoration: underline;
 }

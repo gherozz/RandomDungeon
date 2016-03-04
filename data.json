@@ -5,17 +5,17 @@
 			"nomeEn":  "Busy Hand",
 			"nome": "manoOccupata",
 			"slot": "irremovibile",
-			"attacco": "-1000",
+			"attacco": "-10",
 			"chance": "0",
-			"immagine": "flaticon-mano-occupata"
+			"immagine": "flaticon-mano"
 		}, 
 		{
 			"nomeIta":  "Spada",
 			"nomeEn":  "Sword",
-			"materiale": "metallo",
+			"tipo": "metallo",
 			"nome": "spada",
 			"qualita": "",
-			"tipo": "equip",
+			"uso": "equip",
 			"slot": "mano",
 			"attacco": "15",
 			"statoAttuale": "100",
@@ -25,15 +25,30 @@
 			"immagine": "flaticon-spada"
 		}, 
 		{
+			"nomeIta":  "Spadone",
+			"nomeEn":  "Greatsword",
+			"tipo": "metallo",
+			"nome": "spadone",
+			"qualita": "",
+			"uso": "equip",
+			"slot": "2 mani",
+			"attacco": "30",
+			"statoAttuale": "100",
+			"statoMax": "100",
+			"coloreTesto": "arancione",
+			"chance": "50",
+			"immagine": "flaticon-gladio"
+		}, 
+		{
 			"nomeIta":  "Scudo",
 			"nomeEn":  "Shield",
-			"materiale": "metallo",
+			"tipo": "metallo",
 			"nome": "scudo",
 			"qualita": "",
-			"tipo": "equip",
+			"uso": "equip",
 			"slot": "mano",
-			"difesa": "10",
-			"attacco": "-1000",
+			"difesa": "5",
+			"attacco": "-10",
 			"statoAttuale": "100",
 			"statoMax": "100",
 			"coloreTesto": "blu",
@@ -41,14 +56,44 @@
 			"immagine": "flaticon-scudo-asimmetrico"
 		}, 
 		{
+			"nomeIta":  "Elmo",
+			"nomeEn":  "Helm",
+			"tipo": "metallo",
+			"nome": "elmo",
+			"qualita": "",
+			"uso": "equip",
+			"slot": "testa",
+			"difesa": "5",
+			"statoAttuale": "100",
+			"statoMax": "100",
+			"coloreTesto": "blu",
+			"chance": "50",
+			"immagine": "flaticon-testa-elmo"
+		},
+		{
+			"nomeIta":  "Armatura di Piastre",
+			"nomeEn":  "Chestplate",
+			"tipo": "metallo",
+			"nome": "armatura-piastre",
+			"qualita": "",
+			"uso": "equip",
+			"slot": "corpo",
+			"difesa": "10",
+			"statoAttuale": "100",
+			"statoMax": "100",
+			"coloreTesto": "blu",
+			"chance": "50",
+			"immagine": "flaticon-armatura-piastre"
+		},
+		{
 			"nomeIta":  "Pozione",
 			"nomeEn":  "Potion",
-			"materiale": "pozione",
+			"tipo": "pozione",
 			"nome": "pozione",
 			"qualita": "",
-			"tipo": "uso",
+			"uso": "consumabile",
 			"coloreTesto": "verde",
-			"chance": "50",
+			"chance": "100",
 			"immagine": "flaticon-mana"
 		}
 	],
@@ -58,36 +103,36 @@
 			"nomeIta":  "Scarsa",
 			"nomeEn":  "Poor",
 			"nome": "scarsa",
-			"stats": "0",
+			"stats": "1",
 			"chance": "100"
 		}, 
 		{
 			"nomeIta":  "Normale",
 			"nomeEn":  "Normal",
 			"nome": "normale",
-			"stats": "0",
-			"chance": "50"
+			"stats": "25",
+			"chance": "25"
 		}, 
 		{
 			"nomeIta":  "Buona",
 			"nomeEn":  "Good",
 			"nome": "buona",
-			"stats": "0",
-			"chance": "25"
+			"stats": "50",
+			"chance": "10"
 		}, 
 		{
 			"nomeIta":  "Eccellente",
 			"nomeEn":  "Excellent",
 			"nome": "eccellente",
-			"stats": "0",
-			"chance": "10"
+			"stats": "75",
+			"chance": "2.5"
 		}, 
 		{
 			"nomeIta":  "Perfetta",
 			"nomeEn":  "Perfect",
 			"nome": "perfetta",
-			"stats": "0",
-			"chance": "5"
+			"stats": "100",
+			"chance": "1"
 		}
 	],
 	
@@ -98,36 +143,36 @@
 					"nomeIta":  "Rame",
 					"nomeEn":  "Copper",
 					"nome": "rame",
-					"stats": "0",
+					"stats": "1",
 					"chance": "100"
 				}, 
 				{
 					"nomeIta":  "Bronzo",
 					"nomeEn":  "Bronze",
 					"nome": "bronzo",
-					"stats": "0",
-					"chance": "50"
+					"stats": "25",
+					"chance": "25"
 				}, 
 				{
 					"nomeIta":  "Ferro",
 					"nomeEn":  "Iron",
 					"nome": "ferro",
-					"stats": "0",
-					"chance": "25"
+					"stats": "50",
+					"chance": "10"
 				}, 
 				{
 					"nomeIta":  "Acciaio",
 					"nomeEn":  "Steel",
 					"nome": "acciaio",
-					"stats": "0",
-					"chance": "10"
+					"stats": "75",
+					"chance": "2.5"
 				}, 
 				{
 					"nomeIta":  "Ethernite",
 					"nomeEn":  "Ethernite",
 					"nome": "ethernite",
-					"stats": "0",
-					"chance": "5"
+					"stats": "100",
+					"chance": "1"
 				}
 			]
 		},
@@ -137,9 +182,9 @@
 					"nomeIta":  "Cura",
 					"nomeEn":  "Healing",
 					"nome": "cura",
-					"stats": "0",
 					"salute": "30",
-					"chance": "100"
+					"chance": "100",
+					"stats": "1"
 				}
 			]
 		}
