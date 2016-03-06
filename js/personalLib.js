@@ -29,7 +29,7 @@ function estraiDaListaPesata(lista)
 			listaPesata.push(lista[key]);
 		}
 	}
-	return listaPesata[numeroRandom(0, listaPesata.length-1)];
+	return $.extend(true, [], listaPesata[numeroRandom(0, listaPesata.length-1)]);
 }
 
 function nomeLocalizzato(ogg)
@@ -67,15 +67,12 @@ function spazio(){
 }
 
 function modificaStatsVisualizzate(div, nuovoValore, classe){	
-	if (nuovoValore < 0) nuovoValore = 0;
 	$(div).empty();
 	$(div).append(" " + nuovoValore);
-	$(div).removeClass(classe);
-	$(div).removeClass("bold");
 	$(div).addClass(classe);
 	$(div).addClass("bold");
-	$(div).toggleClass( classe, roundTimer/4, "easeInOutCubic" );
-	$(div).toggleClass( "bold", roundTimer/4, "easeInOutCubic" );
+	$(div).removeClass( classe, roundTimer, "easeInOutCubic" );
+	$(div).removeClass( "bold", roundTimer, "easeInOutCubic" );
 		
 	if (div == "#salute-value" || div == "#maxSalute-value")
 	{
@@ -106,11 +103,11 @@ function setItemInfo(jQ, oggettoObj) {
 		oggettoObj.tipo = estraiDaListaPesata(listaPozioni);
 		modificaStatsOggettoTipo(oggettoObj);
 	} 
-	if (oggettoObj.qualita == "") {
+	if (oggettoObj.qualita == "roll") {
 		oggettoObj.qualita = estraiDaListaPesata(listaQualita);
 		modificaStatsOggettoQualita(oggettoObj);
 	}
-	if (oggettoObj.tipo == undefined && oggettoObj.qualita == undefined) {
+	if (oggettoObj.tipo == "mano") {
 		oggettoObj.tipo = [];
 		oggettoObj.qualita = [];
 		oggettoObj.tipo.nome = "pelle";
@@ -134,11 +131,13 @@ function setItemInfo(jQ, oggettoObj) {
 		if (oggettoObj.slot == "mano") {
 			iconaSlot = '<span class="flaticon-mano"></span>'
 		} else if (oggettoObj.slot == "testa"){
-			iconaSlot = '<span class="flaticon-testa"></span>'
+			iconaSlot = '<span class="flaticon-testa-2"></span>'
 		} else if (oggettoObj.slot == "corpo"){
 			iconaSlot = '<span class="flaticon-corpo"></span>'
 		} else if (oggettoObj.slot == "2 mani"){
 			iconaSlot = '<span class="flaticon-mano"></span><span class="flaticon-mano"></span>'
+		} else {
+			iconaSlot = oggettoObj.slot
 		}
 		info += '<p>' + locCorrente["Slot"] + ': ' + iconaSlot + '</p>';
 	}
@@ -163,8 +162,17 @@ function setItemInfo(jQ, oggettoObj) {
 		info += '<p><span class="flaticon-salute"></span>  ' + locCorrente["Max Salute"] + ': ' + oggettoObj.maxSalute + '</p>';
 	}
 	
+	if (oggettoObj.velocita != undefined)
+	{
+		info += '<p><span class="flaticon-tempo"></span>  ' + locCorrente["Velocita"] + ': ' + oggettoObj.velocita + '</p>';
+	}
+	
+	if (oggettoObj.schivata != undefined)
+	{
+		info += '<p><span class="flaticon-schivata"></span>  ' + locCorrente["Schivata"] + ': ' + oggettoObj.schivata + '</p>';
+	}
+	
 	jQ.append("<div>"+info+"</div>");
-	console.log(oggettoObj);
 }
 
 function modificaStatsOggettoTipo(oggettoObj) {
@@ -173,6 +181,8 @@ function modificaStatsOggettoTipo(oggettoObj) {
 	if (oggettoObj.tipo.difesa != undefined) oggettoObj.difesa = 0 + parseInt(oggettoObj.tipo.difesa);
 	if (oggettoObj.tipo.salute != undefined) oggettoObj.salute = 0 + parseInt(oggettoObj.tipo.salute);
 	if (oggettoObj.tipo.maxSalute != undefined) oggettoObj.maxSalute =  0 + parseInt(oggettoObj.tipo.maxSalute);
+	if (oggettoObj.tipo.velocita != undefined) oggettoObj.velocita =  0 + parseInt(oggettoObj.tipo.velocita);
+	if (oggettoObj.tipo.schivata != undefined) oggettoObj.schivata =  0 + parseInt(oggettoObj.tipo.schivata);
 	
 	if (oggettoObj.attacco > 0)
 	{
@@ -189,6 +199,14 @@ function modificaStatsOggettoTipo(oggettoObj) {
 	if (oggettoObj.maxSalute > 0)
 	{
 		oggettoObj.maxSalute = Math.round(parseInt(oggettoObj.maxSalute) + (oggettoObj.maxSalute*oggettoObj.tipo.stats/100));
+	}
+	if (oggettoObj.velocita > 0)
+	{
+		oggettoObj.velocita = Math.round(parseInt(oggettoObj.velocita) + (oggettoObj.velocita*oggettoObj.tipo.stats/100));
+	}
+	if (oggettoObj.schivata > 0)
+	{
+		oggettoObj.schivata = Math.round(parseInt(oggettoObj.schivata) + (oggettoObj.schivata*oggettoObj.tipo.stats/100));
 	}
 }
 
@@ -208,5 +226,13 @@ function modificaStatsOggettoQualita(oggettoObj) {
 	if (oggettoObj.maxSalute > 0)
 	{
 		oggettoObj.maxSalute = Math.round(parseInt(oggettoObj.maxSalute) + (oggettoObj.maxSalute*oggettoObj.qualita.stats/100));
+	}
+	if (oggettoObj.velocita > 0)
+	{
+		oggettoObj.velocita = Math.round(parseInt(oggettoObj.velocita) + (oggettoObj.velocita*oggettoObj.qualita.stats/100));
+	}
+	if (oggettoObj.schivata > 0)
+	{
+		oggettoObj.schivata = Math.round(parseInt(oggettoObj.schivata) + (oggettoObj.schivata*oggettoObj.qualita.stats/100));
 	}
 }

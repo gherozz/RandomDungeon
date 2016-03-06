@@ -1,20 +1,42 @@
 {
 	"oggetti": [
 		{
+			"nomeIta":  "Mano Sinistra",
+			"nomeEn":  "Left Hand",
+			"nome": "manoSx",
+			"tipo": "mano",
+			"slot": "irremovibile",
+			"velocita": "10",
+			"attacco": "5",
+			"chance": "0",
+			"immagine": "flaticon-mano"
+		}, 
+		{
+			"nomeIta":  "Mano Destra",
+			"nomeEn":  "Right Hand",
+			"nome": "manoDx",
+			"tipo": "mano",
+			"slot": "irremovibile",
+			"velocita": "10",
+			"attacco": "5",
+			"chance": "0",
+			"immagine": "flaticon-mano"
+		}, 
+		{
 			"nomeIta":  "Mano Impegnata",
 			"nomeEn":  "Busy Hand",
 			"nome": "manoOccupata",
+			"tipo": "mano",
 			"slot": "irremovibile",
-			"attacco": "-10",
 			"chance": "0",
-			"immagine": "flaticon-mano"
+			"immagine": "flaticon-mano-occupata"
 		}, 
 		{
 			"nomeIta":  "Spada",
 			"nomeEn":  "Sword",
 			"tipo": "metallo",
 			"nome": "spada",
-			"qualita": "",
+			"qualita": "roll",
 			"uso": "equip",
 			"slot": "mano",
 			"attacco": "15",
@@ -29,7 +51,7 @@
 			"nomeEn":  "Greatsword",
 			"tipo": "metallo",
 			"nome": "spadone",
-			"qualita": "",
+			"qualita": "roll",
 			"uso": "equip",
 			"slot": "2 mani",
 			"attacco": "30",
@@ -37,18 +59,18 @@
 			"statoMax": "100",
 			"coloreTesto": "arancione",
 			"chance": "50",
-			"immagine": "flaticon-gladio"
+			"immagine": "flaticon-spadone"
 		}, 
 		{
 			"nomeIta":  "Scudo",
 			"nomeEn":  "Shield",
 			"tipo": "metallo",
 			"nome": "scudo",
-			"qualita": "",
+			"qualita": "roll",
 			"uso": "equip",
 			"slot": "mano",
-			"difesa": "5",
-			"attacco": "-10",
+			"velocita": "-5",
+			"difesa": "10",
 			"statoAttuale": "100",
 			"statoMax": "100",
 			"coloreTesto": "blu",
@@ -60,7 +82,7 @@
 			"nomeEn":  "Helm",
 			"tipo": "metallo",
 			"nome": "elmo",
-			"qualita": "",
+			"qualita": "roll",
 			"uso": "equip",
 			"slot": "testa",
 			"difesa": "5",
@@ -75,9 +97,10 @@
 			"nomeEn":  "Chestplate",
 			"tipo": "metallo",
 			"nome": "armatura-piastre",
-			"qualita": "",
+			"qualita": "roll",
 			"uso": "equip",
 			"slot": "corpo",
+			"velocita": "-10",
 			"difesa": "10",
 			"statoAttuale": "100",
 			"statoMax": "100",
@@ -90,7 +113,7 @@
 			"nomeEn":  "Potion",
 			"tipo": "pozione",
 			"nome": "pozione",
-			"qualita": "",
+			"qualita": "roll",
 			"uso": "consumabile",
 			"coloreTesto": "verde",
 			"chance": "100",
@@ -196,9 +219,10 @@
 			"nomeIta": "Goblin",
 			"nomeEn": "Goblin",
 			"attacco": "10",
+			"schivata": "25",
 			"difesa": "0",
 			"vita": "30",
-			"boss": false,
+			"velocita": "75",
 			"chance": "50",
 			"azioni": 	[
 								{"nome": "artiglio", "chance":"10"}
@@ -209,7 +233,9 @@
 			"nomeEn": "Orc",
 			"attacco": "15",
 			"difesa": "5",
+			"schivata": "25",
 			"vita": "40",
+			"velocita": "50",
 			"boss": false,
 			"chance": "20",
 			"azioni": 	[
@@ -221,7 +247,9 @@
 			"nomeEn": "Troll",
 			"attacco": "20",
 			"difesa": "10",
+			"schivata": "10",
 			"vita": "70",
+			"velocita": "25",
 			"boss": false,
 			"chance": "5",
 			"azioni": 	[
@@ -234,13 +262,14 @@
 			"nomeEn": "Boss",
 			"attacco": "30",
 			"difesa": "10",
+			"schivata": "25",
 			"vita": "100",
+			"velocita": "50",
 			"boss": true,
 			"chance": "0",
 			"azioni": 	[	
 								{"nome": "rigenera", "chance":"25"},
 								{"nome": "artiglio", "chance":"50"},
-								{"nome": "colpoCoda", "chance":"15"}, 
 								{"nome": "corazzaSpine", "chance":"15"}
 							]
 		}

@@ -1,22 +1,23 @@
 var livello = 0;
 var livelloBoss = 10;
 
-var attaccoManiNude = 5;
-var attaccoDx = attaccoManiNude;
-var attaccoSx = attaccoManiNude;
+var attaccoDx = 0;
+var attaccoSx = 0;
 var difesa = 0;
 var maxSalute = 100;
 var salute = maxSalute;
 var critico = 10;
 var mana = 0;
 var monete = 0;
+var velocita = 50;
+var schivata = 50;
 
 var coloreEroe = "viola";
 var coloreNemico = "rosso";
 var nomeEroe = "Ser Random";
 
 var statoGioco;
-var roundTimer = 700;
+var roundTimer = 1000;
 var fattoreScala = 50;
 
 var lingua = "en";
@@ -92,6 +93,10 @@ $(document).ready( function(){
 	trovaOggetto();
 	trovaOggetto();
 	trovaOggetto();
+	creaLiOggetto(listaOggetti["manoDx"], "#equip-manoDx");
+	modificaStatsEquip(listaOggetti["manoDx"], "equip-manoDx", true);
+	creaLiOggetto(listaOggetti["manoSx"], "#equip-manoSx");
+	modificaStatsEquip(listaOggetti["manoSx"], "equip-manoSx", true);
 	})
 	.fail( function(d, textStatus, error) {
 		console.error("getJSON failed, status: " + textStatus + ", error: "+error)
@@ -117,6 +122,10 @@ $(document).ready( function(){
 	$("#fullscreen").click(function(){
 		screenfull.toggle(); 
 	});
+	
+	$('#gameSpeed').on('input',function(e){
+		roundTimer = 2000 - $('#gameSpeed').val();
+    });
 	
 });
 
@@ -170,6 +179,8 @@ function scontro(mostroScelto) {
 	var maxVitaNemico = randomizza25(parseInt(mostroScelto.vita) + parseInt(mostroScelto.vita)*livello/fattoreScala);
 	var vitaNemico = maxVitaNemico;
 	var attaccoNemico = baseAttaccoNemico;
+	var velocitaNemico = randomizza25(parseInt(mostroScelto.velocita));
+	var schivataNemico = randomizza25(parseInt(mostroScelto.schivata));
 	
 	var turnoEroe = true;
 	
@@ -177,12 +188,42 @@ function scontro(mostroScelto) {
 	
 	cambiaStatoGioco("combattimento");	
 	
-	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico, nomeNemico);
+	statsMostro(vitaNemico, maxVitaNemico, attaccoNemico, difesaNemico, schivataNemico, velocitaNemico, nomeNemico);
 	
 	loopLi();
+	
+	var cc = 0;
+	var ccEroe = 0;
+	var ccNemico = 0;
 
 	function loopLi() {
 		var loop = setInterval(function() { 
+			
+			while (true){
+				cc++;
+				ccNemico += velocitaNemico;
+				ccEroe += velocita;
+				if (ccEroe >= 100 && ccNemico >= 100) {
+					if (Math.random() >0.5) {
+						turnoEroe = true;
+						ccEroe -= 100;
+						break;
+					} else {
+						turnoEroe = false;
+						ccNemico -= 100;
+						break;
+					}
+				} else if (ccEroe >= 100) {
+					turnoEroe = true;
+					ccEroe -= 100;
+					break;
+				} else if (ccNemico >= 100){
+					turnoEroe = false;
+					ccNemico -=100;
+					break;
+				}
+				
+			}
 		
 			if (turnoEroe) {
 			
@@ -207,7 +248,7 @@ function scontro(mostroScelto) {
 			
 				if (attaccoDx > 0) {
 					setTimeout(function() {
-						vitaNemico -= attaccoEroe(attaccoDx, difesaNemico, arma1);
+						vitaNemico -= attaccoEroe(attaccoDx, difesaNemico, schivataNemico, nomeNemico, arma1);
 						$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
 						modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 						}, roundTimer/3);
@@ -215,7 +256,7 @@ function scontro(mostroScelto) {
 				
 				if (attaccoSx > 0) {
 					setTimeout(function() {
-						vitaNemico -= attaccoEroe(attaccoSx, difesaNemico, arma2);
+						vitaNemico -= attaccoEroe(attaccoSx, difesaNemico, schivataNemico, nomeNemico, arma2);
 						$(".salute-mostro-bar").animate({width: (vitaNemico/maxVitaNemico)*100 +"%"}, roundTimer/2);
 						modificaStatsVisualizzate("#salute-mostro-value", vitaNemico, "rosso");
 					}, roundTimer/3*2);
@@ -257,41 +298,58 @@ function scontro(mostroScelto) {
 						break;
 					}
 				}
-				
-				var txt = locCorrente["infligge "];
-				var classe = coloreNemico + " roll";;
-				var txtEffect;
-				
-				attaccoNemicoTemp = randomizza50(attaccoNemico);
-				if (Math.random()*100 < 10) {
-					attaccoNemicoTemp *=2;
-					txt = locCorrente["infligge un CRITICO per "]
-					classe = "criticoTxt " + coloreNemico;
-					txtEffect = "shake";
-				}
-				dannoNemico = attaccoNemicoTemp-difesa;
-				if ( dannoNemico <= 0)
-				{
-					dannoNemico = 1;
-				}
-				setTimeout(function() {
-					salute -= dannoNemico;
-					modificaStatsVisualizzate("#salute-value", salute, "rosso");
-					$(".numeri-mostro").css("height", $(".numeri-eroe").height());
-				
+				var roll = Math.round(Math.random()*100);
+				if (roll >= schivata) {				
+					var txt = locCorrente["infligge "];
+					var classe = coloreNemico + " roll";
+					var txtEffect;
+					
+					attaccoNemicoTemp = randomizza25(attaccoNemico);
+					if (Math.random()*100 < 10) {
+						attaccoNemicoTemp = Math.round(attaccoNemicoTemp * 1.5);
+						txt = locCorrente["infligge un CRITICO per "]
+						classe = "criticoTxt " + coloreNemico;
+						txtEffect = "shake";
+					}
+					dannoNemico = attaccoNemicoTemp-difesa;
+					if ( dannoNemico <= 0)
+					{
+						dannoNemico = 1;
+					}
+					setTimeout(function() {
+						salute -= dannoNemico;
+						modificaStatsVisualizzate("#salute-value", salute, "rosso");
+						$(".numeri-mostro").css("height", $(".numeri-eroe").height());
+					
+						aggiungiLog(
+						"<span class='flaticon-roll'>   (roll:"
+							+ roll
+							+ "/"
+							+ schivata
+							+ ") "
+							+	nomeNemico 
+							+ " </span>(<span class='flaticon-attacco'> </span>"
+							+ attaccoNemicoTemp + " - <span class='flaticon-difesa'> </span>" 
+							+ difesa
+							+ "): "
+							+ txt
+							+ dannoNemico
+							+ locCorrente[" danni"], classe, txtEffect);
+					
+						turnoEroe = !turnoEroe;
+					}, roundTimer/2);
+				} else {
 				aggiungiLog(
-				"<span class='flaticon-roll'>   "
-					+	nomeNemico 
-					+ " </span>(<span class='flaticon-attacco'> </span>"
-					+ attaccoNemicoTemp + " - <span class='flaticon-difesa'> </span>" 
-					+ difesa
-					+ "): "
-					+ txt
-					+ dannoNemico
-					+ locCorrente[" danni"], classe, txtEffect);
-				
-				turnoEroe = !turnoEroe;
-				}, roundTimer/2);
+					"<span class='flaticon-roll'>   (roll:"
+						+ roll
+						+ "/"
+						+ schivata
+						+ ") "
+						+	nomeEroe 
+						+ " </span>"
+						+ locCorrente[" evita l'attacco nemico!"],
+						coloreEroe + " roll");
+				}
 			}
 			
 			if(salute <= 0 || vitaNemico <= 0) {
@@ -342,34 +400,56 @@ function nomeArma(slot) {
 	}
 }
 
-function attaccoEroe(attacco, difesaNemico, arma) {
-	var txt = locCorrente["infligge "];
-	var classe = coloreEroe + " roll";
-	var txtEffect;
-	
-	attaccoTemp = randomizza50(attacco);
-	if (Math.random()*100 < critico) {
-		attaccoTemp *=2;
-		txt = locCorrente["infligge un CRITICO per "]
-		classe = "criticoTxt " + coloreEroe;
-		txtEffect = "shake";
+function attaccoEroe(attacco, difesaNemico, schivataNemico, nomeNemico, arma) {
+
+	var roll = Math.round(Math.random()*100);
+	if (roll >= schivataNemico) {
+		var txt = locCorrente["infligge "];
+		var classe = coloreEroe + " roll";
+		var txtEffect;
+		
+		attaccoTemp = randomizza25(attacco);
+		if (Math.random()*100 < critico) {
+			attaccoTemp = Math.round(attaccoTemp * 1.5)
+			txt = locCorrente["infligge un CRITICO per "]
+			classe = "criticoTxt " + coloreEroe;
+			txtEffect = "shake";
+		}
+		dannoEroe = attaccoTemp-difesaNemico;
+		if (dannoEroe <= 0)
+		{
+			dannoEroe = 1;
+		}	
+		aggiungiLog(
+		"<span class='flaticon-roll'>   (roll:"
+		+ roll
+		+ "/"
+		+ schivataNemico
+		+ ") " 
+		+ nomeEroe 
+		+ " </span>(<span class='flaticon-attacco'> </span>" 
+		+ attaccoTemp 
+		+ " - <span class='flaticon-difesa'> </span>" 
+		+ difesaNemico 
+		+ "): " 
+		+ txt
+		+ dannoEroe 
+		+ locCorrente[" danni con "] + arma, classe, txtEffect);
+		
+		return dannoEroe;
+		
+	} else {
+		aggiungiLog(
+			"<span class='flaticon-roll'>   (roll:"
+			+ roll
+			+ "/"
+			+ schivataNemico
+			+ ") " 
+			+	nomeNemico 
+			+ " </span>"
+			+ locCorrente[" evita l'attacco nemico!"],
+			coloreNemico + " roll");
+			
+		return 0;
 	}
-	dannoEroe = attaccoTemp-difesaNemico;
-	if (dannoEroe <= 0)
-	{
-		dannoEroe = 1;
-	}	
-	aggiungiLog(
-	"<span class='flaticon-roll'>   " 
-	+ nomeEroe 
-	+ " </span>(<span class='flaticon-attacco'> </span>" 
-	+ attaccoTemp 
-	+ " - <span class='flaticon-difesa'> </span>" 
-	+ difesaNemico 
-	+ "): " 
-	+ txt
-	+ dannoEroe 
-	+ locCorrente[" danni con "] + arma, classe, txtEffect);
-	
-	return dannoEroe;
 }

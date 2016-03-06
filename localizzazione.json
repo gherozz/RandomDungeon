@@ -93,6 +93,14 @@
 			"en": "Defense"
 		},
 		{
+			"ita": "Schivata",
+			"en": "Dodge"
+		},
+		{
+			"ita": "Velocita",
+			"en": "Speed"
+		},
+		{
 			"ita": "Salute",
 			"en": "Health"
 		},
@@ -227,6 +235,10 @@
 		{
 			"ita": "Qualitá",
 			"en": "Quality"
+		},
+		{
+			"ita": " evita l'attacco nemico!",
+			"en": " dodge the enemy attack!"
 		},
 		{
 			"ita": "pugni nudi!",

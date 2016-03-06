@@ -28,10 +28,20 @@ function villaggio(){
 }
 
 
-function statsMostro(vita,maxvita, attacco, difesa,nomeNemico){
+function statsMostro(vita, maxvita, attacco, difesa, schivata, velocita, nomeNemico){
 	$('.stats-mostro').html(
 		'<div class="numeri-mostro">'+
 			'<ul>'+
+				'<li>'+
+				'<span class="flaticon-tempo"> </span>'+
+				'<span class="velocita"></span>:'+
+				'<span id="velocita-mostro-value"></span>'+
+				'</li>'+
+				'<li>'+
+				'<span class="flaticon-schivata"> </span>'+
+				'<span class="schivata"></span>:'+
+				'<span id="schivata-mostro-value"></span>'+
+				'</li>'+
 				'<li>'+
 				'<span class="flaticon-salute"> </span>'+
 				'<span class="salute"></span>:'+
@@ -64,6 +74,35 @@ function statsMostro(vita,maxvita, attacco, difesa,nomeNemico){
 	modificaStatsVisualizzate("#attacco-mostro-value", attacco, "arancione");
 	modificaStatsVisualizzate("#difesa-mostro-value", difesa, "blu");
 	modificaStatsVisualizzate("#salute-mostro-value", vita, "verde");
+	modificaStatsVisualizzate("#velocita-mostro-value", velocita, "giallo");
+	modificaStatsVisualizzate("#schivata-mostro-value", schivata, "viola");
 	$("#maxSalute-mostro-value").html(maxvita);
 	traduci();
+}
+
+function traduci(bandiera){
+	if(bandiera == "bandiera"){
+		$("#lingua").toggleClass("ita", function(){
+			$(this).attr("title", locCorrente["Switch Language"])
+		});
+	}
+	$("#inventarioNome").html(locCorrente["Inventario"]);
+	$("#equipaggiamentoNome").html(locCorrente["Equipaggiato"]);
+	$(".stats-eroe h3").html(locCorrente["Statistiche "] + nomeEroe);
+	$(".attacco").html(locCorrente["Attacco"]);
+	$(".difesa").html(locCorrente["Difesa"]);
+	$(".salute").html(locCorrente["Salute"]);
+	$(".critico").html(locCorrente["Critico"]);
+	$(".mana").html(locCorrente["Mana"]);
+	$(".monete").html(locCorrente["Monete"]);
+	$(".velocita").html(locCorrente["Velocita"]);
+	$(".schivata").html(locCorrente["Schivata"]);
+	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
+	cambiaStatoGioco(statoGioco);
+	
+	$("#ulInventario li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function() {
+		oggettoObj = $(this).prop("oggetto");
+		$(this).empty();
+		setItemInfo($(this),oggettoObj);
+	});
 }

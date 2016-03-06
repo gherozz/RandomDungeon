@@ -37,6 +37,10 @@
 		
 			<div class="header">
 				<h1><a href="index.html"></a></h1>
+				<div id="gameSpeedContainer">
+					<label for="gameSpeed">Game Speed</label>
+					<input type="range" name="gameSpeed" value = "1000" id="gameSpeed" min="0" max="1750"></input>
+				</div>
 				<div id="lingua-blur">
 					<div id="lingua" class="eng">
 					</div>	
@@ -64,7 +68,7 @@
 								</span>
 								<span id="icona-corpo" class="flaticon-corpo area-corpo icona-equip">
 								</span>
-								
+																
 								<ul id="equip-testa"  class="area-testa equip">
 								</ul>
 								
@@ -123,7 +127,9 @@
 						<li>
 							<span class="flaticon-attacco"></span>
 							<span class="attacco"></span>:
-							<span id="attaccoSx-value"></span>+
+							<span class="flaticon-mano piccolo">Sx</span>
+							<span id="attaccoSx-value"></span> +
+							<span class="flaticon-mano piccolo">Dx</span>
 							<span id="attaccoDx-value"></span>
 						</li>
 						<li>
@@ -136,6 +142,16 @@
 							<span class="salute"></span>:
 							<span id="salute-value"></span>/
 							<span id="maxSalute-value"></span>
+						</li>
+						<li>
+							<span class="flaticon-tempo"></span>
+							<span class="velocita"></span>:
+							<span id="velocita-value"></span>
+						</li>
+						<li>
+							<span class="flaticon-schivata"></span>
+							<span class="schivata"></span>:
+							<span id="schivata-value"></span>/100
 						</li>
 						<li>
 							<span class="flaticon-mana"></span>

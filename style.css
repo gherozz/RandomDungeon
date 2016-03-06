@@ -49,6 +49,101 @@ span{
 .header h1 a:after{
 	content: "Random Dungeon";
 }
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 8vw; /* Specific width is required for Firefox. */
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent; /* Hides the slider so custom styles can be added */
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.5vw;
+  width: 1.5vw;
+  border-radius: 20%;
+  background: #c95314;
+  cursor: pointer;
+  margin-top:-0.4vw;
+  box-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+}
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  box-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+  height: 1.5vw;
+  width: 1.5vw;
+  border-radius: 20%;
+  background: #c95314;
+  cursor: pointer;
+}
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  box-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+  height: 1.5vw;
+  width: 1.5vw;
+  border-radius: 20%;
+  background: #c95314;
+  cursor: pointer;
+}
+
+/*/////////////////////////////////*/
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 90%;
+  height: 1vw;
+  cursor: pointer;
+  background: #c95314;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #c95314;
+}
+input[type=range]::-moz-range-track {
+  width: 90%;
+  height: 1vw;
+  cursor: pointer;
+  background: #c95314;
+}
+input[type=range]::-ms-track {
+  width: 90%;
+  height: 1vw;
+  cursor: pointer;
+  background: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #c95314;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #c95314;
+}
+input[type=range]::-ms-fill-upper {
+  background: #c95314;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #c95314;
+}
+#gameSpeedContainer{
+    position: absolute;
+    top: 10%;
+    right: 20%;
+	font-size: 1vw;
+	box-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+	padding: 1vw;
+}
+#gameSpeed{
+	box-shadow:0px 0px 0 rgb(104,21,12),1px 1px 0 rgb(89,6,-3),2px 2px 0 rgb(75,-8,-17),3px 3px 0 rgb(60,-23,-32),4px 4px 0 rgb(46,-37,-46),5px 5px 0 rgb(31,-52,-61), 6px 6px 0 rgb(17,-66,-75),7px 7px 6px rgba(0,0,0,0.6),7px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+}
 #lingua-blur{
     position: absolute;
     top: 10%;
@@ -303,7 +398,7 @@ span{
 	border-radius: 5px;
 	padding: 5px;
 	width: 9vw;
-	position: relative;
+	position: absolute;
     left: -2.3vw;
 	z-index: 8;
 	font-size: 1.2vw;
@@ -876,9 +971,21 @@ footer{
 	font-size: 1vw;
 	margin-top: 1vw;
 }
+.piccolo{
+	font-size: 0.8vw;
+}
 .header-red{
 	background: #ef4410;
 }
 .colonna-sx-red{
 	background: #f27d3e;
+}
+.placeholder{
+	-webkit-box-shadow: inset 0px 0px 20px 0px rgba(255,255,255,1);
+-moz-box-shadow: inset 0px 0px 20px 0px rgba(255,255,255,1);
+box-shadow: inset 0px 0px 20px 0px rgba(255,255,255,1);
+	width:3.5vw;
+	height:3.5vw;
+	float: left;
+	z-index:0;
 }

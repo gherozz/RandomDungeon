@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	setAltezze();
 
-	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);			
-	modificaStatsVisualizzate("#attaccoDx-value", attaccoDx, "arancione");
-	modificaStatsVisualizzate("#attaccoSx-value", attaccoSx, "arancione");
+	$(".salute-bar").animate({width: (salute/maxSalute)*100 +"%"}, roundTimer);	
 	modificaStatsVisualizzate("#difesa-value", difesa, "blu");
 	modificaStatsVisualizzate("#salute-value", salute, "verde");
+	modificaStatsVisualizzate("#velocita-value", velocita, "giallo");
+	modificaStatsVisualizzate("#schivata-value", schivata, "viola");
 	$("#maxSalute-value").append(" " + maxSalute);
 	modificaStatsVisualizzate("#critico-value", critico, "rosso");
 	modificaStatsVisualizzate("#mana-value", mana, "viola");
@@ -25,31 +25,6 @@ function setAltezze(){
 	$("#gioco").css("height", heightwindow/5*4);
 	$("#arena").css("height", heightwindow/5*1);
 };
-
-function traduci(bandiera){
-	if(bandiera == "bandiera"){
-		$("#lingua").toggleClass("ita", function(){
-			$(this).attr("title", locCorrente["Switch Language"])
-		});
-	}
-	$("#inventarioNome").html(locCorrente["Inventario"]);
-	$("#equipaggiamentoNome").html(locCorrente["Equipaggiato"]);
-	$(".stats-eroe h3").html(locCorrente["Statistiche "] + nomeEroe);
-	$(".attacco").html(locCorrente["Attacco"]);
-	$(".difesa").html(locCorrente["Difesa"]);
-	$(".salute").html(locCorrente["Salute"]);
-	$(".critico").html(locCorrente["Critico"]);
-	$(".mana").html(locCorrente["Mana"]);
-	$(".monete").html(locCorrente["Monete"]);
-	$("#nomeEroe").attr("placeholder", locCorrente["Inserisci il nome dell'Eroe"]);
-	cambiaStatoGioco(statoGioco);
-	
-	$("#ulInventario li, #equip-testa li, #equip-corpo li, #equip-manoDx li, #equip-manoSx li").each(function() {
-		oggettoObj = $(this).prop("oggetto");
-		$(this).empty();
-		setItemInfo($(this),oggettoObj);
-	});
-}
 
 function sistemaNome(){
 	nomeEroe = $("#nomeEroe").val();
